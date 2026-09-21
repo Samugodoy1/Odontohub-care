@@ -29,12 +29,12 @@ export function CareFaq() {
   return (
     <div className="divide-y divide-[#d2d2d7] border-y border-[#d2d2d7]">
       {FAQS.map((item) => (
-        <details key={item.q} className="group py-7">
-          <summary className="flex cursor-pointer list-none items-center justify-between gap-6 text-left text-[22px] font-semibold tracking-tight text-[#1d1d1f] transition-colors group-open:text-[#0071e3] md:text-[28px]">
+        <details key={item.q} className="group py-5 sm:py-7">
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-left text-[19px] font-semibold tracking-tight text-[#1d1d1f] transition-colors group-open:text-[#0071e3] sm:gap-6 sm:text-[22px] md:text-[28px]">
             {item.q}
             <span
               aria-hidden
-              className="grid size-8 shrink-0 place-items-center rounded-full bg-[#f5f5f7] text-[22px] font-light text-[#86868b] transition-transform duration-300 group-open:rotate-45"
+              className="grid size-7 shrink-0 place-items-center rounded-full bg-[#f5f5f7] text-[20px] font-light text-[#86868b] transition-transform duration-300 group-open:rotate-45 sm:size-8 sm:text-[22px]"
             >
               +
             </span>

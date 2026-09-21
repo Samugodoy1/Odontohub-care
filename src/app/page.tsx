@@ -37,68 +37,67 @@ export default function HomePage() {
 
   return (
     <main>
-      <section className="care-hero-wash relative overflow-hidden px-5 pb-24 pt-20 md:pb-36 md:pt-28">
+      <section className="care-hero-wash relative overflow-hidden pb-12 pt-10 sm:pb-20 sm:pt-16 md:pb-32 md:pt-24">
+        <div className="care-orb -left-24 top-8 size-[280px] bg-[#0071e3]/16 sm:size-[340px]" aria-hidden />
         <div
-          className="care-orb -left-24 top-8 size-[340px] bg-[#0071e3]/18"
-          aria-hidden
-        />
-        <div
-          className="care-orb right-[-80px] top-24 size-[280px] bg-[#32ade6]/20"
+          className="care-orb right-[-80px] top-20 size-[220px] bg-[#32ade6]/18 sm:size-[280px]"
           style={{ animationDelay: "-6s" }}
           aria-hidden
         />
         <div
-          className="care-orb bottom-0 left-1/3 size-[220px] bg-[#34c759]/12"
+          className="care-orb bottom-0 left-1/3 size-[180px] bg-[#34c759]/10 sm:size-[220px]"
           style={{ animationDelay: "-11s" }}
           aria-hidden
         />
-        <div className="relative mx-auto max-w-[900px] text-center">
+        <div className="care-align relative text-center">
           <p className="care-enter care-eyebrow">OdontoHub Care</p>
-          <div className="care-enter mt-5" style={{ animationDelay: "90ms" }}>
+          <div className="care-enter mt-4 sm:mt-5" style={{ animationDelay: "90ms" }}>
             <HeroHeadline />
           </div>
           <p
-            className="care-enter care-subhead mx-auto mt-7 max-w-[500px] text-[19px] md:text-[24px]"
+            className="care-enter care-subhead mx-auto mt-5 max-w-[34rem] text-[17px] sm:mt-7 sm:text-[19px] md:text-[24px]"
             style={{ animationDelay: "160ms" }}
           >
             Diga o tratamento e a cidade. Mostramos quem cuida disso — escolhidos com rigor, um a
             um.
           </p>
-          <div className="care-enter mx-auto mt-12 max-w-[740px]" style={{ animationDelay: "240ms" }}>
+          <div className="care-enter mx-auto mt-8 max-w-[46rem] sm:mt-12" style={{ animationDelay: "240ms" }}>
             <NeedSearch />
           </div>
         </div>
       </section>
 
-      <section id="tratamentos" className="care-band px-5 py-24 md:py-32">
-        <div className="mx-auto max-w-[1080px]">
+      <section id="tratamentos" className="care-band py-14 sm:py-24 md:py-32">
+        <div className="care-align">
           <Reveal>
             <p className="care-eyebrow">Tratamentos</p>
-            <h2 className="care-display mt-4 max-w-[12ch] text-[40px] md:text-[64px]">
+            <h2 className="care-display mt-3 max-w-[12ch] text-[32px] sm:mt-4 sm:text-[40px] md:text-[64px]">
               O que você precisa.
             </h2>
-            <p className="care-subhead mt-5 max-w-[440px] text-[19px] md:text-[21px]">
+            <p className="care-subhead mt-4 max-w-[28rem] text-[17px] sm:mt-5 sm:text-[19px] md:text-[21px]">
               Um dentista para aquilo que te trouxe aqui. Não uma lista genérica.
             </p>
           </Reveal>
-          <Reveal className="mt-14" delay={80}>
-            <CaseRail />
-          </Reveal>
         </div>
+        <Reveal className="mt-10 sm:mt-14" delay={80}>
+          <CaseRail />
+        </Reveal>
       </section>
 
-      <section className="px-5 py-24 md:py-32">
-        <div className="mx-auto grid max-w-[1080px] items-center gap-16 lg:grid-cols-[1.05fr_0.95fr]">
+      <section className="py-14 sm:py-24 md:py-32">
+        <div className="care-align grid items-center gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
           <Reveal>
             <p className="care-eyebrow">Na sua cidade</p>
-            <h2 className="care-display mt-4 text-[40px] md:text-[64px]">Perto de você.</h2>
-            <p className="care-subhead mt-5 max-w-[460px] text-[19px] md:text-[21px]">
+            <h2 className="care-display mt-3 text-[32px] sm:mt-4 sm:text-[40px] md:text-[64px]">
+              Perto de você.
+            </h2>
+            <p className="care-subhead mt-4 max-w-[28rem] text-[17px] sm:mt-5 sm:text-[19px] md:text-[21px]">
               Procurou dentista em Taubaté? Estes são os profissionais da cidade. O tratamento e o
               lugar, juntos.
             </p>
             <Link
               href="/dentista/taubate"
-              className="group mt-8 inline-flex items-center text-[17px] text-[#0066cc]"
+              className="group mt-6 inline-flex items-center text-[17px] text-[#0066cc] sm:mt-8"
             >
               Ver dentistas em Taubaté <span className="care-arrow ml-1">›</span>
             </Link>
@@ -109,53 +108,55 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="care-band px-5 py-24 md:py-32">
-        <div className="mx-auto max-w-[1080px]">
+      <section className="care-band py-14 sm:py-24 md:py-32">
+        <div className="care-align">
           <Reveal>
             <p className="care-eyebrow">Profissionais</p>
-            <h2 className="care-display mt-4 text-[40px] md:text-[56px]">
+            <h2 className="care-display mt-3 text-[32px] sm:mt-4 sm:text-[40px] md:text-[56px]">
               Dentistas para conhecer.
             </h2>
           </Reveal>
-          <Reveal className="mt-12" delay={80}>
-            <DentistRail dentists={network.slice(0, 8)} />
-          </Reveal>
         </div>
+        <Reveal className="mt-10 sm:mt-12" delay={80}>
+          <DentistRail dentists={network.slice(0, 8)} />
+        </Reveal>
       </section>
 
-      <section id="qualidade" className="px-5 py-24 md:py-32">
-        <Reveal>
-          <div className="mx-auto max-w-[680px] text-center">
+      <section id="qualidade" className="py-16 sm:py-24 md:py-32">
+        <div className="care-align">
+          <Reveal>
             <p className="care-eyebrow">Como escolhemos</p>
-            <h2 className="care-display mt-4 text-[40px] md:text-[64px]">Escolhidos com rigor.</h2>
-            <p className="care-subhead mx-auto mt-6 max-w-[500px] text-[19px] md:text-[24px]">
+            <h2 className="care-display mt-3 max-w-[12ch] text-[32px] sm:mt-4 sm:text-[40px] md:text-[64px]">
+              Escolhidos com rigor.
+            </h2>
+            <p className="care-subhead mt-4 max-w-[32rem] text-[17px] sm:mt-6 sm:text-[19px] md:text-[24px]">
               Só entra quem passa. Se o atendimento falha, o dentista sai desta lista. Assim você
               não precisa adivinhar.
             </p>
+          </Reveal>
+          <div className="mt-10 grid gap-8 sm:mt-16 md:grid-cols-3 md:gap-8">
+            {QUALITY.map((item, index) => (
+              <Reveal key={item.n} delay={index * 90}>
+                <p className="text-[13px] tabular-nums text-[#86868b]">{item.n}</p>
+                <h3 className="mt-4 text-[22px] font-semibold tracking-tight text-[#1d1d1f] sm:mt-5 sm:text-[24px] md:text-[28px]">
+                  {item.t}
+                </h3>
+                <p className="mt-3 text-[16px] leading-relaxed text-[#86868b]">{item.d}</p>
+              </Reveal>
+            ))}
           </div>
-        </Reveal>
-        <div className="mx-auto mt-16 grid max-w-[980px] gap-10 md:grid-cols-3 md:gap-8">
-          {QUALITY.map((item, index) => (
-            <Reveal key={item.n} delay={index * 90}>
-              <p className="text-[13px] tabular-nums text-[#86868b]">{item.n}</p>
-              <h3 className="mt-5 text-[24px] font-semibold tracking-tight text-[#1d1d1f] md:text-[28px]">
-                {item.t}
-              </h3>
-              <p className="mt-3 text-[16px] leading-relaxed text-[#86868b]">{item.d}</p>
-            </Reveal>
-          ))}
         </div>
       </section>
 
-      <section className="care-band px-5 py-24 md:py-32">
-        <div className="mx-auto max-w-[820px]">
+      <section className="care-band py-14 sm:py-24 md:py-32">
+        <div className="care-align">
           <Reveal>
             <p className="care-eyebrow">Comece por aqui</p>
-            <h2 className="care-display mt-4 text-[40px] md:text-[56px]">
+            <h2 className="care-display mt-3 max-w-[14ch] text-[32px] sm:mt-4 sm:text-[40px] md:text-[56px]">
               Como você já pesquisa.
             </h2>
           </Reveal>
-          <Reveal className="mt-12" delay={60}>
+          <Reveal className="mt-8 sm:mt-12" delay={60}>
             <ul>
               {GOOGLE_QUERIES.map((query) => (
                 <li key={query}>
@@ -170,16 +171,16 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="px-5 py-20 md:py-28">
-        <div className="mx-auto max-w-[1080px]">
+      <section className="py-12 sm:py-20 md:py-28">
+        <div className="care-align">
           <Reveal>
             <h2 className="care-display text-[32px] md:text-[48px]">Cidades</h2>
-            <div className="mt-8 flex flex-wrap gap-2">
+            <div className="mt-6 flex flex-wrap gap-2 sm:mt-8">
               {REGIONS.map((region) => (
                 <Link
                   key={region.id}
                   href={`/dentista/${citySlug(region.city)}`}
-                  className="rounded-full bg-white px-4 py-2 text-[14px] text-[#1d1d1f] ring-1 ring-[#d2d2d7] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#eaf3fb] hover:ring-[#0071e3]/20"
+                  className="rounded-full bg-white px-3.5 py-2 text-[14px] text-[#1d1d1f] ring-1 ring-[#d2d2d7] transition-all duration-300 hover:bg-[#eaf3fb] hover:ring-[#0071e3]/20"
                 >
                   {region.city}
                 </Link>
@@ -189,27 +190,31 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="px-5 pb-8 md:pb-12">
+      <section className="bg-white py-14 sm:bg-transparent sm:py-8 md:py-12">
         <Reveal>
-          <div className="mx-auto max-w-[1080px] overflow-hidden rounded-[36px] bg-white px-8 py-16 md:px-16">
-            <p className="care-eyebrow">Você é dentista?</p>
-            <h2 className="care-display mt-4 max-w-[16ch] text-[36px] md:text-[52px]">
-              Pacientes te encontram quando você faz parte daqui.
-            </h2>
-            <p className="care-subhead mt-5 max-w-[480px] text-[18px] md:text-[21px]">
-              Cuidar bem da clínica é o começo. Aparecer para quem pesquisa um dentista é o resto.
-            </p>
-            <Link href="/para-dentistas" className="care-btn mt-10">
-              Sou dentista
-            </Link>
+          <div className="care-align sm:py-4">
+            <div className="sm:rounded-[36px] sm:bg-white sm:px-12 sm:py-16 md:px-16">
+              <p className="care-eyebrow">Você é dentista?</p>
+              <h2 className="care-display mt-3 max-w-[16ch] text-[32px] sm:mt-4 sm:text-[36px] md:text-[52px]">
+                Pacientes te encontram quando você faz parte daqui.
+              </h2>
+              <p className="care-subhead mt-4 max-w-[30rem] text-[17px] sm:mt-5 sm:text-[18px] md:text-[21px]">
+                Cuidar bem da clínica é o começo. Aparecer para quem pesquisa um dentista é o resto.
+              </p>
+              <Link href="/para-dentistas" className="care-btn mt-8 w-full sm:mt-10 sm:w-auto">
+                Sou dentista
+              </Link>
+            </div>
           </div>
         </Reveal>
       </section>
 
-      <section className="px-5 py-24 md:py-32">
-        <div className="mx-auto max-w-[820px]">
+      <section className="py-14 sm:py-24 md:py-32">
+        <div className="care-align">
           <Reveal>
-            <h2 className="care-display mb-10 text-[36px] md:text-[52px]">Perguntas frequentes</h2>
+            <h2 className="care-display mb-6 text-[28px] sm:mb-10 sm:text-[36px] md:text-[52px]">
+              Perguntas frequentes
+            </h2>
             <CareFaq />
           </Reveal>
         </div>

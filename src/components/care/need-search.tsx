@@ -50,7 +50,7 @@ export function NeedSearch({
   return (
     <div className={compact ? "" : "w-full"}>
       <form onSubmit={onSubmit} className="w-full" role="search">
-        <div className="grid gap-1 rounded-[28px] bg-white/80 p-2 shadow-[0_16px_50px_rgba(0,0,0,0.06)] ring-1 ring-white/80 backdrop-blur-xl sm:grid-cols-[1.25fr_1fr_auto] sm:gap-0 sm:divide-x sm:divide-[#d2d2d7]/70">
+        <div className="grid gap-1 rounded-[22px] bg-white/90 p-1.5 shadow-[0_12px_40px_rgba(0,0,0,0.06)] ring-1 ring-white/80 backdrop-blur-xl sm:rounded-[28px] sm:p-2 sm:grid-cols-[1.25fr_1fr_auto] sm:gap-0 sm:divide-x sm:divide-[#d2d2d7]/70">
           <div className="px-4 py-2 text-left">
             <label htmlFor={queryId} className="block text-[11px] font-medium text-[#86868b]">
               Tratamento
@@ -91,8 +91,8 @@ export function NeedSearch({
               ])}
             </datalist>
           </div>
-          <div className="flex items-center p-1.5">
-            <button type="submit" className="care-btn h-12 w-full shrink-0 gap-2 px-6 sm:w-auto">
+          <div className="flex items-center p-1">
+            <button type="submit" className="care-btn h-11 w-full shrink-0 gap-2 px-5 text-[16px] sm:h-12 sm:w-auto sm:px-6 sm:text-[17px]">
               Buscar
               <ArrowRight className="size-4" aria-hidden />
             </button>
@@ -106,7 +106,7 @@ export function NeedSearch({
       </form>
 
       {!compact ? (
-        <div className="mt-7 flex flex-wrap justify-center gap-2">
+        <div className="care-chip-row mt-6 sm:mt-7">
           {SUGGESTED_QUERIES.map((item) => (
             <button
               key={item}

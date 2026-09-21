@@ -55,23 +55,23 @@ export default async function ProfessionalPage({
 
   return (
     <main>
-      <section className="care-hero-wash px-5 pb-16 pt-14 md:pt-20">
-        <div className="mx-auto max-w-[980px]">
+      <section className="care-hero-wash pb-12 pt-10 sm:pb-16 sm:pt-14 md:pt-20">
+        <div className="care-align">
           <p className="text-[13px] text-[#86868b]">
             <Link href={`/dentista/${citySlug(city)}`} className="hover:text-[#1d1d1f]">
               Dentista em {city}
             </Link>
           </p>
-          <div className="mt-8 flex items-start gap-5">
+          <div className="mt-6 flex flex-col gap-4 sm:mt-8 sm:flex-row sm:items-start sm:gap-5">
             <div
               aria-hidden
-              className="flex size-16 shrink-0 items-center justify-center rounded-full bg-white text-[18px] font-semibold text-[#1d1d1f] ring-1 ring-[#d2d2d7]"
+              className="flex size-14 shrink-0 items-center justify-center rounded-full bg-white text-[16px] font-semibold text-[#1d1d1f] ring-1 ring-[#d2d2d7] sm:size-16 sm:text-[18px]"
             >
               {initials(professional.name)}
             </div>
-            <div>
+            <div className="min-w-0">
               <div className="flex flex-wrap items-center gap-3">
-                <h1 className="care-display text-[40px] md:text-[56px]">
+                <h1 className="care-display text-[32px] sm:text-[40px] md:text-[56px]">
                   {professional.honorific} {professional.name}
                 </h1>
                 {professional.clinic.inOdontoHubNetwork ? <NetworkBadge /> : null}
@@ -84,10 +84,10 @@ export default async function ProfessionalPage({
         </div>
       </section>
 
-      <section className="px-5 py-16 md:py-24">
-        <div className="mx-auto grid max-w-[980px] gap-12 lg:grid-cols-[1.15fr_0.85fr]">
+      <section className="py-12 sm:py-16 md:py-24">
+        <div className="care-align grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:gap-12">
           <article>
-            <p className="max-w-xl text-[22px] leading-relaxed tracking-tight text-[#1d1d1f]">
+            <p className="max-w-xl text-[18px] leading-relaxed tracking-tight text-[#1d1d1f] sm:text-[22px]">
               {professional.bio}
             </p>
             <p className="mt-5 max-w-xl text-[16px] leading-relaxed text-[#6e6e73]">

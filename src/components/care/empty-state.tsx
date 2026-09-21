@@ -10,9 +10,9 @@ type EmptyStateProps = {
 
 export function EmptyState({ title, body, withSuggestions = true }: EmptyStateProps) {
   return (
-    <div className="rounded-[28px] bg-white px-6 py-16 text-center ring-1 ring-[#d2d2d7]/80 md:px-12">
+    <div className="rounded-[24px] bg-white px-5 py-12 text-center ring-1 ring-[#d2d2d7]/80 sm:rounded-[28px] sm:px-8 sm:py-16 md:px-12">
       <p className="text-[13px] text-[#86868b]">Ainda não</p>
-      <h2 className="mx-auto mt-3 max-w-lg text-[28px] font-semibold tracking-tight text-[#1d1d1f]">
+      <h2 className="mx-auto mt-3 max-w-lg text-[24px] font-semibold tracking-tight text-[#1d1d1f] sm:text-[28px]">
         {title}
       </h2>
       <p className="mx-auto mt-3 max-w-md text-[15px] leading-relaxed text-[#86868b]">{body}</p>

@@ -30,20 +30,20 @@ export function DossierPage({
 }: DossierPageProps) {
   return (
     <main>
-      <section className="care-hero-wash px-5 pb-10 pt-16 md:pt-24">
-        <div className="mx-auto max-w-[820px] text-center">
+      <section className="care-hero-wash pb-10 pt-10 sm:pt-16 md:pt-24">
+        <div className="care-align text-center">
           <p className="text-[15px] font-medium text-[#0071e3]">{eyebrow}</p>
-          <h1 className="care-display mx-auto mt-4 max-w-[18ch] text-[44px] sm:text-[64px] md:text-[80px]">
+          <h1 className="care-display mx-auto mt-3 max-w-[18ch] text-[36px] sm:mt-4 sm:text-[56px] md:text-[72px]">
             {title}
           </h1>
-          <p className="care-subhead mx-auto mt-5 max-w-[540px] text-[19px] md:text-[24px]">{lede}</p>
-          <div className="mx-auto mt-10 max-w-[720px]">
+          <p className="care-subhead mx-auto mt-4 max-w-[34rem] text-[17px] sm:mt-5 sm:text-[19px] md:text-[24px]">{lede}</p>
+          <div className="mx-auto mt-8 max-w-[45rem] sm:mt-10">
             <NeedSearch initialQuery={initialQuery} initialPlace={initialPlace} compact />
           </div>
         </div>
       </section>
-      <section className="px-5 pb-24">
-        <div className="mx-auto max-w-[1080px]">
+      <section className="pb-20 sm:pb-24">
+        <div className="care-align">
           {dentists.length === 0 ? (
             <EmptyState title={emptyTitle} body={emptyBody} />
           ) : (

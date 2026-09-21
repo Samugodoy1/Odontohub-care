@@ -8,7 +8,7 @@ import { citySlug } from "@/lib/seo/cities";
 export function SiteFooter() {
   return (
     <footer className="mt-auto border-t border-[#d2d2d7] bg-white">
-      <div className="mx-auto grid max-w-[980px] gap-12 px-5 py-16 md:grid-cols-4">
+      <div className="care-align grid gap-10 py-12 sm:gap-12 sm:py-16 md:grid-cols-4">
         <div className="md:col-span-1">
           <p className="text-[19px] font-semibold tracking-tight text-[#1d1d1f]">OdontoHub Care</p>
           <p className="mt-3 max-w-xs text-[13px] leading-relaxed text-[#86868b]">
@@ -64,7 +64,7 @@ export function SiteFooter() {
         </div>
       </div>
       <div className="border-t border-[#d2d2d7]">
-        <p className="mx-auto max-w-[980px] px-5 py-6 text-[12px] text-[#86868b]">
+        <p className="care-align py-5 text-[12px] text-[#86868b] sm:py-6">
           © {new Date().getFullYear()} OdontoHub Care. Encontre um dentista. Sem ranking pago, sem
           cupom.
         </p>

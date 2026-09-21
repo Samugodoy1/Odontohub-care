@@ -26,8 +26,8 @@ export default async function SearchPage({ searchParams }: { searchParams: Searc
     : result?.location.region?.city;
 
   return (
-    <main className="px-5 py-12 md:py-20">
-      <div className="mx-auto max-w-[1080px]">
+    <main className="py-8 sm:py-12 md:py-20">
+      <div className="care-align">
         <NeedSearch initialQuery={q} initialPlace={onde} compact />
 
         {!result ? (

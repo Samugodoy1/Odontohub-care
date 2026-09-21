@@ -4,7 +4,7 @@ export function DeviceDossier({ dentists }: { dentists: ProfessionalCard[] }) {
   const slice = dentists.slice(0, 4);
 
   return (
-    <div className="care-float relative mx-auto w-[280px] md:w-[310px]">
+    <div className="care-float relative mx-auto w-[min(100%,280px)] md:w-[310px]">
       <div className="rounded-[48px] bg-gradient-to-b from-[#f2f2f7] to-[#d8d8de] p-[10px] shadow-[0_40px_80px_rgba(0,0,0,0.12)]">
         <div className="overflow-hidden rounded-[38px] bg-white">
           <div className="flex h-9 items-center justify-center">

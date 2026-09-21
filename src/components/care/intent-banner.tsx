@@ -15,10 +15,10 @@ export function IntentBanner({
 }) {
   if (cityDossier && city) {
     return (
-      <div className="text-center md:text-left">
+      <div>
         <p className="text-[15px] font-medium text-[#0071e3]">Na sua cidade</p>
-        <h2 className="care-display mt-2 text-[32px] md:text-[48px]">Dentistas em {city}.</h2>
-        <p className="care-subhead mx-auto mt-3 max-w-xl text-[17px] md:mx-0">
+        <h2 className="care-display mt-2 text-[28px] sm:text-[32px] md:text-[48px]">Dentistas em {city}.</h2>
+        <p className="care-subhead mt-3 max-w-xl text-[17px]">
           Profissionais escolhidos com rigor. Se o atendimento não se sustenta, eles saem da lista.
         </p>
       </div>
@@ -27,12 +27,12 @@ export function IntentBanner({
 
   if (intent.unknown || !intent.primary) {
     return (
-      <div className="text-center md:text-left">
+      <div>
         <p className="text-[15px] font-medium text-[#0071e3]">Busca</p>
         <h2 className="care-display mt-2 text-[32px] md:text-[44px]">
           Diga o que você precisa.
         </h2>
-        <p className="care-subhead mx-auto mt-3 max-w-xl text-[17px] md:mx-0">
+        <p className="care-subhead mt-3 max-w-xl text-[17px]">
           Limpeza, extração, aparelho — e a sua cidade. Encontramos o dentista para isso.
         </p>
       </div>
@@ -48,14 +48,14 @@ export function IntentBanner({
     : null;
 
   return (
-    <div className="text-center md:text-left">
+    <div>
       <p className="text-[15px] font-medium text-[#0071e3]">
         {city ? `${relatedCase?.shortLabel ?? primary.intent.label} · ${city}` : relatedCase?.shortLabel}
       </p>
-      <h2 className="care-display mt-2 text-[32px] md:text-[48px]">
+      <h2 className="care-display mt-2 text-[28px] sm:text-[32px] md:text-[48px]">
         {relatedCase?.headline ?? `${primary.intent.label}.`}
       </h2>
-      <p className="care-subhead mx-auto mt-3 max-w-xl text-[17px] md:mx-0">
+      <p className="care-subhead mt-3 max-w-xl text-[17px]">
         {relatedCase?.lede ?? primary.intent.explanation}
       </p>
       {href ? (

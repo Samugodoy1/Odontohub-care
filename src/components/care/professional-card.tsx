@@ -40,7 +40,7 @@ export function ProfessionalCardView({
   return (
     <article
       className={`care-lift overflow-hidden rounded-[28px] bg-white ring-1 ring-[#d2d2d7]/70 ${
-        featured ? "min-w-[280px] max-w-[320px]" : ""
+        featured ? "w-full" : ""
       }`}
     >
       <Link href={href} className="group block">

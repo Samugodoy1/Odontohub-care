@@ -48,7 +48,7 @@ export function SiteHeader() {
       >
         Ir para o conteúdo
       </a>
-      <div className="mx-auto flex h-12 max-w-[980px] items-center justify-between px-5">
+      <div className="care-align flex h-12 items-center justify-between">
         <CareMark />
         <nav className="hidden items-center gap-7 md:flex" aria-label="Principal">
           {NAV.map((item) => (
