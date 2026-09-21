@@ -4,6 +4,7 @@ import { EmptyState } from "@/components/care/empty-state";
 import { IntentBanner } from "@/components/care/intent-banner";
 import { NeedSearch } from "@/components/care/need-search";
 import { DentistGrid } from "@/components/care/dentist-grid";
+import { getCareCatalog } from "@/lib/catalog/adapter";
 import { searchCare } from "@/lib/search";
 
 export const metadata: Metadata = {
@@ -19,7 +20,8 @@ export default async function SearchPage({ searchParams }: { searchParams: Searc
   const q = typeof params.q === "string" ? params.q : "";
   const onde = typeof params.onde === "string" ? params.onde : "";
   const hasInput = Boolean(q.trim() || onde.trim());
-  const result = hasInput ? searchCare(q || "dentista", onde) : null;
+  const catalog = hasInput ? await getCareCatalog() : null;
+  const result = hasInput && catalog ? searchCare(q || "dentista", onde, catalog) : null;
 
   const locationLabel = result?.location.neighborhood
     ? `${result.location.neighborhood}, ${result.location.region?.city}`

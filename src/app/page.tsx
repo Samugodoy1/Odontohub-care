@@ -7,8 +7,7 @@ import { DeviceDossier } from "@/components/care/device-dossier";
 import { HeroHeadline } from "@/components/care/hero-headline";
 import { NeedSearch } from "@/components/care/need-search";
 import { Reveal } from "@/components/care/reveal";
-import { catalog } from "@/lib/catalog/query";
-import { REGIONS } from "@/lib/catalog/regions";
+import { getCareCatalog } from "@/lib/catalog/adapter";
 import { citySlug } from "@/lib/seo/cities";
 import { GOOGLE_QUERIES } from "@/lib/seo/queries";
 
@@ -30,10 +29,13 @@ const QUALITY = [
   },
 ] as const;
 
-export default function HomePage() {
+export default async function HomePage() {
+  const catalog = await getCareCatalog();
   const network = catalog.listProfessionals({ intentIds: [] });
   const taubate = network.filter((item) => item.region.id === "taubate");
   const featured = taubate.length > 0 ? taubate : network;
+  const featuredCity = featured[0]?.region.city;
+  const regions = catalog.listRegions();
 
   return (
     <main>
@@ -92,14 +94,16 @@ export default function HomePage() {
               Perto de você.
             </h2>
             <p className="care-subhead mt-4 max-w-[28rem] text-[17px] sm:mt-5 sm:text-[19px] md:text-[21px]">
-              Procurou dentista em Taubaté? Estes são os profissionais da cidade. O tratamento e o
-              lugar, juntos.
+              {featuredCity
+                ? `Procurou dentista em ${featuredCity}? Estes são os profissionais da cidade. O tratamento e o lugar, juntos.`
+                : "Informe sua cidade para encontrar profissionais conectados ao OdontoHub Care."}
             </p>
             <Link
-              href="/dentista/taubate"
+              href={featuredCity ? `/dentista/${citySlug(featuredCity)}` : "/buscar"}
               className="group mt-6 inline-flex items-center text-[17px] text-[#0066cc] sm:mt-8"
             >
-              Ver dentistas em Taubaté <span className="care-arrow ml-1">›</span>
+              {featuredCity ? `Ver dentistas em ${featuredCity}` : "Encontrar dentista"}{" "}
+              <span className="care-arrow ml-1">›</span>
             </Link>
           </Reveal>
           <Reveal delay={120}>
@@ -176,7 +180,7 @@ export default function HomePage() {
           <Reveal>
             <h2 className="care-display text-[32px] md:text-[48px]">Cidades</h2>
             <div className="mt-6 flex flex-wrap gap-2 sm:mt-8">
-              {REGIONS.map((region) => (
+              {regions.map((region) => (
                 <Link
                   key={region.id}
                   href={`/dentista/${citySlug(region.city)}`}

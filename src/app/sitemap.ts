@@ -1,12 +1,18 @@
 import type { MetadataRoute } from "next";
 
-import { PROFESSIONALS } from "@/lib/catalog/seed";
+import { getCareProfessionals } from "@/lib/catalog/adapter";
 import { CARE_CASES } from "@/lib/seo/cases";
 import { CITY_SLUGS } from "@/lib/seo/cities";
+import { citySlug } from "@/lib/seo/cities";
 import { SITE } from "@/lib/site";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
+  const professionals = await getCareProfessionals();
+  const citySlugs = [...new Set([
+    ...CITY_SLUGS,
+    ...professionals.map((professional) => citySlug(professional.region.city)),
+  ])];
   const staticRoutes = ["", "/buscar", "/para-dentistas"].map((path) => ({
     url: `${SITE.domain}${path}`,
     lastModified: now,
@@ -21,14 +27,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.85,
   }));
 
-  const cities = CITY_SLUGS.map((slug) => ({
+  const cities = citySlugs.map((slug) => ({
     url: `${SITE.domain}/dentista/${slug}`,
     lastModified: now,
     changeFrequency: "weekly" as const,
     priority: 0.85,
   }));
 
-  const combos = CITY_SLUGS.flatMap((slug) =>
+  const combos = citySlugs.flatMap((slug) =>
     CARE_CASES.map((item) => ({
       url: `${SITE.domain}/dentista/${slug}/${item.slug}`,
       lastModified: now,
@@ -37,7 +43,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
   );
 
-  const profiles = PROFESSIONALS.map((professional) => ({
+  const profiles = professionals.map((professional) => ({
     url: `${SITE.domain}/profissional/${professional.slug}`,
     lastModified: now,
     changeFrequency: "monthly" as const,

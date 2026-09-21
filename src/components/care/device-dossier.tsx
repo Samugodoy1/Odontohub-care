@@ -2,6 +2,7 @@ import type { ProfessionalCard } from "@/lib/catalog/types";
 
 export function DeviceDossier({ dentists }: { dentists: ProfessionalCard[] }) {
   const slice = dentists.slice(0, 4);
+  const city = slice[0]?.region.city || "sua cidade";
 
   return (
     <div className="care-float relative mx-auto w-[min(100%,280px)] md:w-[310px]">
@@ -13,7 +14,7 @@ export function DeviceDossier({ dentists }: { dentists: ProfessionalCard[] }) {
           <div className="px-5 pb-8 pt-1">
             <p className="text-[11px] font-medium text-[#0071e3]">Perto de você</p>
             <p className="mt-1 text-[22px] font-semibold tracking-tight text-[#1d1d1f]">
-              Dentistas em Taubaté
+              Dentistas em {city}
             </p>
             <p className="mt-1 text-[12px] text-[#86868b]">Escolhidos com rigor</p>
             <ul className="mt-5 space-y-2.5">
@@ -24,7 +25,7 @@ export function DeviceDossier({ dentists }: { dentists: ProfessionalCard[] }) {
                   style={{ animationDelay: `${index * 80}ms` }}
                 >
                   <p className="text-[14px] font-medium text-[#1d1d1f]">
-                    {item.honorific} {item.name.split(" ")[0]}
+                    {[item.honorific, item.name.split(" ")[0]].filter(Boolean).join(" ")}
                   </p>
                   <p className="text-[12px] text-[#86868b]">
                     {item.specialties[0]?.shortName} · {item.clinic.neighborhood}

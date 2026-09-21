@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { DossierPage } from "@/components/care/dossier-page";
+import { getCareCatalog } from "@/lib/catalog/adapter";
 import { CITY_SLUGS, regionByCitySlug } from "@/lib/seo/cities";
 import { CARE_CASES, getCase } from "@/lib/seo/cases";
 import { searchCare } from "@/lib/search";
@@ -17,7 +18,9 @@ export async function generateMetadata({
   params: Promise<{ cidade: string; caso: string }>;
 }): Promise<Metadata> {
   const { cidade, caso } = await params;
-  const region = regionByCitySlug(cidade);
+  const catalog = await getCareCatalog();
+  const region = regionByCitySlug(cidade)
+    ?? catalog.listRegions().find((item) => item.id === cidade);
   const careCase = getCase(caso);
   if (!region || !careCase) return { title: "Dentista" };
   const title = `${careCase.title} em ${region.city}`;
@@ -36,11 +39,13 @@ export default async function CityCasePage({
   params: Promise<{ cidade: string; caso: string }>;
 }) {
   const { cidade, caso } = await params;
-  const region = regionByCitySlug(cidade);
+  const catalog = await getCareCatalog();
+  const region = regionByCitySlug(cidade)
+    ?? catalog.listRegions().find((item) => item.id === cidade);
   const careCase = getCase(caso);
   if (!region || !careCase) notFound();
 
-  const result = searchCare(careCase.googleQuery, region.city);
+  const result = searchCare(careCase.googleQuery, region.city, catalog);
 
   return (
     <DossierPage
@@ -54,5 +59,3 @@ export default async function CityCasePage({
     />
   );
 }
-
-export const dynamicParams = false;
