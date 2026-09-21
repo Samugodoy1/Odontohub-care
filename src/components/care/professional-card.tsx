@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { ProfessionalPhoto } from "@/components/care/professional-photo";
 import type { ProfessionalCard } from "@/lib/catalog/types";
 import { citySlug } from "@/lib/seo/cities";
 
@@ -11,15 +12,6 @@ const TILES = [
   "from-[#e8f1fc] to-[#c4daf7]",
   "from-[#f0eefb] to-[#d5d0f2]",
 ];
-
-function initials(name: string) {
-  return name
-    .split(" ")
-    .filter((part) => part.length > 2)
-    .slice(0, 2)
-    .map((part) => part[0])
-    .join("");
-}
 
 function tileFor(id: string) {
   let hash = 0;
@@ -50,12 +42,11 @@ export function ProfessionalCardView({
           <span className="absolute right-4 top-4 rounded-full bg-white/80 px-2.5 py-1 text-[11px] font-medium text-[#1d1d1f] backdrop-blur">
             Selecionado pelo Care
           </span>
-          <div
-            aria-hidden
-            className="flex size-12 items-center justify-center rounded-full bg-white/85 text-[14px] font-semibold text-[#1d1d1f]"
-          >
-            {initials(professional.name)}
-          </div>
+          <ProfessionalPhoto
+            src={professional.photoUrl}
+            name={professional.name}
+            className="size-16 text-[14px] ring-2 ring-white/70 shadow-sm"
+          />
         </div>
         <div className="p-5">
           <h3 className="text-[19px] font-semibold tracking-tight text-[#1d1d1f]">
