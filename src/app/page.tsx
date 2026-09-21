@@ -33,30 +33,33 @@ const SURFACES = [
 export default function HomePage() {
   return (
     <main>
-      <section className="relative overflow-hidden px-5 pb-16 pt-16 md:pb-24 md:pt-24">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute left-1/2 top-0 h-[420px] w-[720px] -translate-x-1/2 rounded-full bg-care-sage/10 blur-[90px]"
-        />
-        <div className="relative mx-auto max-w-[820px] text-center">
-          <p className="care-enter text-[15px] font-medium tracking-tight text-care-sage">
+      <section
+        aria-labelledby="care-hero-title"
+        className="care-stage relative -mt-12 flex min-h-svh flex-col justify-center overflow-hidden px-5 pb-20 pt-12 md:pb-24"
+      >
+        <div className="mx-auto flex w-full max-w-[1120px] flex-col items-center text-center">
+          <p className="care-enter text-[17px] font-semibold tracking-[-0.022em] text-care-ink md:text-[21px]">
             OdontoHub Care
           </p>
           <h1
-            className="care-enter care-display mx-auto mt-4 max-w-[16ch] text-[44px] text-care-ink sm:text-[64px] md:text-[80px]"
+            id="care-hero-title"
+            className="care-enter care-display mx-auto mt-2 max-w-[12em] text-balance text-[clamp(3rem,7.6vw,6rem)] leading-[1.02] tracking-[-0.042em] text-care-ink"
             style={{ animationDelay: "80ms" }}
           >
             Diga o que sente.
           </h1>
           <p
-            className="care-enter care-subhead mx-auto mt-5 max-w-[540px] text-[19px] md:text-[24px]"
-            style={{ animationDelay: "140ms" }}
+            className="care-enter mx-auto mt-5 max-w-[40rem] text-pretty text-[19px] font-normal leading-[1.35] tracking-[-0.018em] text-care-gray md:mt-6 md:text-[24px] md:leading-[1.28]"
+            style={{ animationDelay: "150ms" }}
           >
             Você não precisa saber o nome do tratamento. Descreva o que está acontecendo.
             Encontramos quem cuida — perto de você.
           </p>
-          <div className="care-enter mx-auto mt-10 max-w-[640px]" style={{ animationDelay: "200ms" }}>
-            <NeedSearch autoFocus />
+          <div
+            className="care-enter mt-12 w-full max-w-[720px] md:mt-16"
+            style={{ animationDelay: "230ms" }}
+          >
+            <NeedSearch autoFocus variant="stage" />
           </div>
         </div>
       </section>

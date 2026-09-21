@@ -12,6 +12,7 @@ type NeedSearchProps = {
   initialPlace?: string;
   autoFocus?: boolean;
   compact?: boolean;
+  variant?: "default" | "stage";
 };
 
 export function NeedSearch({
@@ -19,6 +20,7 @@ export function NeedSearch({
   initialPlace = "",
   autoFocus = false,
   compact = false,
+  variant = "default",
 }: NeedSearchProps) {
   const router = useRouter();
   const queryId = useId();
@@ -45,13 +47,19 @@ export function NeedSearch({
     submit();
   }
 
+  const stage = variant === "stage";
+
   return (
     <div className={compact ? "" : "w-full"}>
       <form onSubmit={onSubmit} className="w-full" role="search">
         <div
-          className={`rounded-[28px] bg-white ring-1 ring-care-line ${
-            compact ? "p-3 md:p-4" : "p-3 md:p-5"
-          } shadow-[0_1px_2px_rgba(0,0,0,0.04)]`}
+          className={
+            stage
+              ? "care-glass rounded-[32px] p-3 transition-shadow duration-300 focus-within:shadow-[inset_0_1px_0_rgba(255,255,255,0.96),0_0_0_1px_rgba(31,107,87,0.35),0_22px_60px_-28px_rgba(0,0,0,0.28)] md:p-4"
+              : `rounded-[28px] bg-white ring-1 ring-care-line shadow-[0_1px_2px_rgba(0,0,0,0.04)] ${
+                  compact ? "p-3 md:p-4" : "p-3 md:p-5"
+                }`
+          }
         >
           <label htmlFor={queryId} className="sr-only">
             O que você está sentindo
@@ -67,9 +75,17 @@ export function NeedSearch({
             autoFocus={autoFocus}
             autoComplete="off"
             placeholder="Ex.: Meu dente quebrou"
-            className="h-14 w-full bg-transparent px-3 text-[19px] tracking-tight text-care-ink outline-none placeholder:text-care-muted md:h-16 md:text-[22px]"
+            className={
+              stage
+                ? "h-14 w-full bg-transparent px-3 text-[19px] tracking-[-0.02em] text-care-ink outline-none placeholder:text-care-muted md:h-[4.25rem] md:text-[22px]"
+                : "h-14 w-full bg-transparent px-3 text-[19px] tracking-tight text-care-ink outline-none placeholder:text-care-muted md:h-16 md:text-[22px]"
+            }
           />
-          <div className="mt-2 flex flex-col gap-3 border-t border-care-line/80 px-2 pt-3 sm:flex-row sm:items-center">
+          <div
+            className={`flex flex-col gap-3 border-t border-care-line/80 px-2 pt-3 sm:flex-row sm:items-center ${
+              stage ? "mt-1" : "mt-2"
+            }`}
+          >
             <div className="flex min-w-0 flex-1 items-center gap-2">
               <MapPin className="size-4 shrink-0 text-care-muted" aria-hidden />
               <label htmlFor={placeId} className="sr-only">
@@ -107,7 +123,7 @@ export function NeedSearch({
       </form>
 
       {!compact ? (
-        <div className="mt-6 flex flex-wrap justify-center gap-2">
+        <div className={`flex flex-wrap justify-center ${stage ? "mt-8 gap-2" : "mt-6 gap-2"}`}>
           {SUGGESTED_QUERIES.map((item) => (
             <button
               key={item}
@@ -116,7 +132,11 @@ export function NeedSearch({
                 setQuery(item);
                 submit(item, place);
               }}
-              className="rounded-full bg-white px-3.5 py-1.5 text-[13px] text-care-ink ring-1 ring-care-line transition-colors hover:bg-care-sage-soft hover:text-care-sage-deep hover:ring-care-sage/20"
+              className={
+                stage
+                  ? "rounded-full bg-white/80 px-3.5 py-[7px] text-[13px] tracking-[-0.01em] text-care-ink/80 ring-1 ring-black/[0.05] transition-colors hover:bg-white hover:text-care-ink"
+                  : "rounded-full bg-white px-3.5 py-1.5 text-[13px] text-care-ink ring-1 ring-care-line transition-colors hover:bg-care-sage-soft hover:text-care-sage-deep hover:ring-care-sage/20"
+              }
             >
               {item}
             </button>

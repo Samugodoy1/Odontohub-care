@@ -136,7 +136,14 @@
   font-weight: 400;
   letter-spacing: -0.022em;
   line-height: 1.2;
-  transition: background 0.2s ease, transform 0.15s ease;
+  transition: background 0.2s ease;
+  &:hover {
+    background: #124438;
+  }
+  &:focus-visible {
+    outline: 2px solid #1f6b57;
+    outline-offset: 3px;
+  }
 }
 
 @utility care-btn-dark {
@@ -154,10 +161,27 @@
   transition: background 0.2s ease, transform 0.15s ease;
 }
 
+@utility care-stage {
+  background-color: #f5f5f7;
+  background-image:
+    radial-gradient(ellipse 72% 46% at 50% 18%, #ffffff 0%, rgba(255, 255, 255, 0) 68%),
+    radial-gradient(ellipse 48% 32% at 50% 78%, rgba(31, 107, 87, 0.07) 0%, rgba(31, 107, 87, 0) 70%);
+}
+
+@utility care-glass {
+  background: rgba(255, 255, 255, 0.88);
+  -webkit-backdrop-filter: saturate(180%) blur(22px);
+  backdrop-filter: saturate(180%) blur(22px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.96),
+    0 0 0 1px rgba(0, 0, 0, 0.045),
+    0 22px 60px -28px rgba(0, 0, 0, 0.28);
+}
+
 @keyframes care-enter {
   from {
     opacity: 0;
-    transform: translateY(16px);
+    transform: translateY(8px);
   }
   to {
     opacity: 1;
@@ -166,5 +190,15 @@
 }
 
 @utility care-enter {
-  animation: care-enter 0.8s cubic-bezier(0.25, 0.1, 0.25, 1) both;
+  animation: care-enter 1.05s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .care-enter {
+    animation: none;
+  }
 }

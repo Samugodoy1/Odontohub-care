@@ -23,7 +23,7 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-care-line/70 bg-care-surface/80 backdrop-blur-xl">
+    <header className="sticky top-0 z-40 border-b border-black/[0.06] bg-care-surface/70 backdrop-blur-2xl backdrop-saturate-150">
       <a
         href="#conteudo"
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:z-50 focus:rounded-full focus:bg-care-ink focus:px-4 focus:py-2 focus:text-white"
