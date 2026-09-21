@@ -6,7 +6,7 @@ export function NetworkBadge({ compact = false }: { compact?: boolean }) {
       variant="secondary"
       className="rounded-full border-0 bg-[#eaf8ef] px-2.5 py-0.5 text-[11px] font-medium text-[#248a3d]"
     >
-      {compact ? "Selecionado" : "Selecionado pelo Care"}
+      {compact ? "OdontoHub" : "Rede OdontoHub"}
     </Badge>
   );
 }

@@ -24,10 +24,11 @@ export async function generateMetadata({
   const careCase = getCase(caso);
   if (!region || !careCase) return { title: "Dentista" };
   const title = `${careCase.title} em ${region.city}`;
-  const description = `${careCase.lede} Dentistas em ${region.city}, selecionados pelo Care.`;
+  const description = `Encontre ${careCase.title.toLowerCase()} em ${region.city}. ${careCase.lede}`;
   return {
     title,
     description,
+    keywords: [`${careCase.googleQuery} em ${region.city}`, `dentista em ${region.city}`],
     alternates: { canonical: `${SITE.domain}/dentista/${cidade}/${caso}` },
     openGraph: { title: `${title} · OdontoHub Care`, description },
   };

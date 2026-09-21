@@ -8,12 +8,14 @@ import { Textarea } from "@/components/ui/textarea";
 type InterestFormProps = {
   professionalName: string;
   professionalSlug: string;
+  dentistId?: string | null;
   intentLabel?: string;
 };
 
 export function InterestForm({
   professionalName,
   professionalSlug,
+  dentistId,
   intentLabel,
 }: InterestFormProps) {
   const [sent, setSent] = useState(false);
@@ -35,6 +37,7 @@ export function InterestForm({
           neighborhood: form.get("neighborhood"),
           message: form.get("message"),
           professionalSlug,
+          dentistId,
           intentLabel,
         }),
       });

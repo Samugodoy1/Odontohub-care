@@ -22,6 +22,8 @@ describe("OdontoHub Care catalog adapter", () => {
 
     expect(professional.id).toBe("hub-42");
     expect(professional.slug).toBe("marina-pires-42");
+    expect(professional.honorific).toBe("");
+    expect(professional.name).toBe("Marina Pires");
     expect(professional.region.id).toBe("taubate");
     expect(professional.clinic.neighborhood).toBe("Centro");
     expect(professional.specialtyIds).toEqual(
@@ -45,5 +47,33 @@ describe("OdontoHub Care catalog adapter", () => {
     expect(professional.region.city).toBe("Brasil");
     expect(professional.clinic.neighborhood).toBe("Endereço a confirmar");
     expect(professional.specialtyIds).toEqual(["clinica-geral"]);
+  });
+
+  it("extracts Dr/Dra from Hub names so the UI never shows only Dr", () => {
+    const professional = mapHubProfessional({
+      ...dentist,
+      name: "Dr. João Silva",
+    });
+
+    expect(professional.honorific).toBe("Dr.");
+    expect(professional.name).toBe("João Silva");
+    expect(professional.slug).toBe("joao-silva-42");
+  });
+
+  it("does not reuse the dentist name as the clinic name", () => {
+    const professional = mapHubProfessional({
+      ...dentist,
+      name: "Dr. Samuel Godoy",
+      clinicName: "Dr Samuel Godoy",
+    });
+    expect(professional.clinic.name).toBe("Consultório de Dr. Samuel Godoy");
+  });
+
+  it("upgrades tiny Google avatars to a portrait-sized photo", () => {
+    const professional = mapHubProfessional({
+      ...dentist,
+      photoUrl: "https://lh3.googleusercontent.com/a/ABC=s96-c",
+    });
+    expect(professional.photoUrl).toBe("https://lh3.googleusercontent.com/a/ABC=s1200-c");
   });
 });

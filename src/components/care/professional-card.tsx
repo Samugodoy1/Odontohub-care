@@ -1,31 +1,9 @@
 import Link from "next/link";
 
+import { DentistPhoto } from "@/components/care/dentist-photo";
 import type { ProfessionalCard } from "@/lib/catalog/types";
+import { displayNameOf } from "@/lib/catalog/names";
 import { citySlug } from "@/lib/seo/cities";
-
-const TILES = [
-  "from-[#e6f5f1] to-[#b7ddd4]",
-  "from-[#eaf1fb] to-[#c2d4ee]",
-  "from-[#eef6e8] to-[#c6e0b6]",
-  "from-[#fbf0e8] to-[#f0cbb4]",
-  "from-[#e8f1fc] to-[#c4daf7]",
-  "from-[#f0eefb] to-[#d5d0f2]",
-];
-
-function initials(name: string) {
-  return name
-    .split(" ")
-    .filter((part) => part.length > 2)
-    .slice(0, 2)
-    .map((part) => part[0])
-    .join("");
-}
-
-function tileFor(id: string) {
-  let hash = 0;
-  for (const ch of id) hash = (hash + ch.charCodeAt(0)) % TILES.length;
-  return TILES[hash] ?? TILES[0];
-}
 
 export function ProfessionalCardView({
   professional,
@@ -36,45 +14,49 @@ export function ProfessionalCardView({
 }) {
   const href = `/profissional/${professional.slug}`;
   const cityHref = `/dentista/${citySlug(professional.region.city)}`;
+  const displayName = displayNameOf(professional);
 
   return (
     <article
-      className={`care-lift overflow-hidden rounded-[28px] bg-white ring-1 ring-[#d2d2d7]/70 ${
+      className={`overflow-hidden rounded-[24px] bg-white ring-1 ring-[#e5e5ea] transition-shadow duration-300 hover:shadow-[0_18px_40px_rgba(15,23,42,0.08)] ${
         featured ? "w-full" : ""
       }`}
     >
       <Link href={href} className="group block">
-        <div
-          className={`care-sheen relative flex h-44 items-end bg-gradient-to-br p-5 ${tileFor(professional.id)}`}
-        >
-          <span className="absolute right-4 top-4 rounded-full bg-white/80 px-2.5 py-1 text-[11px] font-medium text-[#1d1d1f] backdrop-blur">
-            Selecionado pelo Care
+        <div className="relative aspect-[4/5] overflow-hidden bg-[#d7e0e8]">
+          <DentistPhoto
+            name={professional.name}
+            honorific={professional.honorific}
+            photoUrl={professional.photoUrl}
+          />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/55 to-transparent" />
+          <span className="absolute left-4 top-4 rounded-full bg-white/92 px-2.5 py-1 text-[11px] font-medium tracking-wide text-[#1d1d1f]">
+            OdontoHub
           </span>
-          <div
-            aria-hidden
-            className="flex size-12 items-center justify-center rounded-full bg-white/85 text-[14px] font-semibold text-[#1d1d1f]"
-          >
-            {initials(professional.name)}
+          <div className="absolute inset-x-0 bottom-0 p-4 text-white">
+            <h3 className="text-[20px] font-semibold leading-tight tracking-tight">
+              {displayName}
+            </h3>
+            <p className="mt-1 text-[13px] text-white/80">
+              {professional.specialties.map((item) => item.shortName).join(" · ")}
+            </p>
           </div>
         </div>
-        <div className="p-5">
-          <h3 className="text-[19px] font-semibold tracking-tight text-[#1d1d1f]">
-            {[professional.honorific, professional.name].filter(Boolean).join(" ")}
-          </h3>
-          <p className="mt-1 text-[13px] text-[#86868b]">
-            {professional.specialties.map((item) => item.shortName).join(" · ")}
+        <div className="px-4 py-3.5">
+          <p className="text-[13px] text-[#6e6e73]">
+            {professional.clinic.name}
           </p>
-          <p className="mt-3 text-[13px] text-[#6e6e73]">
+          <p className="mt-0.5 text-[13px] text-[#86868b]">
             {professional.clinic.neighborhood}, {professional.region.city}
           </p>
         </div>
       </Link>
-      <div className="flex items-center justify-between border-t border-[#d2d2d7]/70 px-5 py-3">
+      <div className="flex items-center justify-between border-t border-[#eeeef0] px-4 py-3">
         <Link href={cityHref} className="text-[12px] text-[#86868b] hover:text-[#1d1d1f]">
           Em {professional.region.city}
         </Link>
-        <Link href={href} className="group text-[13px] text-[#0066cc]">
-          Ver perfil <span className="care-arrow">›</span>
+        <Link href={href} className="text-[13px] font-medium text-[#0f766e]">
+          Ver perfil →
         </Link>
       </div>
     </article>

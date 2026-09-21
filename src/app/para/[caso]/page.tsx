@@ -20,8 +20,9 @@ export async function generateMetadata({
   const careCase = getCase(caso);
   if (!careCase) return { title: "Dentista" };
   return {
-    title: careCase.title,
+    title: `${careCase.title} | OdontoHub Care`,
     description: careCase.lede,
+    keywords: [careCase.googleQuery, careCase.title, "dentista perto de mim"],
     alternates: { canonical: `${SITE.domain}/para/${caso}` },
     openGraph: { title: `${careCase.title} · OdontoHub Care`, description: careCase.lede },
   };
