@@ -12,16 +12,17 @@ export function HeroHeadline() {
     if (reduced) return;
     const id = window.setInterval(() => {
       setIndex((current) => (current + 1) % NEEDS.length);
-    }, 2600);
+    }, 3400);
     return () => window.clearInterval(id);
   }, []);
 
   return (
-    <h1 className="care-display mx-auto max-w-[13ch] text-[48px] sm:text-[72px] md:text-[88px]">
-      Encontre o dentista certo
-      <span className="mt-1 block">
+    <h1 className="care-hero-title">
+      <span className="block">Encontre o</span>
+      <span className="block">dentista certo</span>
+      <span className="mt-[0.08em] block text-[#0071e3]">
         para{" "}
-        <span className="inline-grid text-left text-[#0071e3]">
+        <span className="inline-grid text-left">
           <span className="invisible col-start-1 row-start-1" aria-hidden>
             extração.
           </span>

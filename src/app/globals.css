@@ -265,6 +265,22 @@
     #f5f5f7;
 }
 
+.care-hero-title {
+  margin-inline: auto;
+  max-width: 16ch;
+  font-size: clamp(2.125rem, min(9.5vw, 9.2vh), 6.25rem);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 1.07;
+  color: #1d1d1f;
+}
+
+@media (min-width: 734px) {
+  .care-hero-title {
+    max-width: none;
+  }
+}
+
 .care-orb {
   position: absolute;
   border-radius: 999px;
@@ -361,19 +377,17 @@ a:hover .care-arrow {
 
 .care-word {
   display: inline-block;
-  animation: care-word 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: care-word 0.7s cubic-bezier(0.25, 0.1, 0.25, 1) both;
 }
 
 @keyframes care-word {
   from {
     opacity: 0;
-    transform: translateY(18px);
-    filter: blur(8px);
+    transform: translateY(0.2em);
   }
   to {
     opacity: 1;
     transform: translateY(0);
-    filter: blur(0);
   }
 }
 
