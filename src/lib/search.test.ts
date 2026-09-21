@@ -27,4 +27,24 @@ describe("searchCare", () => {
       ["ana-luisa-freire", "sofia-carvalho"].sort(),
     );
   });
+
+  it("opens a city dossier for dentista em Taubaté", () => {
+    const result = searchCare("dentista em Taubaté");
+    expect(result.location.region?.city).toBe("Taubaté");
+    expect(result.cityDossier).toBe(true);
+    expect(result.matches.length).toBeGreaterThan(0);
+    expect(result.matches.every((item) => item.region.city === "Taubaté")).toBe(true);
+  });
+
+  it("maps dentista para extração to surgery in Taubaté", () => {
+    const result = searchCare("dentista para extração", "Taubaté");
+    expect(result.intent.primary?.intent.id).toBe("cirurgia");
+    expect(result.matches.map((item) => item.slug)).toEqual(expect.arrayContaining(["eduardo-leal"]));
+  });
+
+  it("maps dentista para limpeza", () => {
+    const result = searchCare("dentista para limpeza", "Taubaté");
+    expect(result.intent.primary?.intent.id).toBe("prevencao");
+    expect(result.matches.map((item) => item.slug)).toEqual(expect.arrayContaining(["marina-pires"]));
+  });
 });

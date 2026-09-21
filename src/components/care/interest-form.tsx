@@ -49,41 +49,38 @@ export function InterestForm({
     }
   }
 
+  const fieldClass =
+    "h-11 rounded-2xl border border-[#d2d2d7] bg-[#f5f5f7] px-3 text-[15px] text-[#1d1d1f] outline-none placeholder:text-[#86868b] focus-visible:ring-2 focus-visible:ring-[#0071e3]/30";
+
   if (sent) {
     return (
-      <div className="rounded-[28px] bg-care-sage-soft px-6 py-8 text-care-sage-deep md:px-8">
-        <p className="text-[13px] font-medium uppercase tracking-[0.12em]">Enviado</p>
-        <h2 className="mt-2 text-[24px] font-semibold tracking-tight">Recebemos o seu interesse.</h2>
-        <p className="mt-3 max-w-md text-[15px] leading-relaxed">
-          {professionalName} usa o OdontoHub. A clínica entra em contato para combinar o horário.
-          Nada de leilão, nada de ranking pago.
+      <div className="rounded-[28px] bg-[#eaf8ef] px-6 py-8 md:px-8">
+        <p className="text-[13px] font-medium text-[#248a3d]">Enviado</p>
+        <h2 className="mt-2 text-[24px] font-semibold tracking-tight text-[#1d1d1f]">
+          Pedido enviado à clínica.
+        </h2>
+        <p className="mt-3 max-w-md text-[15px] leading-relaxed text-[#3d5a45]">
+          Enviamos seu pedido para a clínica de {professionalName}. Ela entrará em contato para
+          confirmar a disponibilidade.
         </p>
       </div>
     );
   }
 
   return (
-    <form onSubmit={onSubmit} className="rounded-[28px] bg-white p-6 ring-1 ring-care-line md:p-8">
-      <p className="text-[13px] font-medium uppercase tracking-[0.12em] text-care-muted">
-        Interesse
-      </p>
-      <h2 className="mt-2 text-[24px] font-semibold tracking-tight text-care-ink">
-        Pedir contato
+    <form onSubmit={onSubmit} className="rounded-[28px] bg-white p-6 ring-1 ring-[#d2d2d7]/80 md:p-8">
+      <p className="text-[13px] font-medium text-[#0071e3]">Consulta</p>
+      <h2 className="mt-2 text-[24px] font-semibold tracking-tight text-[#1d1d1f]">
+        Pedir um horário
       </h2>
-      <p className="mt-2 max-w-md text-[15px] leading-relaxed text-care-muted">
-        A clínica vê o pedido no mesmo sistema em que organiza a agenda. Sem cadastro de paciente
-        neste site.
+      <p className="mt-2 max-w-md text-[15px] leading-relaxed text-[#86868b]">
+        A clínica recebe o seu pedido e entra em contato para confirmar a disponibilidade. Sem
+        cadastro aqui.
       </p>
       <div className="mt-6 grid gap-4">
         <div className="grid gap-1.5">
           <Label htmlFor="name">Nome</Label>
-          <input
-            id="name"
-            name="name"
-            required
-            autoComplete="name"
-            className="h-11 rounded-2xl border border-care-line bg-care-wash px-3 text-[15px] outline-none focus-visible:ring-2 focus-visible:ring-care-sage/40"
-          />
+          <input id="name" name="name" required autoComplete="name" className={fieldClass} />
         </div>
         <div className="grid gap-1.5">
           <Label htmlFor="phone">WhatsApp</Label>
@@ -94,8 +91,8 @@ export function InterestForm({
             type="tel"
             autoComplete="tel"
             inputMode="tel"
-            placeholder="(11) 90000-0000"
-            className="h-11 rounded-2xl border border-care-line bg-care-wash px-3 text-[15px] outline-none focus-visible:ring-2 focus-visible:ring-care-sage/40"
+            placeholder="(12) 90000-0000"
+            className={fieldClass}
           />
         </div>
         <div className="grid gap-1.5">
@@ -104,17 +101,17 @@ export function InterestForm({
             id="neighborhood"
             name="neighborhood"
             autoComplete="address-level3"
-            className="h-11 rounded-2xl border border-care-line bg-care-wash px-3 text-[15px] outline-none focus-visible:ring-2 focus-visible:ring-care-sage/40"
+            className={fieldClass}
           />
         </div>
         <div className="grid gap-1.5">
-          <Label htmlFor="message">O que está acontecendo</Label>
+          <Label htmlFor="message">O que você precisa</Label>
           <Textarea
             id="message"
             name="message"
             rows={4}
-            defaultValue={intentLabel ? `Estou procurando ajuda com: ${intentLabel}` : ""}
-            className="min-h-24 rounded-2xl border-care-line bg-care-wash text-[15px]"
+            defaultValue={intentLabel ? `Estou procurando: ${intentLabel}` : ""}
+            className="min-h-24 rounded-2xl border-[#d2d2d7] bg-[#f5f5f7] text-[15px] text-[#1d1d1f]"
           />
         </div>
       </div>
@@ -124,7 +121,7 @@ export function InterestForm({
         </p>
       ) : null}
       <button type="submit" disabled={pending} className="care-btn mt-6 w-full disabled:opacity-60">
-        {pending ? "Enviando…" : "Enviar interesse"}
+        {pending ? "Enviando…" : "Pedir contato"}
       </button>
     </form>
   );

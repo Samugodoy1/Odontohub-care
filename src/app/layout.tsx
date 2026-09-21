@@ -16,18 +16,18 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.domain),
   title: {
-    default: "OdontoHub Care — Diga o que sente.",
+    default: "OdontoHub Care — Encontre o dentista certo.",
     template: "%s · OdontoHub Care",
   },
   description: SITE.description,
   applicationName: SITE.name,
   keywords: [
-    "dentista perto de mim",
-    "dor de dente",
-    "siso",
-    "aparelho",
-    "implante",
-    "odontopediatria",
+    "dentista em Taubaté",
+    "dentista para limpeza",
+    "dentista para extração",
+    "dentista para aparelho",
+    "dentista para implante",
+    "dentista selecionado",
     "OdontoHub Care",
   ],
   authors: [{ name: "OdontoHub" }],
@@ -36,12 +36,12 @@ export const metadata: Metadata = {
     locale: SITE.locale,
     url: SITE.domain,
     siteName: SITE.name,
-    title: "OdontoHub Care — Diga o que sente.",
+    title: SITE.slogan,
     description: SITE.description,
   },
   twitter: {
     card: "summary_large_image",
-    title: "OdontoHub Care — Diga o que sente.",
+    title: SITE.slogan,
     description: SITE.description,
   },
   alternates: {
@@ -82,10 +82,10 @@ const jsonLd = {
   ],
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-BR" className={`${inter.variable} h-full`}>
-      <body className={`${inter.className} flex min-h-full flex-col bg-care-surface text-care-ink`}>
+      <body className={`${inter.className} flex min-h-full flex-col bg-[#f5f5f7] text-[#1d1d1f]`}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

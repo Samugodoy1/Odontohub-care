@@ -6,7 +6,7 @@ import { InterestForm } from "@/components/care/interest-form";
 import { NetworkBadge } from "@/components/care/network-badge";
 import { catalog } from "@/lib/catalog/query";
 import { PROFESSIONALS } from "@/lib/catalog/seed";
-import { INTENT_BY_ID } from "@/lib/intent/taxonomy";
+import { citySlug } from "@/lib/seo/cities";
 import { SITE } from "@/lib/site";
 
 function initials(name: string) {
@@ -30,7 +30,7 @@ export async function generateMetadata({
   const { slug } = await params;
   const professional = catalog.getProfessional(slug);
   if (!professional) {
-    return { title: "Profissional" };
+    return { title: "Dentista" };
   }
   const title = `${professional.honorific} ${professional.name}`;
   const description = `${professional.bio} ${professional.clinic.neighborhood}, ${professional.region.city}.`;
@@ -51,105 +51,85 @@ export default async function ProfessionalPage({
   const professional = catalog.getProfessional(slug);
   if (!professional) notFound();
 
-  const intents = professional.intentIds.map((id) => INTENT_BY_ID[id]).filter(Boolean);
+  const city = professional.region.city;
 
   return (
-    <main className="px-5 py-10 md:py-16">
-      <div className="mx-auto grid max-w-[980px] gap-10 lg:grid-cols-[1.2fr_0.8fr]">
-        <article>
-          <p className="text-[13px] text-care-muted">
-            <Link href="/buscar" className="hover:text-care-ink">
-              Buscar
+    <main>
+      <section className="care-hero-wash pb-12 pt-10 sm:pb-16 sm:pt-14 md:pt-20">
+        <div className="care-align">
+          <p className="text-[13px] text-[#86868b]">
+            <Link href={`/dentista/${citySlug(city)}`} className="hover:text-[#1d1d1f]">
+              Dentista em {city}
             </Link>
-            <span aria-hidden> · </span>
-            {professional.region.city}
           </p>
-          <div className="mt-6 flex items-start gap-5">
+          <div className="mt-6 flex flex-col gap-4 sm:mt-8 sm:flex-row sm:items-start sm:gap-5">
             <div
               aria-hidden
-              className="flex size-16 shrink-0 items-center justify-center rounded-full bg-care-sage-soft text-[18px] font-semibold text-care-sage-deep"
+              className="flex size-14 shrink-0 items-center justify-center rounded-full bg-white text-[16px] font-semibold text-[#1d1d1f] ring-1 ring-[#d2d2d7] sm:size-16 sm:text-[18px]"
             >
               {initials(professional.name)}
             </div>
-            <div>
-              <div className="flex flex-wrap items-center gap-2">
-                <h1 className="care-display text-[34px] md:text-[48px]">
+            <div className="min-w-0">
+              <div className="flex flex-wrap items-center gap-3">
+                <h1 className="care-display text-[32px] sm:text-[40px] md:text-[56px]">
                   {professional.honorific} {professional.name}
                 </h1>
                 {professional.clinic.inOdontoHubNetwork ? <NetworkBadge /> : null}
               </div>
-              <p className="mt-2 text-[16px] text-care-muted">
+              <p className="mt-3 text-[17px] text-[#86868b]">
                 {professional.specialties.map((item) => item.name).join(" · ")} · {professional.cro}
               </p>
             </div>
           </div>
+        </div>
+      </section>
 
-          <p className="mt-10 max-w-xl text-[19px] leading-relaxed text-care-ink/90">
-            {professional.bio}
-          </p>
-          <p className="mt-5 max-w-xl text-[16px] leading-relaxed text-care-muted">
-            {professional.approach}
-          </p>
-
-          <section className="mt-12">
-            <h2 className="text-[13px] font-medium uppercase tracking-[0.12em] text-care-muted">
-              O que trata
-            </h2>
-            <ul className="mt-4 space-y-2">
-              {professional.treats.map((item) => (
-                <li key={item} className="text-[16px] text-care-ink">
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </section>
-
-          <section className="mt-12 rounded-[28px] bg-white p-7 ring-1 ring-care-line">
-            <h2 className="text-[13px] font-medium uppercase tracking-[0.12em] text-care-muted">
-              Como o Care chegou aqui
-            </h2>
-            <p className="mt-3 text-[16px] leading-relaxed text-care-ink/85">
-              {professional.honorific} {professional.name.split(" ")[0]} atende em{" "}
-              {professional.clinic.name}. O consultório usa o OdontoHub — agenda, prontuário,
-              confirmações. Care não inventou este profissional. Apenas mostrou quem já cuida deste
-              tipo de queixa.
+      <section className="py-12 sm:py-16 md:py-24">
+        <div className="care-align grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:gap-12">
+          <article>
+            <p className="max-w-xl text-[18px] leading-relaxed tracking-tight text-[#1d1d1f] sm:text-[22px]">
+              {professional.bio}
             </p>
-            <p className="mt-3 text-[15px] text-care-muted">{professional.clinic.note}</p>
-            <p className="mt-6 text-[15px] text-care-ink">
-              {professional.clinic.address}
+            <p className="mt-5 max-w-xl text-[16px] leading-relaxed text-[#6e6e73]">
+              {professional.approach}
             </p>
-            <p className="mt-1 text-[14px] text-care-muted">
-              {professional.years} anos de prática · Aceita novos pacientes
-            </p>
-          </section>
 
-          {intents.length > 0 ? (
-            <section className="mt-10">
-              <h2 className="text-[13px] font-medium uppercase tracking-[0.12em] text-care-muted">
-                Queixas que este perfil cobre
-              </h2>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {intents.map((intent) => (
-                  <Link
-                    key={intent.id}
-                    href={`/buscar?q=${encodeURIComponent(intent.phrases[0] ?? intent.label)}`}
-                    className="rounded-full bg-white px-3.5 py-1.5 text-[13px] text-care-ink ring-1 ring-care-line hover:bg-care-sage-soft"
-                  >
-                    {intent.label}
-                  </Link>
+            <section className="mt-14">
+              <h2 className="text-[13px] text-[#86868b]">O que trata</h2>
+              <ul className="mt-4 space-y-2">
+                {professional.treats.map((item) => (
+                  <li key={item} className="text-[18px] text-[#1d1d1f]">
+                    {item}
+                  </li>
                 ))}
-              </div>
+              </ul>
             </section>
-          ) : null}
-        </article>
 
-        <aside className="lg:pt-16">
-          <InterestForm
-            professionalName={`${professional.honorific} ${professional.name}`}
-            professionalSlug={professional.slug}
-          />
-        </aside>
-      </div>
+            <section className="mt-12 rounded-[28px] bg-white p-7 ring-1 ring-[#d2d2d7]/80">
+              <h2 className="text-[13px] text-[#86868b]">O consultório</h2>
+              <p className="mt-3 text-[16px] leading-relaxed text-[#1d1d1f]/80">
+                {professional.honorific} {professional.name.split(" ")[0]} atende em{" "}
+                {professional.clinic.name}. Faz parte desta lista pelos critérios de qualidade do
+                Care e permanece enquanto mantiver esse padrão no atendimento.
+              </p>
+              <p className="mt-6 text-[15px] text-[#1d1d1f]">{professional.clinic.address}</p>
+              <p className="mt-1 text-[14px] text-[#86868b]">
+                {professional.years} anos de prática ·{" "}
+                {professional.acceptsNewPatients
+                  ? "Aceita novos pacientes"
+                  : "Consulte a disponibilidade"}
+              </p>
+            </section>
+          </article>
+
+          <aside className="lg:pt-4">
+            <InterestForm
+              professionalName={`${professional.honorific} ${professional.name}`}
+              professionalSlug={professional.slug}
+            />
+          </aside>
+        </div>
+      </section>
     </main>
   );
 }

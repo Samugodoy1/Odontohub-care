@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useId, useState, type FormEvent } from "react";
-import { ArrowRight, MapPin } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 import { SUGGESTED_QUERIES } from "@/lib/site";
 import { REGIONS } from "@/lib/catalog/regions";
@@ -30,13 +30,15 @@ export function NeedSearch({
 
   function submit(nextQuery = query, nextPlace = place) {
     const trimmed = nextQuery.trim();
-    if (!trimmed) {
-      setError("Descreva o que está acontecendo.");
+    const city = nextPlace.trim();
+    if (!trimmed && !city) {
+      setError("Diga o que você precisa ou a sua cidade.");
       return;
     }
     setError("");
-    const params = new URLSearchParams({ q: trimmed });
-    if (nextPlace.trim()) params.set("onde", nextPlace.trim());
+    const params = new URLSearchParams();
+    if (trimmed) params.set("q", trimmed);
+    if (city) params.set("onde", city);
     router.push(`/buscar?${params.toString()}`);
   }
 
@@ -48,53 +50,50 @@ export function NeedSearch({
   return (
     <div className={compact ? "" : "w-full"}>
       <form onSubmit={onSubmit} className="w-full" role="search">
-        <div
-          className={`rounded-[28px] bg-white ring-1 ring-care-line ${
-            compact ? "p-3 md:p-4" : "p-3 md:p-5"
-          } shadow-[0_1px_2px_rgba(0,0,0,0.04)]`}
-        >
-          <label htmlFor={queryId} className="sr-only">
-            O que você está sentindo
-          </label>
-          <input
-            id={queryId}
-            name="q"
-            value={query}
-            onChange={(event) => {
-              setQuery(event.target.value);
-              if (error) setError("");
-            }}
-            autoFocus={autoFocus}
-            autoComplete="off"
-            placeholder="Ex.: Meu dente quebrou"
-            className="h-14 w-full bg-transparent px-3 text-[19px] tracking-tight text-care-ink outline-none placeholder:text-care-muted md:h-16 md:text-[22px]"
-          />
-          <div className="mt-2 flex flex-col gap-3 border-t border-care-line/80 px-2 pt-3 sm:flex-row sm:items-center">
-            <div className="flex min-w-0 flex-1 items-center gap-2">
-              <MapPin className="size-4 shrink-0 text-care-muted" aria-hidden />
-              <label htmlFor={placeId} className="sr-only">
-                Cidade ou bairro
-              </label>
-              <input
-                id={placeId}
-                name="onde"
-                value={place}
-                onChange={(event) => setPlace(event.target.value)}
-                list={listId}
-                placeholder="Cidade ou bairro no Brasil"
-                className="h-10 w-full bg-transparent text-[15px] text-care-ink outline-none placeholder:text-care-muted"
-              />
-              <datalist id={listId}>
-                {REGIONS.flatMap((region) => [
-                  <option key={region.id} value={region.city} />,
-                  ...region.neighborhoods.map((n) => (
-                    <option key={`${region.id}-${n}`} value={`${n}, ${region.city}`} />
-                  )),
-                ])}
-              </datalist>
-            </div>
-            <button type="submit" className="care-btn shrink-0 gap-2">
-              Encontrar
+        <div className="grid gap-1 rounded-[22px] bg-white/90 p-1.5 shadow-[0_12px_40px_rgba(0,0,0,0.06)] ring-1 ring-white/80 backdrop-blur-xl sm:rounded-[28px] sm:p-2 sm:grid-cols-[1.25fr_1fr_auto] sm:gap-0 sm:divide-x sm:divide-[#d2d2d7]/70">
+          <div className="px-4 py-2 text-left">
+            <label htmlFor={queryId} className="block text-[11px] font-medium text-[#86868b]">
+              Tratamento
+            </label>
+            <input
+              id={queryId}
+              name="q"
+              value={query}
+              onChange={(event) => {
+                setQuery(event.target.value);
+                if (error) setError("");
+              }}
+              autoFocus={autoFocus}
+              autoComplete="off"
+              placeholder="Limpeza, extração…"
+              className="mt-0.5 h-9 w-full bg-transparent text-[17px] tracking-tight text-[#1d1d1f] outline-none placeholder:text-[#86868b] md:text-[19px]"
+            />
+          </div>
+          <div className="px-4 py-2 text-left">
+            <label htmlFor={placeId} className="block text-[11px] font-medium text-[#86868b]">
+              Cidade
+            </label>
+            <input
+              id={placeId}
+              name="onde"
+              value={place}
+              onChange={(event) => setPlace(event.target.value)}
+              list={listId}
+              placeholder="Taubaté"
+              className="mt-0.5 h-9 w-full bg-transparent text-[17px] tracking-tight text-[#1d1d1f] outline-none placeholder:text-[#86868b]"
+            />
+            <datalist id={listId}>
+              {REGIONS.flatMap((region) => [
+                <option key={region.id} value={region.city} />,
+                ...region.neighborhoods.map((n) => (
+                  <option key={`${region.id}-${n}`} value={`${n}, ${region.city}`} />
+                )),
+              ])}
+            </datalist>
+          </div>
+          <div className="flex items-center p-1">
+            <button type="submit" className="care-btn h-11 w-full shrink-0 gap-2 px-5 text-[16px] sm:h-12 sm:w-auto sm:px-6 sm:text-[17px]">
+              Buscar
               <ArrowRight className="size-4" aria-hidden />
             </button>
           </div>
@@ -107,16 +106,24 @@ export function NeedSearch({
       </form>
 
       {!compact ? (
-        <div className="mt-6 flex flex-wrap justify-center gap-2">
+        <div className="care-chip-row mt-6 sm:mt-7">
           {SUGGESTED_QUERIES.map((item) => (
             <button
               key={item}
               type="button"
               onClick={() => {
+                const isCity = item.toLowerCase().includes(" em ");
+                if (isCity) {
+                  const [, city] = item.split(/ em /i);
+                  setQuery("dentista");
+                  setPlace(city ?? "");
+                  submit("dentista", city ?? "");
+                  return;
+                }
                 setQuery(item);
                 submit(item, place);
               }}
-              className="rounded-full bg-white px-3.5 py-1.5 text-[13px] text-care-ink ring-1 ring-care-line transition-colors hover:bg-care-sage-soft hover:text-care-sage-deep hover:ring-care-sage/20"
+              className="rounded-full bg-white/70 px-3.5 py-1.5 text-[13px] text-[#1d1d1f]/80 ring-1 ring-[#d2d2d7]/80 backdrop-blur transition-all duration-300 hover:-translate-y-0.5 hover:text-[#0071e3] hover:ring-[#0071e3]/25"
             >
               {item}
             </button>

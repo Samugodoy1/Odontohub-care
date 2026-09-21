@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "OdontoHub Care — Diga o que sente.";
+export const alt = "OdontoHub Care — Encontre o dentista certo.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -16,19 +16,33 @@ export default function OpenGraphImage() {
           justifyContent: "space-between",
           backgroundColor: "#f5f5f7",
           padding: "72px 80px",
-          fontFamily: "Inter, Helvetica, sans-serif",
         }}
       >
-        <div style={{ display: "flex", alignItems: "baseline", gap: 12 }}>
-          <div style={{ fontSize: 32, fontWeight: 600, color: "#1d1d1f" }}>OdontoHub</div>
-          <div style={{ fontSize: 22, fontWeight: 500, color: "#1F6B57" }}>Care</div>
+        <div style={{ display: "flex", color: "#1d1d1f", fontSize: 32, fontWeight: 600 }}>
+          OdontoHub Care
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ fontSize: 72, fontWeight: 600, letterSpacing: "-0.04em", color: "#1d1d1f" }}>
-            Diga o que sente.
+          <div
+            style={{
+              display: "flex",
+              fontSize: 68,
+              fontWeight: 600,
+              letterSpacing: "-0.04em",
+              color: "#1d1d1f",
+              lineHeight: 1.05,
+            }}
+          >
+            Encontre o dentista certo.
           </div>
-          <div style={{ marginTop: 20, fontSize: 28, color: "#86868b", maxWidth: 720 }}>
-            Você não precisa saber o nome do tratamento.
+          <div
+            style={{
+              display: "flex",
+              marginTop: 24,
+              fontSize: 26,
+              color: "#86868b",
+            }}
+          >
+            Limpeza, extração, aparelho. Na sua cidade. Escolhidos com rigor.
           </div>
         </div>
       </div>

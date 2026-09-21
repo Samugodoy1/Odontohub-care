@@ -10,18 +10,18 @@ export const SITE = {
   instagram: "https://instagram.com/odontohub.app",
   locale: "pt_BR",
   language: "pt-BR",
-  slogan: "Diga o que sente.",
+  slogan: "Encontre o dentista certo.",
   description:
-    "OdontoHub Care encontra o dentista certo a partir do que você sente. Sem precisar saber o nome do tratamento. A camada de descoberta do ecossistema OdontoHub.",
+    "Encontre dentistas selecionados para o seu tratamento e a sua cidade. A permanência na lista depende da qualidade do atendimento.",
 } as const;
 
 export const SUGGESTED_QUERIES = [
-  "Meu dente quebrou",
-  "Estou com dor de dente",
-  "Preciso tirar o siso",
-  "Quero colocar aparelho",
-  "Preciso de implante",
-  "Minha restauração caiu",
-  "Meu dente está escuro",
-  "Preciso de um dentista infantil",
+  "dentista em Taubaté",
+  "dentista para limpeza",
+  "dentista para extração",
+  "dentista para aparelho",
+  "dentista para implante",
+  "dentista para canal",
+  "dentista para criança",
+  "dentista para clareamento",
 ] as const;

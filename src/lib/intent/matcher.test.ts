@@ -31,6 +31,9 @@ describe("matchIntent", () => {
     expect(primaryId("Perdi um dente e quero repor")).toBe("implante");
     expect(primaryId("Preciso de dentadura")).toBe("protese");
     expect(primaryId("Quero uma limpeza")).toBe("prevencao");
+    expect(primaryId("dentista para limpeza")).toBe("prevencao");
+    expect(primaryId("dentista para extração")).toBe("cirurgia");
+    expect(primaryId("dentista para aparelho")).toBe("ortodontia");
   });
 
   it("returns alternatives and confidence", () => {

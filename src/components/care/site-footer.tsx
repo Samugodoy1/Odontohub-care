@@ -1,58 +1,72 @@
 import Link from "next/link";
 
 import { SITE } from "@/lib/site";
+import { CARE_CASES } from "@/lib/seo/cases";
+import { REGIONS } from "@/lib/catalog/regions";
+import { citySlug } from "@/lib/seo/cities";
 
 export function SiteFooter() {
   return (
-    <footer className="mt-auto border-t border-care-line bg-white">
-      <div className="mx-auto grid max-w-[980px] gap-10 px-5 py-14 md:grid-cols-[1.4fr_1fr_1fr]">
-        <div>
-          <p className="text-[21px] font-semibold tracking-tight text-care-ink">OdontoHub Care</p>
-          <p className="mt-3 max-w-sm text-[14px] leading-relaxed text-care-muted">
-            A camada de descoberta do ecossistema. O paciente descreve o que sente. A clínica que já
-            usa o Hub aparece.
+    <footer className="mt-auto border-t border-[#d2d2d7] bg-white">
+      <div className="care-align grid gap-10 py-12 sm:gap-12 sm:py-16 md:grid-cols-4">
+        <div className="md:col-span-1">
+          <p className="text-[19px] font-semibold tracking-tight text-[#1d1d1f]">OdontoHub Care</p>
+          <p className="mt-3 max-w-xs text-[13px] leading-relaxed text-[#86868b]">
+            Dentistas selecionados para o seu tratamento e a sua cidade.
           </p>
         </div>
         <div>
-          <p className="text-[12px] font-medium uppercase tracking-[0.12em] text-care-muted">Família</p>
-          <ul className="mt-4 space-y-2 text-[14px]">
+          <p className="text-[12px] text-[#86868b]">Tratamentos</p>
+          <ul className="mt-4 space-y-2 text-[13px]">
+            {CARE_CASES.slice(0, 6).map((item) => (
+              <li key={item.slug}>
+                <Link className="text-[#1d1d1f] hover:underline" href={`/para/${item.slug}`}>
+                  {item.title}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <p className="text-[12px] text-[#86868b]">Cidades</p>
+          <ul className="mt-4 space-y-2 text-[13px]">
+            {REGIONS.slice(0, 6).map((region) => (
+              <li key={region.id}>
+                <Link
+                  className="text-[#1d1d1f] hover:underline"
+                  href={`/dentista/${citySlug(region.city)}`}
+                >
+                  Dentista em {region.city}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <p className="text-[12px] text-[#86868b]">Mais</p>
+          <ul className="mt-4 space-y-2 text-[13px]">
             <li>
-              <a className="text-care-ink hover:underline" href={SITE.hubWww}>
+              <Link className="text-[#1d1d1f] hover:underline" href="/para-dentistas">
+                Sou dentista
+              </Link>
+            </li>
+            <li>
+              <a className="text-[#1d1d1f] hover:underline" href={SITE.hubWww}>
                 OdontoHub
               </a>
             </li>
             <li>
-              <a className="text-care-ink hover:underline" href={SITE.academy}>
-                Academy
-              </a>
-            </li>
-            <li>
-              <Link className="text-care-ink hover:underline" href="/para-dentistas">
-                Care para dentistas
-              </Link>
-            </li>
-          </ul>
-        </div>
-        <div>
-          <p className="text-[12px] font-medium uppercase tracking-[0.12em] text-care-muted">Paciente</p>
-          <ul className="mt-4 space-y-2 text-[14px]">
-            <li>
-              <Link className="text-care-ink hover:underline" href="/buscar">
-                Buscar cuidado
-              </Link>
-            </li>
-            <li>
-              <a className="text-care-ink hover:underline" href={SITE.instagram}>
+              <a className="text-[#1d1d1f] hover:underline" href={SITE.instagram}>
                 Instagram
               </a>
             </li>
           </ul>
         </div>
       </div>
-      <div className="border-t border-care-line">
-        <p className="mx-auto max-w-[980px] px-5 py-6 text-[12px] text-care-muted">
-          © {new Date().getFullYear()} OdontoHub. Care não é um marketplace. É a porta do paciente
-          para a mesma clínica contínua.
+      <div className="border-t border-[#d2d2d7]">
+        <p className="care-align py-5 text-[12px] text-[#86868b] sm:py-6">
+          © {new Date().getFullYear()} OdontoHub Care. Encontre um dentista com critérios de
+          qualidade, não por posição paga.
         </p>
       </div>
     </footer>

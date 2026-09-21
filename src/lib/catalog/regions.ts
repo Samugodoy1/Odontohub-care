@@ -65,6 +65,20 @@ export const REGIONS: readonly Region[] = [
     stateCode: "SC",
     neighborhoods: ["Centro"],
   },
+  {
+    id: "taubate",
+    city: "Taubaté",
+    state: "São Paulo",
+    stateCode: "SP",
+    neighborhoods: ["Centro", "Jardim das Nações", "Esplanada", "Independência"],
+  },
+  {
+    id: "sao-jose-dos-campos",
+    city: "São José dos Campos",
+    state: "São Paulo",
+    stateCode: "SP",
+    neighborhoods: ["Centro", "Vila Ema", "Jardim Aquarius"],
+  },
 ] as const;
 
 export const REGION_BY_ID = Object.fromEntries(REGIONS.map((item) => [item.id, item])) as Record<

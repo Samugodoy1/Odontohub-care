@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 
 import { EmptyState } from "@/components/care/empty-state";
 import { IntentBanner } from "@/components/care/intent-banner";
 import { NeedSearch } from "@/components/care/need-search";
-import { ProfessionalCardView } from "@/components/care/professional-card";
+import { DentistGrid } from "@/components/care/dentist-grid";
 import { searchCare } from "@/lib/search";
 
 export const metadata: Metadata = {
-  title: "Buscar cuidado",
-  description: "Descreva o que você sente. OdontoHub Care encontra profissionais compatíveis na sua região.",
+  title: "Encontrar dentista",
+  description:
+    "Encontre dentistas selecionados para limpeza, extração, aparelho e outros tratamentos na sua cidade.",
 };
 
 type SearchParams = Promise<{ q?: string; onde?: string }>;
@@ -18,81 +18,54 @@ export default async function SearchPage({ searchParams }: { searchParams: Searc
   const params = await searchParams;
   const q = typeof params.q === "string" ? params.q : "";
   const onde = typeof params.onde === "string" ? params.onde : "";
-  const result = q.trim() ? searchCare(q, onde) : null;
+  const hasInput = Boolean(q.trim() || onde.trim());
+  const result = hasInput ? searchCare(q || "dentista", onde) : null;
 
   const locationLabel = result?.location.neighborhood
     ? `${result.location.neighborhood}, ${result.location.region?.city}`
     : result?.location.region?.city;
 
   return (
-    <main className="px-5 py-10 md:py-16">
-      <div className="mx-auto max-w-[820px]">
-        <p className="text-[15px] font-medium tracking-tight text-care-sage">Buscar</p>
-        <h1 className="care-display mt-2 text-[32px] md:text-[44px]">O que está acontecendo?</h1>
-        <div className="mt-8">
-          <NeedSearch initialQuery={q} initialPlace={onde} compact />
-        </div>
+    <main className="py-8 sm:py-12 md:py-20">
+      <div className="care-align">
+        <NeedSearch initialQuery={q} initialPlace={onde} compact />
 
         {!result ? (
-          <div className="mt-10">
+          <div className="mt-14">
             <EmptyState
-              title="Comece pela queixa."
-              body="Escreva o que sente, como falaria no telefone. Care interpreta e mostra quem trata isso perto de você."
+              title="Diga o que você precisa."
+              body="Informe o tratamento ou a cidade para conhecer os profissionais disponíveis."
             />
           </div>
         ) : (
-          <div className="mt-10 space-y-8">
-            <IntentBanner intent={result.intent} />
+          <div className="mt-14 space-y-12">
+            <IntentBanner
+              intent={result.intent}
+              city={locationLabel}
+              cityDossier={result.cityDossier}
+            />
 
-            {result.intent.unknown ? null : result.matches.length === 0 ? (
+            {result.matches.length === 0 ? (
               <EmptyState
                 title={
                   locationLabel
-                    ? `Ninguém para isso em ${locationLabel} nesta demonstração.`
-                    : "Ninguém para isso nesta demonstração."
+                    ? `Ainda não há dentistas para isso em ${locationLabel}.`
+                    : "Ainda não há dentistas para isso."
                 }
-                body="O catálogo atual é um recorte da rede. Tente outra cidade, ou veja profissionais em outras regiões."
+                body="Tente outra cidade ou outro tratamento."
               />
             ) : (
               <section aria-live="polite">
-                <div className="mb-5 flex items-end justify-between gap-4">
-                  <h2 className="text-[13px] font-medium uppercase tracking-[0.12em] text-care-muted">
-                    {locationLabel
-                      ? `${result.matches.length} em ${locationLabel}`
-                      : `${result.matches.length} na rede`}
-                  </h2>
-                </div>
-                <ul className="space-y-4">
-                  {result.matches.map((professional) => (
-                    <li key={professional.id}>
-                      <ProfessionalCardView professional={professional} />
-                    </li>
-                  ))}
-                </ul>
+                <DentistGrid dentists={result.matches} />
               </section>
             )}
 
             {result.elsewhere.length > 0 ? (
               <section>
-                <h2 className="mb-5 text-[13px] font-medium uppercase tracking-[0.12em] text-care-muted">
-                  Em outras cidades
-                </h2>
-                <ul className="space-y-4">
-                  {result.elsewhere.slice(0, 4).map((professional) => (
-                    <li key={professional.id}>
-                      <ProfessionalCardView professional={professional} />
-                    </li>
-                  ))}
-                </ul>
+                <h2 className="mb-6 text-[13px] text-[#86868b]">Em outras cidades</h2>
+                <DentistGrid dentists={result.elsewhere.slice(0, 6)} />
               </section>
             ) : null}
-
-            <p className="text-center text-[13px] text-care-muted">
-              Dentista na rede?{" "}
-              <Link href="/para-dentistas" className="text-care-sage hover:underline">
-                Como o consultório entra no Care
-              </Link>
-            </p>
           </div>
         )}
       </div>

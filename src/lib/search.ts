@@ -2,6 +2,7 @@ import { catalog } from "@/lib/catalog/query";
 import { parseLocation } from "@/lib/catalog/regions";
 import type { ProfessionalCard, Region } from "@/lib/catalog/types";
 import { matchIntent, type IntentMatchResult } from "@/lib/intent/matcher";
+import { normalizeText } from "@/lib/intent/normalize";
 
 export type SearchResult = {
   query: string;
@@ -13,12 +14,20 @@ export type SearchResult = {
   intent: IntentMatchResult;
   matches: ProfessionalCard[];
   elsewhere: ProfessionalCard[];
+  cityDossier: boolean;
 };
+
+const GENERIC_NEED = /^(dentista|dentistas|odontologista|odontologia)?$/;
+
+function isGenericNeed(remainder: string) {
+  return GENERIC_NEED.test(normalizeText(remainder));
+}
 
 export function searchCare(query: string, place = ""): SearchResult {
   const location = parseLocation(query, place);
   const intentQuery = location.remainder || query;
-  const intent = matchIntent(intentQuery);
+  const generic = isGenericNeed(intentQuery);
+  const intent = generic ? matchIntent("") : matchIntent(intentQuery);
   const primaryIds = intent.primary ? [intent.primary.intent.id] : [];
 
   const pool = catalog.listProfessionals({
@@ -46,5 +55,6 @@ export function searchCare(query: string, place = ""): SearchResult {
     intent,
     matches: local,
     elsewhere,
+    cityDossier: Boolean(location.region && (generic || intent.unknown)),
   };
 }

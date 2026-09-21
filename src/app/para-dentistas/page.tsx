@@ -4,100 +4,65 @@ import Link from "next/link";
 import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Para dentistas",
+  title: "Sou dentista",
   description:
-    "OdontoHub Care não é um marketplace. É a porta do paciente para clínicas que já usam o OdontoHub.",
+    "Faça parte do Care e seja encontrado por pacientes que procuram tratamento odontológico na sua cidade.",
 };
-
-const STEPS = [
-  {
-    n: "01",
-    t: "O consultório já existe no Hub.",
-    d: "Agenda, prontuário, especialidade, endereço. Care não pede um segundo cadastro para inventar um perfil.",
-  },
-  {
-    n: "02",
-    t: "A queixa chega em português.",
-    d: "O paciente não escolhe “dentística”. Diz que o dente quebrou. O motor de intenção traduz.",
-  },
-  {
-    n: "03",
-    t: "Você aparece se trata aquilo.",
-    d: "Sem lance, sem destaque pago. Compatibilidade e região. O restante é a clínica, como sempre foi.",
-  },
-] as const;
 
 export default function DentistsPage() {
   return (
     <main>
-      <section className="px-5 pb-16 pt-16 md:pb-24 md:pt-24">
-        <div className="mx-auto max-w-[720px] text-center">
-          <p className="text-[15px] font-medium tracking-tight text-care-sage">Para dentistas</p>
-          <h1 className="care-display mt-4 text-[40px] md:text-[64px]">
-            Não é um marketplace.
+      <section className="care-hero-wash pb-16 pt-12 sm:pb-20 sm:pt-16 md:pb-28 md:pt-24">
+        <div className="care-align text-center">
+          <p className="text-[15px] font-medium text-[#0071e3]">Para dentistas</p>
+          <h1 className="care-display mx-auto mt-3 max-w-[20ch] text-[34px] sm:mt-4 sm:text-[44px] md:text-[64px]">
+            Pacientes procuram um dentista. Você pode ser o que eles encontram.
           </h1>
-          <p className="care-subhead mx-auto mt-5 max-w-[540px] text-[19px] md:text-[24px]">
-            Care é a camada de descoberta do OdontoHub. O paciente encontra o consultório que já
-            opera no sistema — não uma vitrine de anúncios.
+          <p className="care-subhead mx-auto mt-5 max-w-[34rem] text-[17px] sm:mt-6 sm:text-[19px] md:text-[24px]">
+            Quando alguém pesquisa “dentista em Taubaté” ou “dentista para extração”, o Care mostra
+            profissionais que atendem àquela necessidade.
           </p>
-        </div>
-      </section>
-
-      <section className="bg-white px-5 py-20 md:py-28">
-        <div className="mx-auto max-w-[820px]">
-          <h2 className="care-display text-center text-[32px] md:text-[44px]">Como a rede funciona</h2>
-          <ol className="mt-14 space-y-10">
-            {STEPS.map((step) => (
-              <li key={step.n} className="grid gap-3 md:grid-cols-[80px_1fr]">
-                <p className="text-[15px] tabular-nums text-care-muted">{step.n}</p>
-                <div>
-                  <h3 className="text-[24px] font-semibold tracking-tight text-care-ink">{step.t}</h3>
-                  <p className="mt-2 max-w-xl text-[16px] leading-relaxed text-care-muted">{step.d}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-
-      <section className="px-5 py-20 md:py-28">
-        <div className="mx-auto max-w-[720px]">
-          <h2 className="care-display text-[32px] md:text-[44px]">O valor extra do sistema</h2>
-          <p className="mt-5 text-[18px] leading-relaxed text-care-ink/85">
-            O OdontoHub já reduz o caos operacional: pacientes, agenda, retorno, a carga mental do
-            dia. Care é o outro lado da mesma promessa. Quem organiza o consultório no Hub pode
-            aparecer para quem está procurando exatamente aquele cuidado.
-          </p>
-          <p className="mt-5 text-[18px] leading-relaxed text-care-muted">
-            Academy, Hub, Presença, Care. Quatro superfícies. Um ecossistema. O arquivo não começa
-            no anúncio — começa na cadeira.
-          </p>
-          <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
-            <a href={SITE.sistema} className="care-btn-dark">
-              Abrir o OdontoHub
+          <div className="mt-8 flex flex-col items-stretch justify-center gap-4 sm:mt-10 sm:flex-row sm:items-center">
+            <a href={SITE.sistema} className="care-btn w-full sm:w-auto">
+              Quero participar
             </a>
-            <a
-              href={SITE.hubWww}
-              className="text-[17px] text-care-sage hover:underline underline-offset-4"
-            >
-              Conhecer o sistema <span aria-hidden>›</span>
-            </a>
+            <Link href="/buscar" className="text-center text-[17px] text-[#0066cc]">
+              Ver como o paciente vê ›
+            </Link>
           </div>
         </div>
       </section>
 
-      <section className="bg-care-ink px-5 py-20 text-white md:py-28">
-        <div className="mx-auto max-w-[640px] text-center">
-          <h2 className="care-display text-[32px] md:text-[44px]">O paciente já está falando.</h2>
-          <p className="mt-5 text-[18px] leading-relaxed text-white/60">
-            “Meu dente quebrou.” Care escuta. O Hub recebe. Você atende.
-          </p>
-          <Link
-            href="/buscar?q=Meu%20dente%20quebrou"
-            className="mt-8 inline-flex text-[17px] text-[#7ddec4] hover:underline underline-offset-4"
-          >
-            Ver como o paciente chega <span aria-hidden>›</span>
-          </Link>
+      <section className="py-14 sm:py-20 md:py-28">
+        <div className="care-align">
+          <h2 className="care-display text-[28px] sm:text-center sm:text-[32px] md:text-[44px]">Como isso funciona</h2>
+          <ol className="mt-10 space-y-10 sm:mt-14 sm:space-y-12">
+            {[
+              {
+                n: "01",
+                t: "Você cuida da clínica com seriedade.",
+                d: "O Care apresenta sua clínica a partir de informações reais e critérios de qualidade.",
+              },
+              {
+                n: "02",
+                t: "O paciente pesquisa o que precisa.",
+                d: "Limpeza, extração, aparelho e a cidade. A busca começa pela necessidade do paciente.",
+              },
+              {
+                n: "03",
+                t: "Sua clínica aparece para o caso certo.",
+                d: "A permanência na lista depende da continuidade do padrão de atendimento.",
+              },
+            ].map((step) => (
+              <li key={step.n} className="grid gap-3 md:grid-cols-[88px_1fr]">
+                <p className="text-[15px] tabular-nums text-[#86868b]">{step.n}</p>
+                <div>
+                  <h3 className="text-[24px] font-semibold tracking-tight text-[#1d1d1f]">{step.t}</h3>
+                  <p className="mt-2 max-w-xl text-[17px] leading-relaxed text-[#6e6e73]">{step.d}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
         </div>
       </section>
     </main>
