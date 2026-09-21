@@ -85,12 +85,12 @@
   --sidebar-border: #d2d2d7;
   --sidebar-ring: #0071e3;
   --care-max: 61.25rem;
-  --care-pad: 1.25rem;
+  --care-pad: 1.5rem;
 }
 
 @media (min-width: 480px) {
   :root {
-    --care-pad: 1.5rem;
+    --care-pad: 1.75rem;
   }
 }
 
@@ -223,9 +223,22 @@
   padding-right: var(--care-pad);
 }
 
+.care-rail-inset {
+  flex: 0 0 max(var(--care-pad), calc((100vw - var(--care-max)) / 2));
+  width: max(var(--care-pad), calc((100vw - var(--care-max)) / 2));
+  pointer-events: none;
+}
+
 .care-rail-mask {
-  -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 calc(100% - 2.5rem), transparent 100%);
-  mask-image: linear-gradient(90deg, #000 0%, #000 calc(100% - 2.5rem), transparent 100%);
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+@media (min-width: 734px) {
+  .care-rail-mask {
+    -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 calc(100% - 2.5rem), transparent 100%);
+    mask-image: linear-gradient(90deg, #000 0%, #000 calc(100% - 2.5rem), transparent 100%);
+  }
 }
 
 @keyframes care-enter {
