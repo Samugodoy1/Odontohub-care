@@ -1,0 +1,170 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: "Inter", "Inter Fallback", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "Inter", "Inter Fallback", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, monospace;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --color-care-ink: #1d1d1f;
+  --color-care-muted: #86868b;
+  --color-care-gray: #6e6e73;
+  --color-care-surface: #f5f5f7;
+  --color-care-elevated: #ffffff;
+  --color-care-line: #d2d2d7;
+  --color-care-sage: #1f6b57;
+  --color-care-sage-deep: #124438;
+  --color-care-sage-mid: #2a8a70;
+  --color-care-sage-soft: #eaf4f0;
+  --color-care-wash: #fbfbfd;
+  --color-hub-blue: #0071e3;
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  --background: #f5f5f7;
+  --foreground: #1d1d1f;
+  --card: #ffffff;
+  --card-foreground: #1d1d1f;
+  --popover: #ffffff;
+  --popover-foreground: #1d1d1f;
+  --primary: #1f6b57;
+  --primary-foreground: #f5f5f7;
+  --secondary: #eaf4f0;
+  --secondary-foreground: #124438;
+  --muted: #f5f5f7;
+  --muted-foreground: #6e6e73;
+  --accent: #eaf4f0;
+  --accent-foreground: #124438;
+  --destructive: #ff3b30;
+  --border: #d2d2d7;
+  --input: #d2d2d7;
+  --ring: #1f6b57;
+  --radius: 1.25rem;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #1d1d1f;
+  --sidebar-primary: #1f6b57;
+  --sidebar-primary-foreground: #f5f5f7;
+  --sidebar-accent: #eaf4f0;
+  --sidebar-accent-foreground: #124438;
+  --sidebar-border: #d2d2d7;
+  --sidebar-ring: #1f6b57;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "ss01", "cv11", "calt";
+    letter-spacing: -0.011em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background: #eaf4f0;
+    color: #124438;
+  }
+}
+
+@utility care-display {
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+}
+
+@utility care-subhead {
+  font-weight: 400;
+  letter-spacing: -0.016em;
+  line-height: 1.333;
+  color: #86868b;
+}
+
+@utility care-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #1f6b57;
+  color: #f5f5f7;
+  border-radius: 980px;
+  padding: 12px 22px;
+  font-size: 17px;
+  font-weight: 400;
+  letter-spacing: -0.022em;
+  line-height: 1.2;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+@utility care-btn-dark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #1d1d1f;
+  color: #f5f5f7;
+  border-radius: 980px;
+  padding: 12px 22px;
+  font-size: 17px;
+  font-weight: 400;
+  letter-spacing: -0.022em;
+  line-height: 1.2;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+@keyframes care-enter {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@utility care-enter {
+  animation: care-enter 0.8s cubic-bezier(0.25, 0.1, 0.25, 1) both;
+}
