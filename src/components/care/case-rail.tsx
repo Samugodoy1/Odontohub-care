@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { CareMark } from "@/components/care/care-mark";
 import { CARE_CASES } from "@/lib/seo/cases";
 
 export function CaseRail() {
@@ -23,8 +24,8 @@ export function CaseRail() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-black/5" />
             <div className="relative p-5 sm:p-6">
-              <p className="text-[13px] text-white/75">Tratamento</p>
-              <h3 className="mt-1 text-[28px] font-semibold tracking-tight text-white sm:text-[32px]">
+              <CareMark href={false} tone="light" size="sm" />
+              <h3 className="mt-2 text-[28px] font-semibold tracking-tight text-white sm:text-[32px]">
                 {item.headline}
               </h3>
             </div>

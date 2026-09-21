@@ -22,7 +22,7 @@ export const CARE_CASES: readonly CareCase[] = [
     title: "Dentista para limpeza",
     lede: "Revisão, profilaxia, o check-up que você anda adiando. Dentistas escolhidos para cuidar disso com calma.",
     tile: "from-[#e6f5f1] to-[#b7ddd4]",
-    photo: "/care/tratamentos/tratamento-limpeza.jpg",
+    photo: "/care/tratamentos/limpeza-cadeira.jpg",
   },
   {
     slug: "extracao",
@@ -33,7 +33,7 @@ export const CARE_CASES: readonly CareCase[] = [
     title: "Dentista para extração",
     lede: "Siso, dente que não tem mais jeito, extração simples. Quem faz isso todo dia — com cuidado no depois.",
     tile: "from-[#eaf1fb] to-[#c2d4ee]",
-    photo: "/care/tratamentos/tratamento-extracao.jpg",
+    photo: "/care/tratamentos/extracao-cirurgia.jpg",
   },
   {
     slug: "siso",
