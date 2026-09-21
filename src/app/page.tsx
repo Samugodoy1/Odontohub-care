@@ -37,31 +37,24 @@ export default function HomePage() {
 
   return (
     <main>
-      <section className="care-hero-wash relative overflow-hidden pb-12 pt-10 sm:pb-20 sm:pt-16 md:pb-32 md:pt-24">
-        <div className="care-orb -left-24 top-8 size-[280px] bg-[#0071e3]/16 sm:size-[340px]" aria-hidden />
-        <div
-          className="care-orb right-[-80px] top-20 size-[220px] bg-[#32ade6]/18 sm:size-[280px]"
-          style={{ animationDelay: "-6s" }}
-          aria-hidden
-        />
-        <div
-          className="care-orb bottom-0 left-1/3 size-[180px] bg-[#34c759]/10 sm:size-[220px]"
-          style={{ animationDelay: "-11s" }}
-          aria-hidden
-        />
-        <div className="care-align relative text-center">
-          <p className="care-enter care-eyebrow">OdontoHub Care</p>
+      <section className="flex min-h-[calc(100svh-3rem)] items-center bg-[#fbfbfd] py-16 sm:py-24 md:py-28">
+        <div className="care-align w-full text-center">
+          <p className="care-enter text-[17px] font-semibold tracking-[-0.022em] text-[#1d1d1f] sm:text-[21px]">
+            OdontoHub Care
+          </p>
           <div className="care-enter mt-4 sm:mt-5" style={{ animationDelay: "90ms" }}>
             <HeroHeadline />
           </div>
           <p
-            className="care-enter care-subhead mx-auto mt-5 max-w-[34rem] text-[17px] sm:mt-7 sm:text-[19px] md:text-[24px]"
+            className="care-enter care-subhead mx-auto mt-8 max-w-[22rem] text-[19px] sm:mt-10 sm:max-w-[28rem] sm:text-[21px] md:mt-12 md:text-[28px]"
             style={{ animationDelay: "160ms" }}
           >
-            Diga o tratamento e a cidade. Mostramos dentistas selecionados para cuidar do que você
-            precisa.
+            Diga o tratamento e a cidade.
           </p>
-          <div className="care-enter mx-auto mt-8 max-w-[46rem] sm:mt-12" style={{ animationDelay: "240ms" }}>
+          <div
+            className="care-enter mx-auto mt-14 max-w-[40rem] sm:mt-16 md:mt-20"
+            style={{ animationDelay: "240ms" }}
+          >
             <NeedSearch />
           </div>
         </div>
