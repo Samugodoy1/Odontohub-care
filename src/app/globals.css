@@ -268,10 +268,10 @@
 .care-hero-title {
   margin-inline: auto;
   max-width: 16ch;
-  font-size: clamp(2.25rem, 10vw, 6.75rem);
+  font-size: clamp(2.125rem, min(9.5vw, 9.2vh), 6.25rem);
   font-weight: 600;
   letter-spacing: -0.035em;
-  line-height: 1.08;
+  line-height: 1.07;
   color: #1d1d1f;
 }
 

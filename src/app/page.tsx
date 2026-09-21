@@ -37,7 +37,7 @@ export default function HomePage() {
 
   return (
     <main>
-      <section className="flex min-h-[calc(100svh-3rem)] items-center bg-[#fbfbfd] py-16 sm:py-24 md:py-28">
+      <section className="flex min-h-[calc(100svh-3rem)] items-center bg-[#fbfbfd] py-12 sm:py-16 md:py-20">
         <div className="care-align w-full text-center">
           <p className="care-enter text-[17px] font-semibold tracking-[-0.022em] text-[#1d1d1f] sm:text-[21px]">
             OdontoHub Care
@@ -52,7 +52,7 @@ export default function HomePage() {
             Diga o tratamento e a cidade.
           </p>
           <div
-            className="care-enter mx-auto mt-14 max-w-[40rem] sm:mt-16 md:mt-20"
+            className="care-enter mx-auto mt-12 max-w-[40rem] sm:mt-14 md:mt-16"
             style={{ animationDelay: "240ms" }}
           >
             <NeedSearch />
