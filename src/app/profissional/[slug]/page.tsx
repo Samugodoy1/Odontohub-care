@@ -4,18 +4,10 @@ import { notFound } from "next/navigation";
 
 import { InterestForm } from "@/components/care/interest-form";
 import { NetworkBadge } from "@/components/care/network-badge";
+import { ProfessionalPhoto } from "@/components/care/professional-photo";
 import { getCareCatalog, getCareProfessionals } from "@/lib/catalog/adapter";
 import { citySlug } from "@/lib/seo/cities";
 import { SITE } from "@/lib/site";
-
-function initials(name: string) {
-  return name
-    .split(" ")
-    .filter((part) => part.length > 2)
-    .slice(0, 2)
-    .map((part) => part[0])
-    .join("");
-}
 
 export async function generateStaticParams() {
   const professionals = await getCareProfessionals();
@@ -39,7 +31,11 @@ export async function generateMetadata({
     title,
     description,
     alternates: { canonical: `${SITE.domain}/profissional/${slug}` },
-    openGraph: { title: `${title} · OdontoHub Care`, description },
+    openGraph: {
+      title: `${title} · OdontoHub Care`,
+      description,
+      images: professional.photoUrl ? [professional.photoUrl] : undefined,
+    },
   };
 }
 
@@ -66,12 +62,11 @@ export default async function ProfessionalPage({
             </Link>
           </p>
           <div className="mt-6 flex flex-col gap-4 sm:mt-8 sm:flex-row sm:items-start sm:gap-5">
-            <div
-              aria-hidden
-              className="flex size-14 shrink-0 items-center justify-center rounded-full bg-white text-[16px] font-semibold text-[#1d1d1f] ring-1 ring-[#d2d2d7] sm:size-16 sm:text-[18px]"
-            >
-              {initials(professional.name)}
-            </div>
+            <ProfessionalPhoto
+              src={professional.photoUrl}
+              name={professional.name}
+              className="size-16 text-[16px] ring-1 ring-[#d2d2d7] sm:size-20 sm:text-[18px]"
+            />
             <div className="min-w-0">
               <div className="flex flex-wrap items-center gap-3">
                 <h1 className="care-display text-[32px] sm:text-[40px] md:text-[56px]">

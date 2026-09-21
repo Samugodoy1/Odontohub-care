@@ -13,7 +13,7 @@ const dentist: HubDentistProjection = {
   clinicCity: "Taubaté",
   clinicState: "SP",
   clinicNeighborhood: "Centro",
-  photoUrl: null,
+  photoUrl: "https://res.cloudinary.com/demo/image/upload/marina.jpg",
 };
 
 describe("OdontoHub Care catalog adapter", () => {
@@ -24,6 +24,7 @@ describe("OdontoHub Care catalog adapter", () => {
     expect(professional.slug).toBe("marina-pires-42");
     expect(professional.region.id).toBe("taubate");
     expect(professional.clinic.neighborhood).toBe("Centro");
+    expect(professional.photoUrl).toBe(dentist.photoUrl);
     expect(professional.specialtyIds).toEqual(
       expect.arrayContaining(["periodontia", "clinica-geral"]),
     );
