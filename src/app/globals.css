@@ -198,6 +198,10 @@
   scroll-snap-type: x mandatory;
   overscroll-behavior-x: contain;
   padding-bottom: 16px;
+  padding-left: max(var(--care-pad), calc((100vw - var(--care-max)) / 2));
+  padding-right: max(var(--care-pad), calc((100vw - var(--care-max)) / 2));
+  scroll-padding-left: max(var(--care-pad), calc((100vw - var(--care-max)) / 2));
+  scroll-padding-right: max(var(--care-pad), calc((100vw - var(--care-max)) / 2));
   scrollbar-width: none;
   touch-action: pan-x;
 }
@@ -221,12 +225,6 @@
 @utility care-align-start {
   padding-left: max(var(--care-pad), calc((100vw - var(--care-max)) / 2));
   padding-right: var(--care-pad);
-}
-
-.care-rail-inset {
-  flex: 0 0 max(var(--care-pad), calc((100vw - var(--care-max)) / 2));
-  width: max(var(--care-pad), calc((100vw - var(--care-max)) / 2));
-  pointer-events: none;
 }
 
 .care-rail-mask {

@@ -3,15 +3,10 @@ import Link from "next/link";
 
 import { CARE_CASES } from "@/lib/seo/cases";
 
-function RailInset() {
-  return <div aria-hidden className="care-rail-inset" />;
-}
-
 export function CaseRail() {
   return (
     <div className="care-rail-mask">
       <div className="care-rail">
-        <RailInset />
         {CARE_CASES.map((item, index) => (
           <Link
             key={item.slug}
@@ -35,7 +30,6 @@ export function CaseRail() {
             </div>
           </Link>
         ))}
-        <RailInset />
       </div>
     </div>
   );

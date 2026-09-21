@@ -15,15 +15,10 @@ export function DentistGrid({ dentists }: { dentists: ProfessionalCard[] }) {
   );
 }
 
-function RailInset() {
-  return <div aria-hidden className="care-rail-inset" />;
-}
-
 export function DentistRail({ dentists }: { dentists: ProfessionalCard[] }) {
   return (
     <div className="care-rail-mask">
       <div className="care-rail">
-        <RailInset />
         {dentists.map((professional) => (
           <div key={professional.id} className="care-rail-item w-[min(78vw,280px)]">
             <ProfessionalCardView professional={professional} featured />
@@ -35,7 +30,6 @@ export function DentistRail({ dentists }: { dentists: ProfessionalCard[] }) {
         >
           Ver todos <span className="care-arrow ml-1">›</span>
         </Link>
-        <RailInset />
       </div>
     </div>
   );
