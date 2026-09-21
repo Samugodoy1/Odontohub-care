@@ -36,6 +36,16 @@ const SPECIALTY_ALIASES: readonly [SpecialtyId, readonly string[]][] = [
   ["harmonizacao", ["harmonizacao"]],
 ];
 
+function enlargePhotoUrl(url: string | null): string | null {
+  if (!url) return null;
+  const googleSized = url.replace(/=s\d+(?:-c)?(?:\/)?$/i, "=s1200-c");
+  if (googleSized !== url) return googleSized;
+  return url.replace(
+    /\/image\/upload\/(?!.*(?:w_|h_|c_fill))/,
+    "/image/upload/f_auto,q_auto,c_fill,g_face,w_1200,h_1500/",
+  );
+}
+
 function slugify(value: string) {
   return normalizeText(value).replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 }
@@ -85,7 +95,13 @@ export function mapHubProfessional(projection: HubDentistProjection): Profession
       normalizeText(projection.clinicAddress ?? "").includes(normalizeText(item)))
     || "Endereço a confirmar";
   const parsed = parseDentistName(projection.name);
-  const clinicName = projection.clinicName?.trim() || `Consultório de ${parsed.displayName}`;
+  const rawClinicName = projection.clinicName?.trim() || "";
+  const clinicNameLooksLikePerson = rawClinicName
+    && (normalizeText(rawClinicName) === normalizeText(parsed.displayName)
+      || normalizeText(rawClinicName) === normalizeText(parsed.name));
+  const clinicName = !rawClinicName || clinicNameLooksLikePerson
+    ? `Consultório de ${parsed.displayName}`
+    : rawClinicName;
   const clinicAddress = projection.clinicAddress?.trim()
     || [neighborhood, region.city, region.stateCode].filter(Boolean).join(", ");
   const specialtyNames = specialties.map((item) => item.name);
@@ -96,7 +112,7 @@ export function mapHubProfessional(projection: HubDentistProjection): Profession
     name: parsed.name,
     honorific: parsed.honorific,
     cro: projection.cro?.trim() || "CRO a confirmar",
-    photoUrl: projection.photoUrl,
+    photoUrl: enlargePhotoUrl(projection.photoUrl),
     specialtyIds: mappedSpecialtyIds,
     intentIds,
     clinicId: `hub-clinic-${projection.id}`,
