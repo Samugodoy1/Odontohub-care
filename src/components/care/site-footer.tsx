@@ -12,7 +12,7 @@ export function SiteFooter() {
         <div className="md:col-span-1">
           <p className="text-[19px] font-semibold tracking-tight text-[#1d1d1f]">OdontoHub Care</p>
           <p className="mt-3 max-w-xs text-[13px] leading-relaxed text-[#86868b]">
-            Dentistas escolhidos com rigor, para o seu caso e a sua cidade.
+            Dentistas selecionados para o seu tratamento e a sua cidade.
           </p>
         </div>
         <div>
@@ -65,8 +65,8 @@ export function SiteFooter() {
       </div>
       <div className="border-t border-[#d2d2d7]">
         <p className="care-align py-5 text-[12px] text-[#86868b] sm:py-6">
-          © {new Date().getFullYear()} OdontoHub Care. Encontre um dentista. Sem ranking pago, sem
-          cupom.
+          © {new Date().getFullYear()} OdontoHub Care. Encontre um dentista com critérios de
+          qualidade, não por posição paga.
         </p>
       </div>
     </footer>

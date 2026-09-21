@@ -57,10 +57,11 @@ export function InterestForm({
       <div className="rounded-[28px] bg-[#eaf8ef] px-6 py-8 md:px-8">
         <p className="text-[13px] font-medium text-[#248a3d]">Enviado</p>
         <h2 className="mt-2 text-[24px] font-semibold tracking-tight text-[#1d1d1f]">
-          A clínica vai falar com você.
+          Pedido enviado à clínica.
         </h2>
         <p className="mt-3 max-w-md text-[15px] leading-relaxed text-[#3d5a45]">
-          Pedimos contato para {professionalName}. Eles combinam o horário com você.
+          Enviamos seu pedido para a clínica de {professionalName}. Ela entrará em contato para
+          confirmar a disponibilidade.
         </p>
       </div>
     );
@@ -73,7 +74,8 @@ export function InterestForm({
         Pedir um horário
       </h2>
       <p className="mt-2 max-w-md text-[15px] leading-relaxed text-[#86868b]">
-        A clínica recebe o seu recado e entra em contato. Sem cadastro aqui.
+        A clínica recebe o seu pedido e entra em contato para confirmar a disponibilidade. Sem
+        cadastro aqui.
       </p>
       <div className="mt-6 grid gap-4">
         <div className="grid gap-1.5">

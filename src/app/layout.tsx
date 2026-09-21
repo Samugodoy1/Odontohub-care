@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     "dentista para extração",
     "dentista para aparelho",
     "dentista para implante",
-    "dentista verificado",
+    "dentista selecionado",
     "OdontoHub Care",
   ],
   authors: [{ name: "OdontoHub" }],

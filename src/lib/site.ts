@@ -12,7 +12,7 @@ export const SITE = {
   language: "pt-BR",
   slogan: "Encontre o dentista certo.",
   description:
-    "Encontre um dentista para o seu caso — limpeza, extração, aparelho — na sua cidade. Só profissionais escolhidos com rigor. Se o atendimento falha, eles saem da lista.",
+    "Encontre dentistas selecionados para o seu tratamento e a sua cidade. A permanência na lista depende da qualidade do atendimento.",
 } as const;
 
 export const SUGGESTED_QUERIES = [

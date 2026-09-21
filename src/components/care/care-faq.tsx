@@ -1,15 +1,15 @@
 const FAQS = [
   {
     q: "O que é o Care?",
-    a: "É o lugar para encontrar um dentista — o certo para o que você precisa, na sua cidade. Não é uma lista comprada. São profissionais escolhidos com rigor.",
+    a: "É uma lista de dentistas selecionados para diferentes tratamentos e cidades. Você pesquisa o que precisa e conhece os profissionais disponíveis.",
   },
   {
     q: "Como vocês escolhem os dentistas?",
-    a: "Só entra quem já cuida bem da clínica e passa pelo critério de qualidade. Não se compra um lugar nesta lista.",
+    a: "A entrada segue critérios de qualidade do Care. A posição na lista não é comprada.",
   },
   {
-    q: "E se o dentista não atender bem?",
-    a: "Ele sai. Má prática ou muitas reclamações sérias tiram o profissional da lista. Você não precisa ficar adivinhando.",
+    q: "A lista é atualizada?",
+    a: "Sim. A permanência depende da continuidade do padrão de atendimento. Problemas sérios podem retirar o profissional da lista.",
   },
   {
     q: "Preciso pagar para usar?",
@@ -17,11 +17,11 @@ const FAQS = [
   },
   {
     q: "Como marco uma consulta?",
-    a: "Abra o perfil do dentista e peça contato. A clínica fala com você para combinar o horário.",
+    a: "Abra o perfil do dentista e envie um pedido de contato. A clínica fala com você para confirmar a disponibilidade e combinar o horário.",
   },
   {
     q: "Sou dentista. Posso aparecer?",
-    a: "Sim — se você faz parte do Care e sustenta a qualidade. Comece pela página para dentistas.",
+    a: "Você pode solicitar a participação da sua clínica. A entrada depende dos critérios de qualidade do Care.",
   },
 ] as const;
 

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-const NEEDS = ["limpeza", "extração", "aparelho", "você"] as const;
+const NEEDS = ["limpeza", "extração", "aparelho", "implante"] as const;
 
 export function HeroHeadline() {
   const [index, setIndex] = useState(0);

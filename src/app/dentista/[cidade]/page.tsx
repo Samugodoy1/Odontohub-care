@@ -19,7 +19,7 @@ export async function generateMetadata({
   const region = regionByCitySlug(cidade);
   if (!region) return { title: "Dentista" };
   const title = `Dentista em ${region.city}`;
-  const description = `Dentistas em ${region.city} escolhidos com rigor. Encontre quem cuida do seu caso — sem ranking pago.`;
+  const description = `Dentistas em ${region.city} selecionados pelo Care. Encontre profissionais para o tratamento que você procura.`;
   return {
     title,
     description,
@@ -41,7 +41,7 @@ export default async function CityPage({ params }: { params: Promise<{ cidade: s
     <DossierPage
       eyebrow="Na sua cidade"
       title={`Dentista em ${region.city}.`}
-      lede={`Profissionais escolhidos com rigor em ${region.city}. Se o atendimento não se sustenta, eles saem da lista.`}
+      lede={`Profissionais selecionados pelo Care em ${region.city}. A permanência na lista depende da qualidade do atendimento.`}
       dentists={dentists}
       initialQuery="dentista"
       initialPlace={region.city}

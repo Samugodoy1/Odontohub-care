@@ -48,7 +48,7 @@ export function ProfessionalCardView({
           className={`care-sheen relative flex h-44 items-end bg-gradient-to-br p-5 ${tileFor(professional.id)}`}
         >
           <span className="absolute right-4 top-4 rounded-full bg-white/80 px-2.5 py-1 text-[11px] font-medium text-[#1d1d1f] backdrop-blur">
-            Selecionado
+            Selecionado pelo Care
           </span>
           <div
             aria-hidden

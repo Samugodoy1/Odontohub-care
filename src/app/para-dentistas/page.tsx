@@ -6,7 +6,7 @@ import { SITE } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Sou dentista",
   description:
-    "Pacientes te encontram no Care quando você faz parte da lista. Qualidade cobrada. Sem anúncio comprado.",
+    "Faça parte do Care e seja encontrado por pacientes que procuram tratamento odontológico na sua cidade.",
 };
 
 export default function DentistsPage() {
@@ -20,11 +20,11 @@ export default function DentistsPage() {
           </h1>
           <p className="care-subhead mx-auto mt-5 max-w-[34rem] text-[17px] sm:mt-6 sm:text-[19px] md:text-[24px]">
             Quando alguém pesquisa “dentista em Taubaté” ou “dentista para extração”, o Care mostra
-            quem cuida daquilo. Sem comprar um anúncio.
+            profissionais que atendem àquela necessidade.
           </p>
           <div className="mt-8 flex flex-col items-stretch justify-center gap-4 sm:mt-10 sm:flex-row sm:items-center">
             <a href={SITE.sistema} className="care-btn w-full sm:w-auto">
-              Quero aparecer
+              Quero participar
             </a>
             <Link href="/buscar" className="text-center text-[17px] text-[#0066cc]">
               Ver como o paciente vê ›
@@ -41,17 +41,17 @@ export default function DentistsPage() {
               {
                 n: "01",
                 t: "Você cuida da clínica com seriedade.",
-                d: "O Care não inventa um perfil. Mostra o consultório que já existe — e só se a qualidade segura.",
+                d: "O Care apresenta sua clínica a partir de informações reais e critérios de qualidade.",
               },
               {
                 n: "02",
                 t: "O paciente pesquisa o que precisa.",
-                d: "Limpeza. Extração. A cidade. Palavras de quem dói o dente, não de quem vende software.",
+                d: "Limpeza, extração, aparelho e a cidade. A busca começa pela necessidade do paciente.",
               },
               {
                 n: "03",
-                t: "Você aparece se trata aquilo.",
-                d: "E some se o atendimento falhar. Má prática ou muitas reclamações sérias: fora da lista.",
+                t: "Sua clínica aparece para o caso certo.",
+                d: "A permanência na lista depende da continuidade do padrão de atendimento.",
               },
             ].map((step) => (
               <li key={step.n} className="grid gap-3 md:grid-cols-[88px_1fr]">

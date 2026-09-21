@@ -16,17 +16,17 @@ const QUALITY = [
   {
     n: "01",
     t: "Selecionados um a um",
-    d: "Não é quem pagou para aparecer. É quem cuida bem — e continua cuidando.",
+    d: "A posição não é comprada. Cada profissional entra pelos critérios de qualidade do Care.",
   },
   {
     n: "02",
-    t: "Se não atender bem, sai",
-    d: "Má prática ou muitas reclamações sérias tiram o profissional da lista.",
+    t: "A qualidade é contínua",
+    d: "Problemas sérios no atendimento podem retirar o profissional da lista.",
   },
   {
     n: "03",
-    t: "Você encontra quem atende",
-    d: "O que aparece aqui ainda está de pé. Quem saiu, some da busca.",
+    t: "A lista é atualizada",
+    d: "Você vê os profissionais que continuam ativos no Care.",
   },
 ] as const;
 
@@ -58,8 +58,8 @@ export default function HomePage() {
             className="care-enter care-subhead mx-auto mt-5 max-w-[34rem] text-[17px] sm:mt-7 sm:text-[19px] md:text-[24px]"
             style={{ animationDelay: "160ms" }}
           >
-            Diga o tratamento e a cidade. Mostramos quem cuida disso — escolhidos com rigor, um a
-            um.
+            Diga o tratamento e a cidade. Mostramos dentistas selecionados para cuidar do que você
+            precisa.
           </p>
           <div className="care-enter mx-auto mt-8 max-w-[46rem] sm:mt-12" style={{ animationDelay: "240ms" }}>
             <NeedSearch />
@@ -75,7 +75,7 @@ export default function HomePage() {
               O que você precisa.
             </h2>
             <p className="care-subhead mt-4 max-w-[28rem] text-[17px] sm:mt-5 sm:text-[19px] md:text-[21px]">
-              Um dentista para aquilo que te trouxe aqui. Não uma lista genérica.
+              Encontre profissionais que atendem à sua necessidade — não apenas uma lista genérica.
             </p>
           </Reveal>
         </div>
@@ -130,8 +130,8 @@ export default function HomePage() {
               Escolhidos com rigor.
             </h2>
             <p className="care-subhead mt-4 max-w-[32rem] text-[17px] sm:mt-6 sm:text-[19px] md:text-[24px]">
-              Só entra quem passa. Se o atendimento falha, o dentista sai desta lista. Assim você
-              não precisa adivinhar.
+              A entrada e a permanência no Care seguem critérios de qualidade. Assim você não
+              precisa escolher no escuro.
             </p>
           </Reveal>
           <div className="mt-10 grid gap-8 sm:mt-16 md:grid-cols-3 md:gap-8">
@@ -196,10 +196,11 @@ export default function HomePage() {
             <div className="sm:rounded-[36px] sm:bg-white sm:px-12 sm:py-16 md:px-16">
               <p className="care-eyebrow">Você é dentista?</p>
               <h2 className="care-display mt-3 max-w-[16ch] text-[32px] sm:mt-4 sm:text-[36px] md:text-[52px]">
-                Pacientes te encontram quando você faz parte daqui.
+                Pacientes encontram você quando sua clínica faz parte do Care.
               </h2>
               <p className="care-subhead mt-4 max-w-[30rem] text-[17px] sm:mt-5 sm:text-[18px] md:text-[21px]">
-                Cuidar bem da clínica é o começo. Aparecer para quem pesquisa um dentista é o resto.
+                Cuidar bem é o começo. O Care ajuda sua clínica a aparecer para quem procura um
+                dentista.
               </p>
               <Link href="/para-dentistas" className="care-btn mt-8 w-full sm:mt-10 sm:w-auto">
                 Sou dentista

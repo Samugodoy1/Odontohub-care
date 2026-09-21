@@ -49,8 +49,7 @@ export function DossierPage({
           ) : (
             <>
               <p className="mb-6 text-[13px] text-[#86868b]">
-                {dentists.length} {dentists.length === 1 ? "dentista" : "dentistas"} · escolhidos com
-                rigor
+                {dentists.length} {dentists.length === 1 ? "dentista selecionado" : "dentistas selecionados"} pelo Care
               </p>
               <DentistGrid dentists={dentists} />
             </>

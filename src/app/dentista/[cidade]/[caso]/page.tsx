@@ -21,7 +21,7 @@ export async function generateMetadata({
   const careCase = getCase(caso);
   if (!region || !careCase) return { title: "Dentista" };
   const title = `${careCase.title} em ${region.city}`;
-  const description = `${careCase.lede} Em ${region.city}.`;
+  const description = `${careCase.lede} Dentistas em ${region.city}, selecionados pelo Care.`;
   return {
     title,
     description,
@@ -44,7 +44,7 @@ export default async function CityCasePage({
 
   return (
     <DossierPage
-      eyebrow={careCase.googleQuery}
+      eyebrow="Tratamento"
       title={`${careCase.headline.replace(".", "")} em ${region.city}.`}
       lede={careCase.lede}
       dentists={result.matches}

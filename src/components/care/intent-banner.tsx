@@ -19,7 +19,7 @@ export function IntentBanner({
         <p className="text-[15px] font-medium text-[#0071e3]">Na sua cidade</p>
         <h2 className="care-display mt-2 text-[28px] sm:text-[32px] md:text-[48px]">Dentistas em {city}.</h2>
         <p className="care-subhead mt-3 max-w-xl text-[17px]">
-          Profissionais escolhidos com rigor. Se o atendimento não se sustenta, eles saem da lista.
+          Profissionais selecionados pelo Care. A permanência na lista depende da qualidade do atendimento.
         </p>
       </div>
     );
@@ -33,7 +33,7 @@ export function IntentBanner({
           Diga o que você precisa.
         </h2>
         <p className="care-subhead mt-3 max-w-xl text-[17px]">
-          Limpeza, extração, aparelho — e a sua cidade. Encontramos o dentista para isso.
+          Informe o tratamento e a cidade para conhecer profissionais que atendem à sua necessidade.
         </p>
       </div>
     );

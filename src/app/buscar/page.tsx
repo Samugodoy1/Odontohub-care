@@ -9,7 +9,7 @@ import { searchCare } from "@/lib/search";
 export const metadata: Metadata = {
   title: "Encontrar dentista",
   description:
-    "Encontre um dentista para limpeza, extração, aparelho — na sua cidade. Profissionais escolhidos com rigor.",
+    "Encontre dentistas selecionados para limpeza, extração, aparelho e outros tratamentos na sua cidade.",
 };
 
 type SearchParams = Promise<{ q?: string; onde?: string }>;
@@ -34,7 +34,7 @@ export default async function SearchPage({ searchParams }: { searchParams: Searc
           <div className="mt-14">
             <EmptyState
               title="Diga o que você precisa."
-              body="Limpeza, extração, a sua cidade. Encontramos o dentista para isso."
+              body="Informe o tratamento ou a cidade para conhecer os profissionais disponíveis."
             />
           </div>
         ) : (

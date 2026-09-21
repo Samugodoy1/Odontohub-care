@@ -109,12 +109,15 @@ export default async function ProfessionalPage({
               <h2 className="text-[13px] text-[#86868b]">O consultório</h2>
               <p className="mt-3 text-[16px] leading-relaxed text-[#1d1d1f]/80">
                 {professional.honorific} {professional.name.split(" ")[0]} atende em{" "}
-                {professional.clinic.name}. Está nesta lista porque o cuidado foi escolhido com
-                rigor — e permanece só enquanto a qualidade se sustenta.
+                {professional.clinic.name}. Faz parte desta lista pelos critérios de qualidade do
+                Care e permanece enquanto mantiver esse padrão no atendimento.
               </p>
               <p className="mt-6 text-[15px] text-[#1d1d1f]">{professional.clinic.address}</p>
               <p className="mt-1 text-[14px] text-[#86868b]">
-                {professional.years} anos de prática · Aceita novos pacientes
+                {professional.years} anos de prática ·{" "}
+                {professional.acceptsNewPatients
+                  ? "Aceita novos pacientes"
+                  : "Consulte a disponibilidade"}
               </p>
             </section>
           </article>
