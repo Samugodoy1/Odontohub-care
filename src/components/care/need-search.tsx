@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useId, useState, type FormEvent } from "react";
-import { MapPin, Search } from "lucide-react";
+import { Search } from "lucide-react";
 
 import { SUGGESTED_QUERIES } from "@/lib/site";
 import { REGIONS } from "@/lib/catalog/regions";
@@ -14,6 +14,16 @@ type NeedSearchProps = {
   compact?: boolean;
 };
 
+function composeQuery(query: string, place: string) {
+  const trimmed = query.trim();
+  const city = place.trim();
+  if (trimmed && city) {
+    const already = trimmed.toLowerCase().includes(city.toLowerCase());
+    return already ? trimmed : `${trimmed} em ${city}`;
+  }
+  return trimmed || city;
+}
+
 export function NeedSearch({
   initialQuery = "",
   initialPlace = "",
@@ -22,24 +32,18 @@ export function NeedSearch({
 }: NeedSearchProps) {
   const router = useRouter();
   const queryId = useId();
-  const placeId = useId();
   const listId = useId();
-  const [query, setQuery] = useState(initialQuery);
-  const [place, setPlace] = useState(initialPlace);
+  const [query, setQuery] = useState(composeQuery(initialQuery, initialPlace));
   const [error, setError] = useState("");
 
-  function submit(nextQuery = query, nextPlace = place) {
+  function submit(nextQuery = query) {
     const trimmed = nextQuery.trim();
-    const city = nextPlace.trim();
-    if (!trimmed && !city) {
+    if (!trimmed) {
       setError("Diga o tratamento ou a cidade.");
       return;
     }
     setError("");
-    const params = new URLSearchParams();
-    if (trimmed) params.set("q", trimmed);
-    if (city) params.set("onde", city);
-    router.push(`/buscar?${params.toString()}`);
+    router.push(`/buscar?q=${encodeURIComponent(trimmed)}`);
   }
 
   function onSubmit(event: FormEvent<HTMLFormElement>) {
@@ -50,64 +54,39 @@ export function NeedSearch({
   return (
     <div className={compact ? "" : "w-full"}>
       <form onSubmit={onSubmit} className="w-full" role="search">
-        <div className="rounded-[18px] bg-white p-2 shadow-[0_10px_30px_rgba(15,23,42,0.08)] ring-1 ring-[#e8e8ed] sm:p-2.5">
-          <div className="grid gap-2 sm:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)_auto] sm:items-end">
-            <div className="rounded-[14px] bg-[#f4f4f5] px-4 py-3 text-left">
-              <label htmlFor={queryId} className="block text-[11px] font-semibold uppercase tracking-[0.14em] text-[#6e6e73]">
-                Tratamento
-              </label>
-              <div className="mt-1 flex items-center gap-2">
-                <Search className="size-4 shrink-0 text-[#0f766e]" aria-hidden />
-                <input
-                  id={queryId}
-                  name="q"
-                  value={query}
-                  onChange={(event) => {
-                    setQuery(event.target.value);
-                    if (error) setError("");
-                  }}
-                  autoFocus={autoFocus}
-                  autoComplete="off"
-                  placeholder="Limpeza, canal, implante"
-                  className="h-8 w-full bg-transparent text-[16px] text-[#1d1d1f] outline-none placeholder:text-[#a1a1a6]"
-                />
-              </div>
-            </div>
-            <div className="rounded-[14px] bg-[#f4f4f5] px-4 py-3 text-left">
-              <label htmlFor={placeId} className="block text-[11px] font-semibold uppercase tracking-[0.14em] text-[#6e6e73]">
-                Cidade
-              </label>
-              <div className="mt-1 flex items-center gap-2">
-                <MapPin className="size-4 shrink-0 text-[#0f766e]" aria-hidden />
-                <input
-                  id={placeId}
-                  name="onde"
-                  value={place}
-                  onChange={(event) => setPlace(event.target.value)}
-                  list={listId}
-                  placeholder="Taubaté, SP"
-                  className="h-8 w-full bg-transparent text-[16px] text-[#1d1d1f] outline-none placeholder:text-[#a1a1a6]"
-                />
-              </div>
-              <datalist id={listId}>
-                {REGIONS.flatMap((region) => [
-                  <option key={region.id} value={region.city} />,
-                  ...region.neighborhoods.map((n) => (
-                    <option key={`${region.id}-${n}`} value={`${n}, ${region.city}`} />
-                  )),
-                ])}
-              </datalist>
-            </div>
-            <button
-              type="submit"
-              className="h-12 rounded-[14px] bg-[#0f766e] px-6 text-[15px] font-semibold text-white transition-colors hover:bg-[#0d9488] sm:h-[68px] sm:px-7"
-            >
-              Buscar
-            </button>
+        <label htmlFor={queryId} className="sr-only">
+          Buscar tratamento ou cidade
+        </label>
+        <div className="care-search-shell">
+          <div className="care-search-field">
+            <Search className="size-[18px] shrink-0 text-[#86868b] sm:size-5" aria-hidden />
+            <input
+              id={queryId}
+              name="q"
+              value={query}
+              onChange={(event) => {
+                setQuery(event.target.value);
+                if (error) setError("");
+              }}
+              autoFocus={autoFocus}
+              autoComplete="off"
+              enterKeyHint="search"
+              type="search"
+              list={listId}
+              placeholder="Buscar tratamento ou cidade"
+            />
           </div>
         </div>
+        <datalist id={listId}>
+          {SUGGESTED_QUERIES.map((item) => (
+            <option key={item} value={item} />
+          ))}
+          {REGIONS.map((region) => (
+            <option key={region.id} value={region.city} />
+          ))}
+        </datalist>
         {error ? (
-          <p className="mt-3 px-1 text-[14px] text-[#b42318]" role="alert">
+          <p className="mt-3 px-2 text-[14px] text-[#b42318]" role="alert">
             {error}
           </p>
         ) : null}
@@ -120,18 +99,10 @@ export function NeedSearch({
               key={item}
               type="button"
               onClick={() => {
-                const isCity = item.toLowerCase().includes(" em ");
-                if (isCity) {
-                  const [, city] = item.split(/ em /i);
-                  setQuery("dentista");
-                  setPlace(city ?? "");
-                  submit("dentista", city ?? "");
-                  return;
-                }
                 setQuery(item);
-                submit(item, place);
+                submit(item);
               }}
-              className="rounded-full bg-white px-3.5 py-1.5 text-[13px] text-[#3f3f46] ring-1 ring-[#e5e5ea] transition-colors hover:text-[#0f766e] hover:ring-[#0f766e]/30"
+              className="rounded-full bg-white px-3.5 py-1.5 text-[13px] text-[#1d1d1f]/80 ring-1 ring-[#d2d2d7]/80 transition-colors hover:text-[#0071e3] hover:ring-[#0071e3]/25"
             >
               {item}
             </button>
