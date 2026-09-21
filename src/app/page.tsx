@@ -4,11 +4,31 @@ import { CareFaq } from "@/components/care/care-faq";
 import { CaseRail } from "@/components/care/case-rail";
 import { DentistRail } from "@/components/care/dentist-grid";
 import { DeviceDossier } from "@/components/care/device-dossier";
+import { HeroHeadline } from "@/components/care/hero-headline";
 import { NeedSearch } from "@/components/care/need-search";
+import { Reveal } from "@/components/care/reveal";
 import { catalog } from "@/lib/catalog/query";
 import { REGIONS } from "@/lib/catalog/regions";
 import { citySlug } from "@/lib/seo/cities";
 import { GOOGLE_QUERIES } from "@/lib/seo/queries";
+
+const QUALITY = [
+  {
+    n: "01",
+    t: "Selecionados um a um",
+    d: "Não é quem pagou para aparecer. É quem cuida bem — e continua cuidando.",
+  },
+  {
+    n: "02",
+    t: "Se não atender bem, sai",
+    d: "Má prática ou muitas reclamações sérias tiram o profissional da lista.",
+  },
+  {
+    n: "03",
+    t: "Você encontra quem atende",
+    d: "O que aparece aqui ainda está de pé. Quem saiu, some da busca.",
+  },
+] as const;
 
 export default function HomePage() {
   const network = catalog.listProfessionals({ intentIds: [] });
@@ -17,159 +37,181 @@ export default function HomePage() {
 
   return (
     <main>
-      <section className="care-hero-wash relative overflow-hidden px-5 pb-20 pt-16 md:pb-28 md:pt-24">
-        <div className="relative mx-auto max-w-[860px] text-center">
-          <p className="care-enter text-[17px] font-semibold tracking-tight text-[#1d1d1f]">
-            OdontoHub Care
-          </p>
-          <h1
-            className="care-enter care-display mx-auto mt-4 max-w-[12ch] text-[48px] sm:text-[72px] md:text-[84px]"
-            style={{ animationDelay: "80ms" }}
-          >
-            Encontre o dentista certo.
-          </h1>
+      <section className="care-hero-wash relative overflow-hidden px-5 pb-24 pt-20 md:pb-36 md:pt-28">
+        <div
+          className="care-orb -left-24 top-8 size-[340px] bg-[#0071e3]/18"
+          aria-hidden
+        />
+        <div
+          className="care-orb right-[-80px] top-24 size-[280px] bg-[#32ade6]/20"
+          style={{ animationDelay: "-6s" }}
+          aria-hidden
+        />
+        <div
+          className="care-orb bottom-0 left-1/3 size-[220px] bg-[#34c759]/12"
+          style={{ animationDelay: "-11s" }}
+          aria-hidden
+        />
+        <div className="relative mx-auto max-w-[900px] text-center">
+          <p className="care-enter care-eyebrow">OdontoHub Care</p>
+          <div className="care-enter mt-5" style={{ animationDelay: "90ms" }}>
+            <HeroHeadline />
+          </div>
           <p
-            className="care-enter care-subhead mx-auto mt-6 max-w-[520px] text-[19px] md:text-[24px]"
-            style={{ animationDelay: "140ms" }}
+            className="care-enter care-subhead mx-auto mt-7 max-w-[500px] text-[19px] md:text-[24px]"
+            style={{ animationDelay: "160ms" }}
           >
-            Diga o que você precisa e a sua cidade. Mostramos quem cuida disso — profissionais
-            escolhidos com rigor, um a um.
+            Diga o tratamento e a cidade. Mostramos quem cuida disso — escolhidos com rigor, um a
+            um.
           </p>
-          <div className="care-enter mx-auto mt-10 max-w-[720px]" style={{ animationDelay: "200ms" }}>
+          <div className="care-enter mx-auto mt-12 max-w-[740px]" style={{ animationDelay: "240ms" }}>
             <NeedSearch />
           </div>
         </div>
       </section>
 
-      <section id="tratamentos" className="px-5 py-20 md:py-28">
+      <section id="tratamentos" className="care-band px-5 py-24 md:py-32">
         <div className="mx-auto max-w-[1080px]">
-          <h2 className="care-display max-w-[14ch] text-[36px] md:text-[52px]">
-            O que você precisa.
-          </h2>
-          <p className="care-subhead mt-5 max-w-[480px] text-[19px] md:text-[21px]">
-            Limpeza. Extração. Aparelho. Um dentista para aquilo que te trouxe aqui.
-          </p>
-          <div className="mt-12">
-            <CaseRail />
-          </div>
-        </div>
-      </section>
-
-      <section className="px-5 py-20 md:py-28">
-        <div className="mx-auto grid max-w-[1080px] items-center gap-16 lg:grid-cols-2">
-          <div>
-            <p className="text-[15px] font-medium text-[#0071e3]">Na sua cidade</p>
-            <h2 className="care-display mt-3 text-[36px] md:text-[52px]">Perto de você.</h2>
-            <p className="care-subhead mt-5 text-[19px] md:text-[21px]">
-              Procurou dentista em Taubaté? Estes são os profissionais da cidade. O mesmo vale
-              para extração, limpeza, aparelho — o tratamento e o lugar, juntos.
+          <Reveal>
+            <p className="care-eyebrow">Tratamentos</p>
+            <h2 className="care-display mt-4 max-w-[12ch] text-[40px] md:text-[64px]">
+              O que você precisa.
+            </h2>
+            <p className="care-subhead mt-5 max-w-[440px] text-[19px] md:text-[21px]">
+              Um dentista para aquilo que te trouxe aqui. Não uma lista genérica.
             </p>
-            <Link href="/dentista/taubate" className="mt-8 inline-block text-[17px] text-[#0066cc]">
-              Ver dentistas em Taubaté ›
+          </Reveal>
+          <Reveal className="mt-14" delay={80}>
+            <CaseRail />
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="px-5 py-24 md:py-32">
+        <div className="mx-auto grid max-w-[1080px] items-center gap-16 lg:grid-cols-[1.05fr_0.95fr]">
+          <Reveal>
+            <p className="care-eyebrow">Na sua cidade</p>
+            <h2 className="care-display mt-4 text-[40px] md:text-[64px]">Perto de você.</h2>
+            <p className="care-subhead mt-5 max-w-[460px] text-[19px] md:text-[21px]">
+              Procurou dentista em Taubaté? Estes são os profissionais da cidade. O tratamento e o
+              lugar, juntos.
+            </p>
+            <Link
+              href="/dentista/taubate"
+              className="group mt-8 inline-flex items-center text-[17px] text-[#0066cc]"
+            >
+              Ver dentistas em Taubaté <span className="care-arrow ml-1">›</span>
             </Link>
-          </div>
-          <DeviceDossier dentists={featured} />
+          </Reveal>
+          <Reveal delay={120}>
+            <DeviceDossier dentists={featured} />
+          </Reveal>
         </div>
       </section>
 
-      <section className="px-5 py-16">
+      <section className="care-band px-5 py-24 md:py-32">
         <div className="mx-auto max-w-[1080px]">
-          <h2 className="care-display text-[32px] md:text-[44px]">Dentistas para conhecer.</h2>
-          <div className="mt-10">
+          <Reveal>
+            <p className="care-eyebrow">Profissionais</p>
+            <h2 className="care-display mt-4 text-[40px] md:text-[56px]">
+              Dentistas para conhecer.
+            </h2>
+          </Reveal>
+          <Reveal className="mt-12" delay={80}>
             <DentistRail dentists={network.slice(0, 8)} />
-          </div>
+          </Reveal>
         </div>
       </section>
 
-      <section id="qualidade" className="px-5 py-20 md:py-28">
-        <div className="mx-auto max-w-[680px] text-center">
-          <p className="text-[15px] font-medium text-[#248a3d]">Como escolhemos</p>
-          <h2 className="care-display mt-4 text-[36px] md:text-[52px]">Escolhidos com rigor.</h2>
-          <p className="care-subhead mx-auto mt-6 max-w-[520px] text-[19px] md:text-[24px]">
-            Só entra quem passa. Se o atendimento falha, ou se as reclamações se acumulam, o
-            dentista sai desta lista. Assim você não precisa adivinhar.
-          </p>
-        </div>
-        <div className="mx-auto mt-14 grid max-w-[980px] gap-4 md:grid-cols-3">
-          {[
-            {
-              t: "Selecionados um a um",
-              d: "Não é quem pagou para aparecer. É quem cuida bem — e continua cuidando.",
-            },
-            {
-              t: "Se não atender bem, sai",
-              d: "Má prática ou muitas reclamações sérias tiram o profissional da lista.",
-            },
-            {
-              t: "Você encontra quem atende",
-              d: "O que aparece aqui ainda está de pé. Quem saiu, some da busca.",
-            },
-          ].map((item) => (
-            <div key={item.t} className="rounded-[28px] bg-white px-7 py-8 ring-1 ring-[#d2d2d7]/80">
-              <h3 className="text-[22px] font-semibold tracking-tight text-[#1d1d1f]">{item.t}</h3>
-              <p className="mt-3 text-[15px] leading-relaxed text-[#86868b]">{item.d}</p>
-            </div>
+      <section id="qualidade" className="px-5 py-24 md:py-32">
+        <Reveal>
+          <div className="mx-auto max-w-[680px] text-center">
+            <p className="care-eyebrow">Como escolhemos</p>
+            <h2 className="care-display mt-4 text-[40px] md:text-[64px]">Escolhidos com rigor.</h2>
+            <p className="care-subhead mx-auto mt-6 max-w-[500px] text-[19px] md:text-[24px]">
+              Só entra quem passa. Se o atendimento falha, o dentista sai desta lista. Assim você
+              não precisa adivinhar.
+            </p>
+          </div>
+        </Reveal>
+        <div className="mx-auto mt-16 grid max-w-[980px] gap-10 md:grid-cols-3 md:gap-8">
+          {QUALITY.map((item, index) => (
+            <Reveal key={item.n} delay={index * 90}>
+              <p className="text-[13px] tabular-nums text-[#86868b]">{item.n}</p>
+              <h3 className="mt-5 text-[24px] font-semibold tracking-tight text-[#1d1d1f] md:text-[28px]">
+                {item.t}
+              </h3>
+              <p className="mt-3 text-[16px] leading-relaxed text-[#86868b]">{item.d}</p>
+            </Reveal>
           ))}
         </div>
       </section>
 
-      <section className="px-5 py-20 md:py-28">
-        <div className="mx-auto max-w-[920px] text-center">
-          <h2 className="care-display text-[36px] md:text-[52px]">Comece como você já pesquisa.</h2>
-          <p className="care-subhead mx-auto mt-5 max-w-[460px] text-[19px]">
-            No Google, ou aqui. O mesmo pedido, o dentista certo.
-          </p>
-          <ul className="mt-12 grid gap-3 sm:grid-cols-2">
-            {GOOGLE_QUERIES.map((query) => (
-              <li key={query}>
-                <Link
-                  href={`/buscar?q=${encodeURIComponent(query)}`}
-                  className="block rounded-[22px] bg-white px-6 py-5 text-left text-[19px] font-medium tracking-tight text-[#1d1d1f] ring-1 ring-[#d2d2d7]/80 transition hover:bg-[#eaf3fb]"
-                >
-                  {query}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      <section className="px-5 py-16">
-        <div className="mx-auto max-w-[1080px]">
-          <h2 className="care-display text-[32px] md:text-[44px]">Cidades</h2>
-          <div className="mt-8 flex flex-wrap gap-2">
-            {REGIONS.map((region) => (
-              <Link
-                key={region.id}
-                href={`/dentista/${citySlug(region.city)}`}
-                className="rounded-full bg-white px-4 py-2 text-[14px] text-[#1d1d1f] ring-1 ring-[#d2d2d7] hover:bg-[#eaf3fb]"
-              >
-                {region.city}
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="px-5 py-20 md:py-28">
-        <div className="mx-auto max-w-[1080px] overflow-hidden rounded-[36px] bg-white px-8 py-14 ring-1 ring-[#d2d2d7]/80 md:px-14">
-          <p className="text-[15px] font-medium text-[#0071e3]">Você é dentista?</p>
-          <h2 className="care-display mt-3 max-w-[18ch] text-[32px] md:text-[44px]">
-            Pacientes te encontram quando você faz parte daqui.
-          </h2>
-          <p className="care-subhead mt-5 max-w-[520px] text-[18px] md:text-[21px]">
-            Cuidar bem da clínica é o começo. Aparecer para quem pesquisa um dentista é o resto.
-          </p>
-          <Link href="/para-dentistas" className="care-btn mt-8">
-            Sou dentista
-          </Link>
-        </div>
-      </section>
-
-      <section className="px-5 py-20 md:py-28">
+      <section className="care-band px-5 py-24 md:py-32">
         <div className="mx-auto max-w-[820px]">
-          <h2 className="care-display mb-10 text-[36px] md:text-[48px]">Perguntas frequentes</h2>
-          <CareFaq />
+          <Reveal>
+            <p className="care-eyebrow">Comece por aqui</p>
+            <h2 className="care-display mt-4 text-[40px] md:text-[56px]">
+              Como você já pesquisa.
+            </h2>
+          </Reveal>
+          <Reveal className="mt-12" delay={60}>
+            <ul>
+              {GOOGLE_QUERIES.map((query) => (
+                <li key={query}>
+                  <Link href={`/buscar?q=${encodeURIComponent(query)}`} className="care-query group">
+                    {query}
+                    <span className="care-arrow text-[#86868b] group-hover:text-[#0071e3]">›</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="px-5 py-20 md:py-28">
+        <div className="mx-auto max-w-[1080px]">
+          <Reveal>
+            <h2 className="care-display text-[32px] md:text-[48px]">Cidades</h2>
+            <div className="mt-8 flex flex-wrap gap-2">
+              {REGIONS.map((region) => (
+                <Link
+                  key={region.id}
+                  href={`/dentista/${citySlug(region.city)}`}
+                  className="rounded-full bg-white px-4 py-2 text-[14px] text-[#1d1d1f] ring-1 ring-[#d2d2d7] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#eaf3fb] hover:ring-[#0071e3]/20"
+                >
+                  {region.city}
+                </Link>
+              ))}
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="px-5 pb-8 md:pb-12">
+        <Reveal>
+          <div className="mx-auto max-w-[1080px] overflow-hidden rounded-[36px] bg-white px-8 py-16 md:px-16">
+            <p className="care-eyebrow">Você é dentista?</p>
+            <h2 className="care-display mt-4 max-w-[16ch] text-[36px] md:text-[52px]">
+              Pacientes te encontram quando você faz parte daqui.
+            </h2>
+            <p className="care-subhead mt-5 max-w-[480px] text-[18px] md:text-[21px]">
+              Cuidar bem da clínica é o começo. Aparecer para quem pesquisa um dentista é o resto.
+            </p>
+            <Link href="/para-dentistas" className="care-btn mt-10">
+              Sou dentista
+            </Link>
+          </div>
+        </Reveal>
+      </section>
+
+      <section className="px-5 py-24 md:py-32">
+        <div className="mx-auto max-w-[820px]">
+          <Reveal>
+            <h2 className="care-display mb-10 text-[36px] md:text-[52px]">Perguntas frequentes</h2>
+            <CareFaq />
+          </Reveal>
         </div>
       </section>
     </main>

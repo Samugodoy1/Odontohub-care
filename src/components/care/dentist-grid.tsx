@@ -5,7 +5,7 @@ import type { ProfessionalCard } from "@/lib/catalog/types";
 
 export function DentistGrid({ dentists }: { dentists: ProfessionalCard[] }) {
   return (
-    <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+    <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {dentists.map((professional) => (
         <li key={professional.id}>
           <ProfessionalCardView professional={professional} />
@@ -17,18 +17,20 @@ export function DentistGrid({ dentists }: { dentists: ProfessionalCard[] }) {
 
 export function DentistRail({ dentists }: { dentists: ProfessionalCard[] }) {
   return (
-    <div className="care-rail -mx-5 px-5">
-      {dentists.map((professional) => (
-        <div key={professional.id} className="care-rail-item w-[280px]">
-          <ProfessionalCardView professional={professional} featured />
-        </div>
-      ))}
-      <Link
-        href="/buscar"
-        className="care-rail-item flex h-full min-h-[340px] w-[220px] items-center justify-center rounded-[28px] bg-white text-[17px] text-[#0066cc] ring-1 ring-[#d2d2d7]/80"
-      >
-        Ver todos ›
-      </Link>
+    <div className="care-rail-mask">
+      <div className="care-rail -mx-5 px-5">
+        {dentists.map((professional) => (
+          <div key={professional.id} className="care-rail-item w-[280px]">
+            <ProfessionalCardView professional={professional} featured />
+          </div>
+        ))}
+        <Link
+          href="/buscar"
+          className="care-rail-item care-lift flex h-full min-h-[360px] w-[220px] items-center justify-center rounded-[28px] bg-white text-[17px] text-[#0066cc] ring-1 ring-[#d2d2d7]/70"
+        >
+          Ver todos <span className="care-arrow ml-1">›</span>
+        </Link>
+      </div>
     </div>
   );
 }

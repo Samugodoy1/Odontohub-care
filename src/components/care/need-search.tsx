@@ -50,47 +50,53 @@ export function NeedSearch({
   return (
     <div className={compact ? "" : "w-full"}>
       <form onSubmit={onSubmit} className="w-full" role="search">
-        <div className="grid gap-2 rounded-[22px] bg-white p-2 shadow-[0_2px_24px_rgba(0,0,0,0.06)] ring-1 ring-[#d2d2d7]/80 sm:grid-cols-[1.3fr_1fr_auto]">
-          <label htmlFor={queryId} className="sr-only">
-            O que você precisa
-          </label>
-          <input
-            id={queryId}
-            name="q"
-            value={query}
-            onChange={(event) => {
-              setQuery(event.target.value);
-              if (error) setError("");
-            }}
-            autoFocus={autoFocus}
-            autoComplete="off"
-            placeholder="Limpeza, extração, aparelho…"
-            className="h-14 rounded-[16px] bg-[#f5f5f7] px-4 text-[17px] tracking-tight text-[#1d1d1f] outline-none placeholder:text-[#86868b] md:text-[19px]"
-          />
-          <label htmlFor={placeId} className="sr-only">
-            Cidade
-          </label>
-          <input
-            id={placeId}
-            name="onde"
-            value={place}
-            onChange={(event) => setPlace(event.target.value)}
-            list={listId}
-            placeholder="Sua cidade"
-            className="h-14 rounded-[16px] bg-[#f5f5f7] px-4 text-[17px] tracking-tight text-[#1d1d1f] outline-none placeholder:text-[#86868b]"
-          />
-          <datalist id={listId}>
-            {REGIONS.flatMap((region) => [
-              <option key={region.id} value={region.city} />,
-              ...region.neighborhoods.map((n) => (
-                <option key={`${region.id}-${n}`} value={`${n}, ${region.city}`} />
-              )),
-            ])}
-          </datalist>
-          <button type="submit" className="care-btn h-14 shrink-0 gap-2 px-6">
-            Buscar
-            <ArrowRight className="size-4" aria-hidden />
-          </button>
+        <div className="grid gap-1 rounded-[28px] bg-white/80 p-2 shadow-[0_16px_50px_rgba(0,0,0,0.06)] ring-1 ring-white/80 backdrop-blur-xl sm:grid-cols-[1.25fr_1fr_auto] sm:gap-0 sm:divide-x sm:divide-[#d2d2d7]/70">
+          <div className="px-4 py-2 text-left">
+            <label htmlFor={queryId} className="block text-[11px] font-medium text-[#86868b]">
+              Tratamento
+            </label>
+            <input
+              id={queryId}
+              name="q"
+              value={query}
+              onChange={(event) => {
+                setQuery(event.target.value);
+                if (error) setError("");
+              }}
+              autoFocus={autoFocus}
+              autoComplete="off"
+              placeholder="Limpeza, extração…"
+              className="mt-0.5 h-9 w-full bg-transparent text-[17px] tracking-tight text-[#1d1d1f] outline-none placeholder:text-[#86868b] md:text-[19px]"
+            />
+          </div>
+          <div className="px-4 py-2 text-left">
+            <label htmlFor={placeId} className="block text-[11px] font-medium text-[#86868b]">
+              Cidade
+            </label>
+            <input
+              id={placeId}
+              name="onde"
+              value={place}
+              onChange={(event) => setPlace(event.target.value)}
+              list={listId}
+              placeholder="Taubaté"
+              className="mt-0.5 h-9 w-full bg-transparent text-[17px] tracking-tight text-[#1d1d1f] outline-none placeholder:text-[#86868b]"
+            />
+            <datalist id={listId}>
+              {REGIONS.flatMap((region) => [
+                <option key={region.id} value={region.city} />,
+                ...region.neighborhoods.map((n) => (
+                  <option key={`${region.id}-${n}`} value={`${n}, ${region.city}`} />
+                )),
+              ])}
+            </datalist>
+          </div>
+          <div className="flex items-center p-1.5">
+            <button type="submit" className="care-btn h-12 w-full shrink-0 gap-2 px-6 sm:w-auto">
+              Buscar
+              <ArrowRight className="size-4" aria-hidden />
+            </button>
+          </div>
         </div>
         {error ? (
           <p className="mt-3 px-2 text-[14px] text-[#b42318]" role="alert">
@@ -100,7 +106,7 @@ export function NeedSearch({
       </form>
 
       {!compact ? (
-        <div className="mt-6 flex flex-wrap justify-center gap-2">
+        <div className="mt-7 flex flex-wrap justify-center gap-2">
           {SUGGESTED_QUERIES.map((item) => (
             <button
               key={item}
@@ -117,7 +123,7 @@ export function NeedSearch({
                 setQuery(item);
                 submit(item, place);
               }}
-              className="rounded-full bg-white px-3.5 py-1.5 text-[13px] text-[#1d1d1f] ring-1 ring-[#d2d2d7] transition-colors hover:bg-[#eaf3fb] hover:text-[#0071e3] hover:ring-[#0071e3]/20"
+              className="rounded-full bg-white/70 px-3.5 py-1.5 text-[13px] text-[#1d1d1f]/80 ring-1 ring-[#d2d2d7]/80 backdrop-blur transition-all duration-300 hover:-translate-y-0.5 hover:text-[#0071e3] hover:ring-[#0071e3]/25"
             >
               {item}
             </button>

@@ -4,21 +4,25 @@ export function DeviceDossier({ dentists }: { dentists: ProfessionalCard[] }) {
   const slice = dentists.slice(0, 4);
 
   return (
-    <div className="relative mx-auto w-[280px] md:w-[300px]">
-      <div className="rounded-[44px] bg-[#e8e8ed] p-3 shadow-[0_20px_60px_rgba(0,0,0,0.08)]">
-        <div className="overflow-hidden rounded-[36px] bg-white">
-          <div className="flex h-8 items-center justify-center">
-            <div className="h-4 w-20 rounded-full bg-[#e8e8ed]" />
+    <div className="care-float relative mx-auto w-[280px] md:w-[310px]">
+      <div className="rounded-[48px] bg-gradient-to-b from-[#f2f2f7] to-[#d8d8de] p-[10px] shadow-[0_40px_80px_rgba(0,0,0,0.12)]">
+        <div className="overflow-hidden rounded-[38px] bg-white">
+          <div className="flex h-9 items-center justify-center">
+            <div className="h-[22px] w-[92px] rounded-full bg-[#1d1d1f]" />
           </div>
-          <div className="px-5 pb-8 pt-2">
-            <p className="text-[11px] text-[#86868b]">Perto de você</p>
+          <div className="px-5 pb-8 pt-1">
+            <p className="text-[11px] font-medium text-[#0071e3]">Perto de você</p>
             <p className="mt-1 text-[22px] font-semibold tracking-tight text-[#1d1d1f]">
               Dentistas em Taubaté
             </p>
             <p className="mt-1 text-[12px] text-[#86868b]">Escolhidos com rigor</p>
-            <ul className="mt-5 space-y-3">
-              {slice.map((item) => (
-                <li key={item.id} className="rounded-2xl bg-[#f5f5f7] px-3 py-3">
+            <ul className="mt-5 space-y-2.5">
+              {slice.map((item, index) => (
+                <li
+                  key={item.id}
+                  className="rounded-2xl bg-[#f5f5f7] px-3 py-3"
+                  style={{ animationDelay: `${index * 80}ms` }}
+                >
                   <p className="text-[14px] font-medium text-[#1d1d1f]">
                     {item.honorific} {item.name.split(" ")[0]}
                   </p>

@@ -39,20 +39,20 @@ export function ProfessionalCardView({
 
   return (
     <article
-      className={`overflow-hidden rounded-[28px] bg-white ring-1 ring-[#d2d2d7]/80 ${
+      className={`care-lift overflow-hidden rounded-[28px] bg-white ring-1 ring-[#d2d2d7]/70 ${
         featured ? "min-w-[280px] max-w-[320px]" : ""
       }`}
     >
-      <Link href={href} className="block">
+      <Link href={href} className="group block">
         <div
-          className={`relative flex h-40 items-end bg-gradient-to-br p-5 ${tileFor(professional.id)}`}
+          className={`care-sheen relative flex h-44 items-end bg-gradient-to-br p-5 ${tileFor(professional.id)}`}
         >
-          <span className="absolute right-4 top-4 rounded-full bg-white/80 px-2.5 py-1 text-[11px] font-medium text-[#1d1d1f]">
+          <span className="absolute right-4 top-4 rounded-full bg-white/80 px-2.5 py-1 text-[11px] font-medium text-[#1d1d1f] backdrop-blur">
             Selecionado
           </span>
           <div
             aria-hidden
-            className="flex size-12 items-center justify-center rounded-full bg-white/80 text-[14px] font-semibold text-[#1d1d1f]"
+            className="flex size-12 items-center justify-center rounded-full bg-white/85 text-[14px] font-semibold text-[#1d1d1f]"
           >
             {initials(professional.name)}
           </div>
@@ -69,12 +69,12 @@ export function ProfessionalCardView({
           </p>
         </div>
       </Link>
-      <div className="flex items-center justify-between border-t border-[#d2d2d7]/80 px-5 py-3">
+      <div className="flex items-center justify-between border-t border-[#d2d2d7]/70 px-5 py-3">
         <Link href={cityHref} className="text-[12px] text-[#86868b] hover:text-[#1d1d1f]">
           Em {professional.region.city}
         </Link>
-        <Link href={href} className="text-[13px] text-[#0066cc] hover:underline">
-          Ver perfil ›
+        <Link href={href} className="group text-[13px] text-[#0066cc]">
+          Ver perfil <span className="care-arrow">›</span>
         </Link>
       </div>
     </article>

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Menu } from "lucide-react";
 
 import { CareMark } from "@/components/care/care-mark";
@@ -22,9 +22,26 @@ const NAV = [
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    const frame = requestAnimationFrame(onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, []);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-[#d2d2d7]/70 bg-[#f5f5f7]/80 backdrop-blur-xl">
+    <header
+      className={`sticky top-0 z-40 transition-[background,border,box-shadow,backdrop-filter] duration-500 ${
+        scrolled
+          ? "border-b border-[#d2d2d7]/80 bg-[#f5f5f7]/75 shadow-[0_1px_0_rgba(0,0,0,0.04)] backdrop-blur-2xl"
+          : "border-b border-transparent bg-transparent"
+      }`}
+    >
       <a
         href="#conteudo"
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:z-50 focus:rounded-full focus:bg-[#1d1d1f] focus:px-4 focus:py-2 focus:text-white"
@@ -38,7 +55,7 @@ export function SiteHeader() {
             <Link
               key={item.href}
               href={item.href}
-              className="text-[12px] text-[#1d1d1f]/80 transition-colors hover:text-[#1d1d1f]"
+              className="text-[12px] text-[#1d1d1f]/70 transition-colors duration-200 hover:text-[#1d1d1f]"
             >
               {item.label}
             </Link>
