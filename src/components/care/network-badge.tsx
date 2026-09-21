@@ -4,9 +4,9 @@ export function NetworkBadge({ compact = false }: { compact?: boolean }) {
   return (
     <Badge
       variant="secondary"
-      className="rounded-full border-0 bg-[#30d158]/15 px-2.5 py-0.5 text-[11px] font-medium text-[#30d158]"
+      className="rounded-full border-0 bg-[#eaf8ef] px-2.5 py-0.5 text-[11px] font-medium text-[#248a3d]"
     >
-      {compact ? "Verificado" : "Verificado OdontoHub"}
+      {compact ? "Selecionado" : "Selecionado com rigor"}
     </Badge>
   );
 }

@@ -7,21 +7,20 @@ import { citySlug } from "@/lib/seo/cities";
 
 export function SiteFooter() {
   return (
-    <footer className="mt-auto border-t border-white/10 bg-black">
+    <footer className="mt-auto border-t border-[#d2d2d7] bg-white">
       <div className="mx-auto grid max-w-[980px] gap-12 px-5 py-16 md:grid-cols-4">
         <div className="md:col-span-1">
-          <p className="text-[19px] font-semibold tracking-tight text-white">OdontoHub Care</p>
-          <p className="mt-3 max-w-xs text-[13px] leading-relaxed text-white/50">
-            O dossiê de dentistas que usam o OdontoHub. Qualidade cobrada. Má prática, fora da
-            rede — e fora do Care.
+          <p className="text-[19px] font-semibold tracking-tight text-[#1d1d1f]">OdontoHub Care</p>
+          <p className="mt-3 max-w-xs text-[13px] leading-relaxed text-[#86868b]">
+            Dentistas escolhidos com rigor, para o seu caso e a sua cidade.
           </p>
         </div>
         <div>
-          <p className="text-[12px] text-white/40">Casos</p>
+          <p className="text-[12px] text-[#86868b]">Tratamentos</p>
           <ul className="mt-4 space-y-2 text-[13px]">
             {CARE_CASES.slice(0, 6).map((item) => (
               <li key={item.slug}>
-                <Link className="text-white/80 hover:underline" href={`/para/${item.slug}`}>
+                <Link className="text-[#1d1d1f] hover:underline" href={`/para/${item.slug}`}>
                   {item.title}
                 </Link>
               </li>
@@ -29,12 +28,12 @@ export function SiteFooter() {
           </ul>
         </div>
         <div>
-          <p className="text-[12px] text-white/40">Cidades</p>
+          <p className="text-[12px] text-[#86868b]">Cidades</p>
           <ul className="mt-4 space-y-2 text-[13px]">
             {REGIONS.slice(0, 6).map((region) => (
               <li key={region.id}>
                 <Link
-                  className="text-white/80 hover:underline"
+                  className="text-[#1d1d1f] hover:underline"
                   href={`/dentista/${citySlug(region.city)}`}
                 >
                   Dentista em {region.city}
@@ -44,35 +43,30 @@ export function SiteFooter() {
           </ul>
         </div>
         <div>
-          <p className="text-[12px] text-white/40">Família</p>
+          <p className="text-[12px] text-[#86868b]">Mais</p>
           <ul className="mt-4 space-y-2 text-[13px]">
             <li>
-              <a className="text-white/80 hover:underline" href={SITE.hubWww}>
+              <Link className="text-[#1d1d1f] hover:underline" href="/para-dentistas">
+                Sou dentista
+              </Link>
+            </li>
+            <li>
+              <a className="text-[#1d1d1f] hover:underline" href={SITE.hubWww}>
                 OdontoHub
               </a>
             </li>
             <li>
-              <a className="text-white/80 hover:underline" href={SITE.sistema}>
-                Sistema da clínica
-              </a>
-            </li>
-            <li>
-              <Link className="text-white/80 hover:underline" href="/para-dentistas">
-                Aparecer no Care
-              </Link>
-            </li>
-            <li>
-              <a className="text-white/80 hover:underline" href={SITE.instagram}>
+              <a className="text-[#1d1d1f] hover:underline" href={SITE.instagram}>
                 Instagram
               </a>
             </li>
           </ul>
         </div>
       </div>
-      <div className="border-t border-white/10">
-        <p className="mx-auto max-w-[980px] px-5 py-6 text-[12px] text-white/35">
-          © {new Date().getFullYear()} OdontoHub. Care não é um ranking pago. É o direito de
-          aparecer — reservado a quem usa o sistema e sustenta a qualidade.
+      <div className="border-t border-[#d2d2d7]">
+        <p className="mx-auto max-w-[980px] px-5 py-6 text-[12px] text-[#86868b]">
+          © {new Date().getFullYear()} OdontoHub Care. Encontre um dentista. Sem ranking pago, sem
+          cupom.
         </p>
       </div>
     </footer>

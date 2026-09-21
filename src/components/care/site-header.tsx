@@ -15,19 +15,19 @@ import {
 } from "@/components/ui/sheet";
 
 const NAV = [
-  { href: "/#casos", label: "Casos" },
-  { href: "/#qualidade", label: "Qualidade" },
-  { href: "/para-dentistas", label: "Para dentistas" },
+  { href: "/#tratamentos", label: "Tratamentos" },
+  { href: "/#qualidade", label: "Como escolhemos" },
+  { href: "/para-dentistas", label: "Sou dentista" },
 ] as const;
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-white/10 bg-black/80 backdrop-blur-xl">
+    <header className="sticky top-0 z-40 border-b border-[#d2d2d7]/70 bg-[#f5f5f7]/80 backdrop-blur-xl">
       <a
         href="#conteudo"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:z-50 focus:rounded-full focus:bg-white focus:px-4 focus:py-2 focus:text-black"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:z-50 focus:rounded-full focus:bg-[#1d1d1f] focus:px-4 focus:py-2 focus:text-white"
       >
         Ir para o conteúdo
       </a>
@@ -38,7 +38,7 @@ export function SiteHeader() {
             <Link
               key={item.href}
               href={item.href}
-              className="text-[12px] text-white/80 transition-colors hover:text-white"
+              className="text-[12px] text-[#1d1d1f]/80 transition-colors hover:text-[#1d1d1f]"
             >
               {item.label}
             </Link>
@@ -52,15 +52,15 @@ export function SiteHeader() {
             <Button
               variant="ghost"
               size="icon"
-              className="text-white hover:bg-white/10 md:hidden"
+              className="text-[#1d1d1f] hover:bg-black/5 md:hidden"
               aria-label="Abrir menu"
             >
               <Menu className="size-5" />
             </Button>
           </SheetTrigger>
-          <SheetContent side="right" className="w-[280px] border-white/10 bg-black text-white">
+          <SheetContent side="right" className="w-[280px] bg-white text-[#1d1d1f]">
             <SheetHeader>
-              <SheetTitle className="text-left text-white">
+              <SheetTitle className="text-left">
                 <CareMark />
               </SheetTitle>
             </SheetHeader>
@@ -70,7 +70,7 @@ export function SiteHeader() {
                   key={item.href}
                   href={item.href}
                   onClick={() => setOpen(false)}
-                  className="text-[17px] text-white"
+                  className="text-[17px] text-[#1d1d1f]"
                 >
                   {item.label}
                 </Link>

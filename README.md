@@ -54,6 +54,4 @@ npm run build
 
 ## Design
 
-Referência: [Apple Fitness+](https://www.apple.com/br/apple-fitness-plus/) — canvas preto, tipo grande, galerias horizontais, CTA azul, FAQ em escala de produto.
-
-Care fala com o paciente. Hub fala com o dentista. Os dois são a mesma família.
+Tema claro, clínico, no espírito das páginas de saúde da Apple: papel `#f5f5f7`, texto `#1d1d1f`, azul `#0071e3`, muito ar. A copy fala com quem procura um dentista — não com quem avalia software.

@@ -16,7 +16,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.domain),
   title: {
-    default: "OdontoHub Care — Os dentistas certos. Para o seu caso.",
+    default: "OdontoHub Care — Encontre o dentista certo.",
     template: "%s · OdontoHub Care",
   },
   description: SITE.description,
@@ -85,7 +85,7 @@ const jsonLd = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-BR" className={`${inter.variable} h-full`}>
-      <body className={`${inter.className} flex min-h-full flex-col bg-black text-[#f5f5f7]`}>
+      <body className={`${inter.className} flex min-h-full flex-col bg-[#f5f5f7] text-[#1d1d1f]`}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

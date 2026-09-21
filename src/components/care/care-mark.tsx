@@ -1,36 +1,18 @@
 import Link from "next/link";
 
-export function CareMark({ inverted = true }: { inverted?: boolean }) {
+export function CareMark() {
   return (
     <Link
       href="/"
-      className="group inline-flex items-baseline gap-1.5 leading-none"
+      className="inline-flex items-baseline gap-1.5 leading-none"
       aria-label="OdontoHub Care, página inicial"
     >
-      <span
-        className={`text-[17px] font-semibold tracking-tight md:text-[19px] ${
-          inverted ? "text-white" : "text-care-ink-light"
-        }`}
-      >
+      <span className="text-[17px] font-semibold tracking-tight text-[#1d1d1f] md:text-[19px]">
         OdontoHub
       </span>
-      <span
-        className={`text-[17px] font-semibold tracking-tight md:text-[19px] ${
-          inverted ? "text-white/55" : "text-care-muted"
-        }`}
-      >
+      <span className="text-[17px] font-semibold tracking-tight text-[#86868b] md:text-[19px]">
         Care
       </span>
     </Link>
-  );
-}
-
-export function CareRings({ className = "" }: { className?: string }) {
-  return (
-    <div className={`care-rings ${className}`} aria-hidden>
-      <span />
-      <span />
-      <span />
-    </div>
   );
 }

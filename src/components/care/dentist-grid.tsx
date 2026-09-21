@@ -25,7 +25,7 @@ export function DentistRail({ dentists }: { dentists: ProfessionalCard[] }) {
       ))}
       <Link
         href="/buscar"
-        className="care-rail-item flex h-full min-h-[360px] w-[220px] items-center justify-center rounded-[28px] bg-[#1d1d1f] text-[17px] text-[#64d2ff]"
+        className="care-rail-item flex h-full min-h-[340px] w-[220px] items-center justify-center rounded-[28px] bg-white text-[17px] text-[#0066cc] ring-1 ring-[#d2d2d7]/80"
       >
         Ver todos ›
       </Link>

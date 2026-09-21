@@ -19,7 +19,7 @@ export async function generateMetadata({
   const region = regionByCitySlug(cidade);
   if (!region) return { title: "Dentista" };
   const title = `Dentista em ${region.city}`;
-  const description = `Dentistas em ${region.city} que usam o OdontoHub. Dossiê verificado do Care — qualidade cobrada, sem ranking pago.`;
+  const description = `Dentistas em ${region.city} escolhidos com rigor. Encontre quem cuida do seu caso — sem ranking pago.`;
   return {
     title,
     description,
@@ -39,9 +39,9 @@ export default async function CityPage({ params }: { params: Promise<{ cidade: s
 
   return (
     <DossierPage
-      eyebrow="OdontoHub Care"
+      eyebrow="Na sua cidade"
       title={`Dentista em ${region.city}.`}
-      lede={`O dossiê de quem usa o OdontoHub em ${region.city}. Verificados. Fora da rede, fora do Care.`}
+      lede={`Profissionais escolhidos com rigor em ${region.city}. Se o atendimento não se sustenta, eles saem da lista.`}
       dentists={dentists}
       initialQuery="dentista"
       initialPlace={region.city}

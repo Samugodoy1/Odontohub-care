@@ -4,12 +4,12 @@ import type { ProfessionalCard } from "@/lib/catalog/types";
 import { citySlug } from "@/lib/seo/cities";
 
 const TILES = [
-  "from-[#1c3a5a] to-[#64d2ff]",
-  "from-[#3a1848] to-[#bf5af2]",
-  "from-[#1a2a14] to-[#30d158]",
-  "from-[#4a1c1c] to-[#ff9f0a]",
-  "from-[#1e3a5f] to-[#0a84ff]",
-  "from-[#2a1840] to-[#ff375f]",
+  "from-[#e6f5f1] to-[#b7ddd4]",
+  "from-[#eaf1fb] to-[#c2d4ee]",
+  "from-[#eef6e8] to-[#c6e0b6]",
+  "from-[#fbf0e8] to-[#f0cbb4]",
+  "from-[#e8f1fc] to-[#c4daf7]",
+  "from-[#f0eefb] to-[#d5d0f2]",
 ];
 
 function initials(name: string) {
@@ -39,42 +39,42 @@ export function ProfessionalCardView({
 
   return (
     <article
-      className={`overflow-hidden rounded-[28px] bg-[#1d1d1f] ${
+      className={`overflow-hidden rounded-[28px] bg-white ring-1 ring-[#d2d2d7]/80 ${
         featured ? "min-w-[280px] max-w-[320px]" : ""
       }`}
     >
       <Link href={href} className="block">
         <div
-          className={`relative flex h-44 items-end bg-gradient-to-br p-5 ${tileFor(professional.id)}`}
+          className={`relative flex h-40 items-end bg-gradient-to-br p-5 ${tileFor(professional.id)}`}
         >
-          <span className="absolute right-4 top-4 rounded-full bg-black/35 px-2.5 py-1 text-[11px] text-white backdrop-blur">
-            Verificado
+          <span className="absolute right-4 top-4 rounded-full bg-white/80 px-2.5 py-1 text-[11px] font-medium text-[#1d1d1f]">
+            Selecionado
           </span>
           <div
             aria-hidden
-            className="flex size-14 items-center justify-center rounded-full bg-black/25 text-[16px] font-semibold text-white backdrop-blur"
+            className="flex size-12 items-center justify-center rounded-full bg-white/80 text-[14px] font-semibold text-[#1d1d1f]"
           >
             {initials(professional.name)}
           </div>
         </div>
         <div className="p-5">
-          <h3 className="text-[19px] font-semibold tracking-tight text-white">
+          <h3 className="text-[19px] font-semibold tracking-tight text-[#1d1d1f]">
             {professional.honorific} {professional.name}
           </h3>
-          <p className="mt-1 text-[13px] text-white/55">
+          <p className="mt-1 text-[13px] text-[#86868b]">
             {professional.specialties.map((item) => item.shortName).join(" · ")}
           </p>
-          <p className="mt-3 text-[13px] text-white/70">
+          <p className="mt-3 text-[13px] text-[#6e6e73]">
             {professional.clinic.neighborhood}, {professional.region.city}
           </p>
         </div>
       </Link>
-      <div className="flex items-center justify-between border-t border-white/8 px-5 py-3">
-        <Link href={cityHref} className="text-[12px] text-white/45 hover:text-white">
-          Dentista em {professional.region.city}
+      <div className="flex items-center justify-between border-t border-[#d2d2d7]/80 px-5 py-3">
+        <Link href={cityHref} className="text-[12px] text-[#86868b] hover:text-[#1d1d1f]">
+          Em {professional.region.city}
         </Link>
-        <Link href={href} className="text-[13px] text-[#64d2ff] hover:underline">
-          Ver dossiê ›
+        <Link href={href} className="text-[13px] text-[#0066cc] hover:underline">
+          Ver perfil ›
         </Link>
       </div>
     </article>

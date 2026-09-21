@@ -10,9 +10,9 @@ export const SITE = {
   instagram: "https://instagram.com/odontohub.app",
   locale: "pt_BR",
   language: "pt-BR",
-  slogan: "Os dentistas certos. Para o seu caso.",
+  slogan: "Encontre o dentista certo.",
   description:
-    "OdontoHub Care é o dossiê de dentistas verificados que usam o OdontoHub. Pesquise no Google “dentista em Taubaté” ou “dentista para extração” e encontre quem realmente pode cuidar de você.",
+    "Encontre um dentista para o seu caso — limpeza, extração, aparelho — na sua cidade. Só profissionais escolhidos com rigor. Se o atendimento falha, eles saem da lista.",
 } as const;
 
 export const SUGGESTED_QUERIES = [

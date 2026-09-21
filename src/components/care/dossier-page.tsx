@@ -22,18 +22,18 @@ export function DossierPage({
   title,
   lede,
   dentists,
-  emptyTitle = "Ainda não há dentistas neste recorte.",
-  emptyBody = "O catálogo cresce com a rede OdontoHub. Tente outra cidade ou outro caso.",
+  emptyTitle = "Ainda não há dentistas para isso.",
+  emptyBody = "Tente outra cidade ou outro tratamento. A lista cresce com cuidado.",
   initialQuery = "",
   initialPlace = "",
   elsewhere = [],
 }: DossierPageProps) {
   return (
-    <main className="bg-black">
-      <section className="px-5 pb-10 pt-16 md:pt-24">
+    <main>
+      <section className="care-hero-wash px-5 pb-10 pt-16 md:pt-24">
         <div className="mx-auto max-w-[820px] text-center">
-          <p className="text-[15px] font-medium text-[#64d2ff]">{eyebrow}</p>
-          <h1 className="care-display mx-auto mt-4 max-w-[18ch] text-[44px] text-white sm:text-[64px] md:text-[80px]">
+          <p className="text-[15px] font-medium text-[#0071e3]">{eyebrow}</p>
+          <h1 className="care-display mx-auto mt-4 max-w-[18ch] text-[44px] sm:text-[64px] md:text-[80px]">
             {title}
           </h1>
           <p className="care-subhead mx-auto mt-5 max-w-[540px] text-[19px] md:text-[24px]">{lede}</p>
@@ -48,25 +48,25 @@ export function DossierPage({
             <EmptyState title={emptyTitle} body={emptyBody} />
           ) : (
             <>
-              <p className="mb-6 text-[13px] text-white/40">
-                {dentists.length} {dentists.length === 1 ? "profissional" : "profissionais"} ·
-                verificados OdontoHub
+              <p className="mb-6 text-[13px] text-[#86868b]">
+                {dentists.length} {dentists.length === 1 ? "dentista" : "dentistas"} · escolhidos com
+                rigor
               </p>
               <DentistGrid dentists={dentists} />
             </>
           )}
           {elsewhere.length > 0 ? (
             <div className="mt-16">
-              <h2 className="care-display text-[28px] text-white">Em outras cidades</h2>
+              <h2 className="care-display text-[28px]">Em outras cidades</h2>
               <div className="mt-8">
                 <DentistGrid dentists={elsewhere.slice(0, 6)} />
               </div>
             </div>
           ) : null}
-          <p className="mt-12 text-center text-[14px] text-white/40">
-            Dentista na rede?{" "}
-            <Link href="/para-dentistas" className="text-[#64d2ff] hover:underline">
-              O sistema encontra pacientes para você
+          <p className="mt-12 text-center text-[14px] text-[#86868b]">
+            Você é dentista?{" "}
+            <Link href="/para-dentistas" className="text-[#0066cc] hover:underline">
+              Como aparecer aqui
             </Link>
           </p>
         </div>

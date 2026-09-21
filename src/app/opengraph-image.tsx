@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "OdontoHub Care — Os dentistas certos. Para o seu caso.";
+export const alt = "OdontoHub Care — Encontre o dentista certo.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -14,11 +14,11 @@ export default function OpenGraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          backgroundColor: "#000",
+          backgroundColor: "#f5f5f7",
           padding: "72px 80px",
         }}
       >
-        <div style={{ display: "flex", color: "#f5f5f7", fontSize: 32, fontWeight: 600 }}>
+        <div style={{ display: "flex", color: "#1d1d1f", fontSize: 32, fontWeight: 600 }}>
           OdontoHub Care
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
@@ -28,11 +28,11 @@ export default function OpenGraphImage() {
               fontSize: 68,
               fontWeight: 600,
               letterSpacing: "-0.04em",
-              color: "#f5f5f7",
+              color: "#1d1d1f",
               lineHeight: 1.05,
             }}
           >
-            Os dentistas certos. Para o seu caso.
+            Encontre o dentista certo.
           </div>
           <div
             style={{
@@ -42,7 +42,7 @@ export default function OpenGraphImage() {
               color: "#86868b",
             }}
           >
-            Dentistas que usam o OdontoHub. Verificados. Fora da rede, fora do Care.
+            Limpeza, extração, aparelho. Na sua cidade. Escolhidos com rigor.
           </div>
         </div>
       </div>

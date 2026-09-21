@@ -9,7 +9,7 @@ import { searchCare } from "@/lib/search";
 export const metadata: Metadata = {
   title: "Encontrar dentista",
   description:
-    "Encontre dentistas verificados da rede OdontoHub. Pesquise pela cidade ou pelo caso — limpeza, extração, aparelho.",
+    "Encontre um dentista para limpeza, extração, aparelho — na sua cidade. Profissionais escolhidos com rigor.",
 };
 
 type SearchParams = Promise<{ q?: string; onde?: string }>;
@@ -33,8 +33,8 @@ export default async function SearchPage({ searchParams }: { searchParams: Searc
         {!result ? (
           <div className="mt-14">
             <EmptyState
-              title="Comece pela cidade ou pelo caso."
-              body="“Dentista em Taubaté.” “Dentista para limpeza.” O Care monta o dossiê dos profissionais verificados."
+              title="Diga o que você precisa."
+              body="Limpeza, extração, a sua cidade. Encontramos o dentista para isso."
             />
           </div>
         ) : (
@@ -49,10 +49,10 @@ export default async function SearchPage({ searchParams }: { searchParams: Searc
               <EmptyState
                 title={
                   locationLabel
-                    ? `Ainda não há dentistas para isso em ${locationLabel} nesta demonstração.`
-                    : "Ainda não há dentistas para isso nesta demonstração."
+                    ? `Ainda não há dentistas para isso em ${locationLabel}.`
+                    : "Ainda não há dentistas para isso."
                 }
-                body="O catálogo atual é um recorte da rede. Tente outra cidade ou outro caso."
+                body="Tente outra cidade ou outro tratamento."
               />
             ) : (
               <section aria-live="polite">
@@ -62,9 +62,7 @@ export default async function SearchPage({ searchParams }: { searchParams: Searc
 
             {result.elsewhere.length > 0 ? (
               <section>
-                <h2 className="mb-6 text-[13px] uppercase tracking-[0.12em] text-white/40">
-                  Em outras cidades
-                </h2>
+                <h2 className="mb-6 text-[13px] text-[#86868b]">Em outras cidades</h2>
                 <DentistGrid dentists={result.elsewhere.slice(0, 6)} />
               </section>
             ) : null}

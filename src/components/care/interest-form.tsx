@@ -50,43 +50,38 @@ export function InterestForm({
   }
 
   const fieldClass =
-    "h-11 rounded-2xl border border-white/12 bg-white/6 px-3 text-[15px] text-white outline-none placeholder:text-white/30 focus-visible:ring-2 focus-visible:ring-[#0071e3]/50";
+    "h-11 rounded-2xl border border-[#d2d2d7] bg-[#f5f5f7] px-3 text-[15px] text-[#1d1d1f] outline-none placeholder:text-[#86868b] focus-visible:ring-2 focus-visible:ring-[#0071e3]/30";
 
   if (sent) {
     return (
-      <div className="rounded-[28px] bg-[#1d1d1f] px-6 py-8 md:px-8">
-        <p className="text-[13px] font-medium text-[#30d158]">Enviado</p>
-        <h2 className="mt-2 text-[24px] font-semibold tracking-tight text-white">
-          A clínica recebe no OdontoHub.
+      <div className="rounded-[28px] bg-[#eaf8ef] px-6 py-8 md:px-8">
+        <p className="text-[13px] font-medium text-[#248a3d]">Enviado</p>
+        <h2 className="mt-2 text-[24px] font-semibold tracking-tight text-[#1d1d1f]">
+          A clínica vai falar com você.
         </h2>
-        <p className="mt-3 max-w-md text-[15px] leading-relaxed text-white/55">
-          {professionalName} usa o sistema. O pedido entra na mesma agenda em que a clínica já
-          trabalha.
+        <p className="mt-3 max-w-md text-[15px] leading-relaxed text-[#3d5a45]">
+          Pedimos contato para {professionalName}. Eles combinam o horário com você.
         </p>
       </div>
     );
   }
 
   return (
-    <form onSubmit={onSubmit} className="rounded-[28px] bg-[#1d1d1f] p-6 md:p-8">
-      <p className="text-[13px] font-medium text-[#64d2ff]">Contato</p>
-      <h2 className="mt-2 text-[24px] font-semibold tracking-tight text-white">
-        Falar com a clínica
+    <form onSubmit={onSubmit} className="rounded-[28px] bg-white p-6 ring-1 ring-[#d2d2d7]/80 md:p-8">
+      <p className="text-[13px] font-medium text-[#0071e3]">Consulta</p>
+      <h2 className="mt-2 text-[24px] font-semibold tracking-tight text-[#1d1d1f]">
+        Pedir um horário
       </h2>
-      <p className="mt-2 max-w-md text-[15px] leading-relaxed text-white/50">
-        Sem cadastro neste site. O dentista vê o pedido no OdontoHub.
+      <p className="mt-2 max-w-md text-[15px] leading-relaxed text-[#86868b]">
+        A clínica recebe o seu recado e entra em contato. Sem cadastro aqui.
       </p>
       <div className="mt-6 grid gap-4">
         <div className="grid gap-1.5">
-          <Label htmlFor="name" className="text-white/70">
-            Nome
-          </Label>
+          <Label htmlFor="name">Nome</Label>
           <input id="name" name="name" required autoComplete="name" className={fieldClass} />
         </div>
         <div className="grid gap-1.5">
-          <Label htmlFor="phone" className="text-white/70">
-            WhatsApp
-          </Label>
+          <Label htmlFor="phone">WhatsApp</Label>
           <input
             id="phone"
             name="phone"
@@ -99,9 +94,7 @@ export function InterestForm({
           />
         </div>
         <div className="grid gap-1.5">
-          <Label htmlFor="neighborhood" className="text-white/70">
-            Bairro
-          </Label>
+          <Label htmlFor="neighborhood">Bairro</Label>
           <input
             id="neighborhood"
             name="neighborhood"
@@ -110,25 +103,23 @@ export function InterestForm({
           />
         </div>
         <div className="grid gap-1.5">
-          <Label htmlFor="message" className="text-white/70">
-            O seu caso
-          </Label>
+          <Label htmlFor="message">O que você precisa</Label>
           <Textarea
             id="message"
             name="message"
             rows={4}
             defaultValue={intentLabel ? `Estou procurando: ${intentLabel}` : ""}
-            className="min-h-24 rounded-2xl border-white/12 bg-white/6 text-[15px] text-white"
+            className="min-h-24 rounded-2xl border-[#d2d2d7] bg-[#f5f5f7] text-[15px] text-[#1d1d1f]"
           />
         </div>
       </div>
       {error ? (
-        <p className="mt-3 text-[14px] text-[#ff8a80]" role="alert">
+        <p className="mt-3 text-[14px] text-[#b42318]" role="alert">
           {error}
         </p>
       ) : null}
       <button type="submit" disabled={pending} className="care-btn mt-6 w-full disabled:opacity-60">
-        {pending ? "Enviando…" : "Enviar para a clínica"}
+        {pending ? "Enviando…" : "Pedir contato"}
       </button>
     </form>
   );

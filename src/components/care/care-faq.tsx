@@ -1,45 +1,45 @@
 const FAQS = [
   {
-    q: "O que é o OdontoHub Care?",
-    a: "É o dossiê público dos dentistas que usam o OdontoHub. Não é um ranking pago nem um catálogo de cupom. É o lugar onde o paciente encontra profissionais verificados, específicos para o caso dele.",
+    q: "O que é o Care?",
+    a: "É o lugar para encontrar um dentista — o certo para o que você precisa, na sua cidade. Não é uma lista comprada. São profissionais escolhidos com rigor.",
   },
   {
-    q: "Como o Care aparece no Google?",
-    a: "Quando alguém pesquisa “dentista em Taubaté”, “dentista para limpeza” ou “dentista para extração”, o Care é a página que deve aparecer no topo: a cidade, o caso, os dentistas certos da rede.",
+    q: "Como vocês escolhem os dentistas?",
+    a: "Só entra quem já cuida bem da clínica e passa pelo critério de qualidade. Não se compra um lugar nesta lista.",
   },
   {
-    q: "Quem pode aparecer no Care?",
-    a: "Quem já opera a clínica no OdontoHub. Usar o sistema é o direito de entrar no dossiê. Não se compra posição. Não se aluga destaque.",
+    q: "E se o dentista não atender bem?",
+    a: "Ele sai. Má prática ou muitas reclamações sérias tiram o profissional da lista. Você não precisa ficar adivinhando.",
   },
   {
-    q: "O que acontece se o dentista atender mal?",
-    a: "Qualidade é critério, não slogan. Má prática ou um volume sério de reclamações desliga o profissional do OdontoHub — e, com isso, ele some do Care. A rede se protege para o paciente poder confiar.",
+    q: "Preciso pagar para usar?",
+    a: "Não. Procurar aqui é grátis. A consulta é com a clínica, como sempre foi.",
   },
   {
-    q: "O paciente paga para usar o Care?",
-    a: "Não. O Care é a porta. A consulta é com a clínica, no consultório, como sempre foi.",
+    q: "Como marco uma consulta?",
+    a: "Abra o perfil do dentista e peça contato. A clínica fala com você para combinar o horário.",
   },
   {
-    q: "Sou dentista. Como entro?",
-    a: "Organizando o consultório no OdontoHub. Agenda, prontuário, o dia. Quem usa o sistema ganha o direito de aparecer para quem está procurando exatamente o que você trata.",
+    q: "Sou dentista. Posso aparecer?",
+    a: "Sim — se você faz parte do Care e sustenta a qualidade. Comece pela página para dentistas.",
   },
 ] as const;
 
 export function CareFaq() {
   return (
-    <div className="divide-y divide-white/10 border-y border-white/10">
+    <div className="divide-y divide-[#d2d2d7] border-y border-[#d2d2d7]">
       {FAQS.map((item) => (
         <details key={item.q} className="group py-6">
-          <summary className="flex cursor-pointer list-none items-start justify-between gap-6 text-left text-[21px] font-semibold tracking-tight text-white md:text-[28px]">
+          <summary className="flex cursor-pointer list-none items-start justify-between gap-6 text-left text-[21px] font-semibold tracking-tight text-[#1d1d1f] md:text-[28px]">
             {item.q}
             <span
               aria-hidden
-              className="mt-1 text-[28px] font-light text-white/40 transition group-open:rotate-45"
+              className="mt-1 text-[28px] font-light text-[#86868b] transition group-open:rotate-45"
             >
               +
             </span>
           </summary>
-          <p className="mt-4 max-w-2xl text-[17px] leading-relaxed text-white/55">{item.a}</p>
+          <p className="mt-4 max-w-2xl text-[17px] leading-relaxed text-[#6e6e73]">{item.a}</p>
         </details>
       ))}
     </div>

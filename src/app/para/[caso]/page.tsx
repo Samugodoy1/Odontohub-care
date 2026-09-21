@@ -35,7 +35,7 @@ export default async function CasePage({ params }: { params: Promise<{ caso: str
 
   return (
     <DossierPage
-      eyebrow="OdontoHub Care"
+      eyebrow="Tratamento"
       title={careCase.headline}
       lede={careCase.lede}
       dentists={result.matches}
