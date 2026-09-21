@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { DossierPage } from "@/components/care/dossier-page";
-import { catalog } from "@/lib/catalog/query";
+import { getCareCatalog } from "@/lib/catalog/adapter";
 import { regionByCitySlug, CITY_SLUGS } from "@/lib/seo/cities";
 import { SITE } from "@/lib/site";
 
@@ -16,7 +16,9 @@ export async function generateMetadata({
   params: Promise<{ cidade: string }>;
 }): Promise<Metadata> {
   const { cidade } = await params;
-  const region = regionByCitySlug(cidade);
+  const catalog = await getCareCatalog();
+  const region = regionByCitySlug(cidade)
+    ?? catalog.listRegions().find((item) => item.id === cidade);
   if (!region) return { title: "Dentista" };
   const title = `Dentista em ${region.city}`;
   const description = `Dentistas em ${region.city} selecionados pelo Care. Encontre profissionais para o tratamento que você procura.`;
@@ -30,7 +32,9 @@ export async function generateMetadata({
 
 export default async function CityPage({ params }: { params: Promise<{ cidade: string }> }) {
   const { cidade } = await params;
-  const region = regionByCitySlug(cidade);
+  const catalog = await getCareCatalog();
+  const region = regionByCitySlug(cidade)
+    ?? catalog.listRegions().find((item) => item.id === cidade);
   if (!region) notFound();
 
   const dentists = catalog
@@ -48,5 +52,3 @@ export default async function CityPage({ params }: { params: Promise<{ cidade: s
     />
   );
 }
-
-export const dynamicParams = false;

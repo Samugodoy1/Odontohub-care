@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { DossierPage } from "@/components/care/dossier-page";
+import { getCareCatalog } from "@/lib/catalog/adapter";
 import { CARE_CASES, getCase } from "@/lib/seo/cases";
 import { searchCare } from "@/lib/search";
 import { SITE } from "@/lib/site";
@@ -31,7 +32,8 @@ export default async function CasePage({ params }: { params: Promise<{ caso: str
   const careCase = getCase(caso);
   if (!careCase) notFound();
 
-  const result = searchCare(careCase.googleQuery);
+  const catalog = await getCareCatalog();
+  const result = searchCare(careCase.googleQuery, "", catalog);
 
   return (
     <DossierPage

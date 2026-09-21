@@ -59,7 +59,7 @@ export function ProfessionalCardView({
         </div>
         <div className="p-5">
           <h3 className="text-[19px] font-semibold tracking-tight text-[#1d1d1f]">
-            {professional.honorific} {professional.name}
+            {[professional.honorific, professional.name].filter(Boolean).join(" ")}
           </h3>
           <p className="mt-1 text-[13px] text-[#86868b]">
             {professional.specialties.map((item) => item.shortName).join(" · ")}

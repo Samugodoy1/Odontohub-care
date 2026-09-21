@@ -34,12 +34,15 @@ src/
   lib/seo/             Casos e slugs de cidade
 ```
 
-O catálogo fica atrás de `CatalogPort`. Hoje é seed local. Depois pode ler uma projeção do Hub sem o Care escrever no Hub.
+O catálogo fica atrás de `CatalogPort` e lê a projeção pública, somente leitura, da API do
+OdontoHub. Contas de dentistas com acesso aprovado aparecem automaticamente; o administrador pode
+remover ou recolocar cada profissional no Care sem bloquear seu acesso ao sistema.
 
 ## Rodar
 
 ```bash
 npm install
+cp .env.example .env.local
 npm run dev
 ```
 

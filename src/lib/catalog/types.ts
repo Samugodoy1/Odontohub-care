@@ -29,8 +29,9 @@ export type Professional = {
   id: string;
   slug: string;
   name: string;
-  honorific: "Dr." | "Dra.";
+  honorific: "Dr." | "Dra." | "";
   cro: string;
+  photoUrl?: string | null;
   specialtyIds: SpecialtyId[];
   intentIds: IntentId[];
   clinicId: string;
@@ -55,9 +56,8 @@ export type CatalogQuery = {
 };
 
 /**
- * Future sync from OdontoHub API lands behind this port.
- * Care never mutates Hub. The adapter can later map users.specialty,
- * users.clinic_name, users.clinic_address, users.cro, users.bio.
+ * Care reads the OdontoHub public projection behind this port.
+ * Visibility is administered in Hub; Care never mutates it.
  */
 export type CatalogPort = {
   listProfessionals(query: CatalogQuery): ProfessionalCard[];

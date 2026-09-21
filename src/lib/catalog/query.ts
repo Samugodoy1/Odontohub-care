@@ -48,16 +48,39 @@ function rank(card: ProfessionalCard, query: CatalogQuery): number {
   return score;
 }
 
+function queryCards(cards: ProfessionalCard[], query: CatalogQuery): ProfessionalCard[] {
+  return cards
+    .map((card) => ({ card, score: rank(card, query) }))
+    .filter((item) => {
+      if (query.intentIds.length === 0) return true;
+      return query.intentIds.some((id) => item.card.intentIds.includes(id));
+    })
+    .sort((a, b) => b.score - a.score)
+    .map((item) => item.card);
+}
+
+export function catalogFromCards(cards: ProfessionalCard[]): CatalogPort {
+  const regions = [...new Map(cards.map((card) => [card.region.id, card.region])).values()];
+
+  return {
+    listProfessionals(query: CatalogQuery): ProfessionalCard[] {
+      return queryCards(cards, query);
+    },
+    getProfessional(slug: string): ProfessionalCard | null {
+      return cards.find((card) => card.slug === slug) ?? null;
+    },
+    listRegions(): Region[] {
+      return regions;
+    },
+    listSpecialties(): Specialty[] {
+      return [...SPECIALTIES];
+    },
+  };
+}
+
 export const localCatalog: CatalogPort = {
   listProfessionals(query: CatalogQuery): ProfessionalCard[] {
-    return allCards()
-      .map((card) => ({ card, score: rank(card, query) }))
-      .filter((item) => {
-        if (query.intentIds.length === 0) return true;
-        return query.intentIds.some((id) => item.card.intentIds.includes(id));
-      })
-      .sort((a, b) => b.score - a.score)
-      .map((item) => item.card);
+    return queryCards(allCards(), query);
   },
   getProfessional(slug: string): ProfessionalCard | null {
     return allCards().find((card) => card.slug === slug) ?? null;

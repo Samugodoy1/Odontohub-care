@@ -92,14 +92,18 @@ export type LocationGuess = {
   remainder: string;
 };
 
-export function parseLocation(query: string, explicitPlace?: string): LocationGuess {
+export function parseLocation(
+  query: string,
+  explicitPlace?: string,
+  regions: readonly Region[] = REGIONS,
+): LocationGuess {
   const haystack = [explicitPlace, query].filter(Boolean).join(" ");
   const normalized = normalizeText(haystack);
 
   let region: Region | null = null;
   let neighborhood: string | null = null;
 
-  for (const item of REGIONS) {
+  for (const item of regions) {
     const cityNorm = normalizeText(item.city);
     const stateNorm = normalizeText(item.stateCode);
     if (normalized.includes(cityNorm) || normalized.split(" ").includes(stateNorm.toLowerCase())) {
@@ -112,7 +116,7 @@ export function parseLocation(query: string, explicitPlace?: string): LocationGu
     }
   }
 
-  for (const item of region ? [region] : REGIONS) {
+  for (const item of region ? [region] : regions) {
     for (const n of item.neighborhoods) {
       if (normalized.includes(normalizeText(n))) {
         neighborhood = n;
