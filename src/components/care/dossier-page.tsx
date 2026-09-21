@@ -4,6 +4,8 @@ import { EmptyState } from "@/components/care/empty-state";
 import { DentistGrid } from "@/components/care/dentist-grid";
 import { NeedSearch } from "@/components/care/need-search";
 import type { ProfessionalCard } from "@/lib/catalog/types";
+import { itemListJsonLd } from "@/lib/seo/jsonld";
+import { SITE } from "@/lib/site";
 
 type DossierPageProps = {
   eyebrow: string;
@@ -30,6 +32,14 @@ export function DossierPage({
 }: DossierPageProps) {
   return (
     <main>
+      {dentists.length > 0 ? (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(itemListJsonLd(dentists, title, SITE.domain)),
+          }}
+        />
+      ) : null}
       <section className="care-hero-wash pb-10 pt-10 sm:pt-16 md:pt-24">
         <div className="care-align text-center">
           <p className="text-[15px] font-medium text-[#0071e3]">{eyebrow}</p>

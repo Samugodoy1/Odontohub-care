@@ -1,4 +1,5 @@
 import { catalogFromCards } from "@/lib/catalog/query";
+import { parseDentistName } from "@/lib/catalog/names";
 import { REGIONS } from "@/lib/catalog/regions";
 import { SPECIALTY_BY_ID } from "@/lib/catalog/specialties";
 import type { CatalogPort, ProfessionalCard, Region } from "@/lib/catalog/types";
@@ -83,27 +84,28 @@ export function mapHubProfessional(projection: HubDentistProjection): Profession
     || region.neighborhoods.find((item) =>
       normalizeText(projection.clinicAddress ?? "").includes(normalizeText(item)))
     || "Endereço a confirmar";
-  const clinicName = projection.clinicName?.trim() || `Consultório de ${projection.name}`;
+  const parsed = parseDentistName(projection.name);
+  const clinicName = projection.clinicName?.trim() || `Consultório de ${parsed.displayName}`;
   const clinicAddress = projection.clinicAddress?.trim()
     || [neighborhood, region.city, region.stateCode].filter(Boolean).join(", ");
   const specialtyNames = specialties.map((item) => item.name);
 
   return {
     id: `hub-${projection.id}`,
-    slug: `${slugify(projection.name) || "dentista"}-${projection.id}`,
-    name: projection.name.trim(),
-    honorific: "",
+    slug: `${slugify(parsed.name) || "dentista"}-${projection.id}`,
+    name: parsed.name,
+    honorific: parsed.honorific,
     cro: projection.cro?.trim() || "CRO a confirmar",
     photoUrl: projection.photoUrl,
     specialtyIds: mappedSpecialtyIds,
     intentIds,
     clinicId: `hub-clinic-${projection.id}`,
     bio: projection.bio?.trim()
-      || `${projection.name} atende pela rede OdontoHub em ${region.city}.`,
+      || `${parsed.displayName} atende pela rede OdontoHub em ${region.city}.`,
     treats: specialtyNames,
     approach: "Atendimento com agenda e prontuário integrados ao OdontoHub.",
     years: 0,
-    acceptsNewPatients: false,
+    acceptsNewPatients: true,
     clinic: {
       id: `hub-clinic-${projection.id}`,
       name: clinicName,
@@ -158,5 +160,5 @@ export async function getCareCatalog(): Promise<CatalogPort> {
 export const HUB_SYNC = {
   source: "odontohub-api",
   status: "connected",
-  note: "Care reads the public OdontoHub projection and never writes to the Hub.",
+  note: "Care reads the public OdontoHub projection. Patient interest is posted to the Hub as a CARE appointment request.",
 } as const;

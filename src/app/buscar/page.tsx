@@ -7,13 +7,30 @@ import { DentistGrid } from "@/components/care/dentist-grid";
 import { getCareCatalog } from "@/lib/catalog/adapter";
 import { searchCare } from "@/lib/search";
 
-export const metadata: Metadata = {
-  title: "Encontrar dentista",
-  description:
-    "Encontre dentistas selecionados para limpeza, extração, aparelho e outros tratamentos na sua cidade.",
-};
-
 type SearchParams = Promise<{ q?: string; onde?: string }>;
+
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: SearchParams;
+}): Promise<Metadata> {
+  const params = await searchParams;
+  const q = typeof params.q === "string" ? params.q.trim() : "";
+  const onde = typeof params.onde === "string" ? params.onde.trim() : "";
+  if (!q && !onde) {
+    return {
+      title: "Encontrar dentista",
+      description:
+        "Encontre dentista para limpeza, extração, aparelho, implante e canal na sua cidade no OdontoHub Care.",
+    };
+  }
+  const title = [q || "Dentista", onde ? `em ${onde}` : null].filter(Boolean).join(" ");
+  return {
+    title,
+    description: `${title}. Clínicas da rede OdontoHub selecionadas pelo Care.`,
+    robots: { index: false, follow: true },
+  };
+}
 
 export default async function SearchPage({ searchParams }: { searchParams: SearchParams }) {
   const params = await searchParams;

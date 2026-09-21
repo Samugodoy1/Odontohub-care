@@ -9,7 +9,9 @@ import { NeedSearch } from "@/components/care/need-search";
 import { Reveal } from "@/components/care/reveal";
 import { getCareCatalog } from "@/lib/catalog/adapter";
 import { citySlug } from "@/lib/seo/cities";
+import { itemListJsonLd } from "@/lib/seo/jsonld";
 import { GOOGLE_QUERIES } from "@/lib/seo/queries";
+import { SITE } from "@/lib/site";
 
 const QUALITY = [
   {
@@ -39,6 +41,12 @@ export default async function HomePage() {
 
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(itemListJsonLd(network, "Dentistas do OdontoHub Care", SITE.domain)),
+        }}
+      />
       <section className="care-hero-wash relative overflow-hidden pb-12 pt-10 sm:pb-20 sm:pt-16 md:pb-32 md:pt-24">
         <div className="care-orb -left-24 top-8 size-[280px] bg-[#0071e3]/16 sm:size-[340px]" aria-hidden />
         <div
@@ -60,8 +68,8 @@ export default async function HomePage() {
             className="care-enter care-subhead mx-auto mt-5 max-w-[34rem] text-[17px] sm:mt-7 sm:text-[19px] md:text-[24px]"
             style={{ animationDelay: "160ms" }}
           >
-            Diga o tratamento e a cidade. Mostramos dentistas selecionados para cuidar do que você
-            precisa.
+            Diga o tratamento e a cidade. Mostramos dentistas da rede OdontoHub para cuidar do que
+            você precisa — limpeza, extração, aparelho, implante e urgência.
           </p>
           <div className="care-enter mx-auto mt-8 max-w-[46rem] sm:mt-12" style={{ animationDelay: "240ms" }}>
             <NeedSearch />

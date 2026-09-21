@@ -1,15 +1,15 @@
 const FAQS = [
   {
     q: "O que é o Care?",
-    a: "É uma lista de dentistas selecionados para diferentes tratamentos e cidades. Você pesquisa o que precisa e conhece os profissionais disponíveis.",
+    a: "É a lista pública de dentistas da rede OdontoHub. Você pesquisa o tratamento e a cidade e vê clínicas que usam o sistema na prática.",
   },
   {
     q: "Como vocês escolhem os dentistas?",
-    a: "A entrada segue critérios de qualidade do Care. A posição na lista não é comprada.",
+    a: "Só entram contas ativas do OdontoHub, com clínica identificada. Alunos do Academy não aparecem aqui. A posição na lista não é comprada.",
   },
   {
     q: "A lista é atualizada?",
-    a: "Sim. A permanência depende da continuidade do padrão de atendimento. Problemas sérios podem retirar o profissional da lista.",
+    a: "Sim. A permanência depende da continuidade do padrão de atendimento. O administrador pode retirar um profissional do Care sem bloquear o sistema da clínica.",
   },
   {
     q: "Preciso pagar para usar?",
@@ -17,11 +17,11 @@ const FAQS = [
   },
   {
     q: "Como marco uma consulta?",
-    a: "Abra o perfil do dentista e envie um pedido de contato. A clínica fala com você para confirmar a disponibilidade e combinar o horário.",
+    a: "Abra o perfil do dentista e envie um pedido. A solicitação chega na inbox da clínica no OdontoHub, com seu nome e WhatsApp.",
   },
   {
     q: "Sou dentista. Posso aparecer?",
-    a: "Você pode solicitar a participação da sua clínica. A entrada depende dos critérios de qualidade do Care.",
+    a: "Sim, se a sua clínica usa o OdontoHub. Faça login no sistema, complete CRO e cidade do consultório e mantenha a publicação no Care.",
   },
 ] as const;
 

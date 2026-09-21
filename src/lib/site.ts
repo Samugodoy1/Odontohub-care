@@ -12,7 +12,7 @@ export const SITE = {
   language: "pt-BR",
   slogan: "Encontre o dentista certo.",
   description:
-    "Encontre dentistas selecionados para o seu tratamento e a sua cidade. A permanência na lista depende da qualidade do atendimento.",
+    "Encontre dentista para limpeza, extração, aparelho, implante, canal e urgência na sua cidade. OdontoHub Care mostra clínicas da rede OdontoHub — selecionadas, com pedido de consulta direto para o consultório.",
 } as const;
 
 export const SUGGESTED_QUERIES = [

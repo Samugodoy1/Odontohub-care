@@ -21,10 +21,11 @@ export async function generateMetadata({
     ?? catalog.listRegions().find((item) => item.id === cidade);
   if (!region) return { title: "Dentista" };
   const title = `Dentista em ${region.city}`;
-  const description = `Dentistas em ${region.city} selecionados pelo Care. Encontre profissionais para o tratamento que você procura.`;
+  const description = `Encontre dentista em ${region.city} para limpeza, extração, aparelho, implante e canal. Clínicas da rede OdontoHub selecionadas pelo Care.`;
   return {
     title,
     description,
+    keywords: [`dentista em ${region.city}`, `dentista ${region.city}`, `clínica odontológica ${region.city}`],
     alternates: { canonical: `${SITE.domain}/dentista/${cidade}` },
     openGraph: { title: `${title} · OdontoHub Care`, description },
   };
