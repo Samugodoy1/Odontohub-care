@@ -20,10 +20,10 @@ describe("searchCare", () => {
     expect(result.matches.every((item) => item.intentIds.includes("cirurgia"))).toBe(true);
   });
 
-  it("maps pediatric queries only to pediatric dentists", () => {
+  it("recommends pediatric dentists first for a child query", () => {
     const result = searchCare("Preciso de um dentista infantil");
     expect(result.intent.primary?.intent.id).toBe("pediatrica");
-    expect(result.matches.map((item) => item.slug).sort()).toEqual(
+    expect(result.matches.slice(0, 2).map((item) => item.slug).sort()).toEqual(
       ["ana-luisa-freire", "sofia-carvalho"].sort(),
     );
   });

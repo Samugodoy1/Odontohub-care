@@ -17,17 +17,14 @@ export function HeroHeadline() {
   }, []);
 
   return (
-    <h1 className="care-display mx-auto max-w-[13ch] text-[56px] sm:text-[80px] md:text-[104px]">
+    <h1 className="care-hero-title">
       Encontre o dentista certo
-      <span className="mt-1 block">
-        para{" "}
-        <span className="inline-grid text-left text-[#0071e3]">
-          <span className="invisible col-start-1 row-start-1" aria-hidden>
-            extração.
-          </span>
-          <span key={NEEDS[index]} className="care-word col-start-1 row-start-1">
-            {NEEDS[index]}.
-          </span>
+      <span className="care-hero-need">
+        <span className="invisible col-start-1 row-start-1" aria-hidden>
+          para extração.
+        </span>
+        <span key={NEEDS[index]} className="care-word col-start-1 row-start-1">
+          para {NEEDS[index]}.
         </span>
       </span>
     </h1>

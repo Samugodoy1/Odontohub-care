@@ -50,8 +50,6 @@ function slugify(value: string) {
   return normalizeText(value).replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 }
 
-const GENERAL_INTENTS = new Set<IntentId>(["prevencao", "urgencia"]);
-
 function hasAlias(haystack: string, alias: string) {
   if (` ${haystack} `.includes(` ${alias} `)) return true;
   if (alias === "bucomaxilo" || alias === "implante") {
@@ -72,7 +70,7 @@ export function intentsForSpecialties(ids: readonly SpecialtyId[]): IntentId[] {
   return CARE_INTENTS.filter((intent) => {
     const specific = intent.specialtyIds.filter((id) => id !== "clinica-geral");
     if (specific.some((id) => ids.includes(id))) return true;
-    return ids.includes("clinica-geral") && (specific.length === 0 || GENERAL_INTENTS.has(intent.id));
+    return ids.includes("clinica-geral");
   }).map((intent) => intent.id);
 }
 
