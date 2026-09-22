@@ -17,7 +17,7 @@ export function HeroHeadline() {
   }, []);
 
   return (
-    <h1 className="care-display mx-auto max-w-[13ch] text-[48px] sm:text-[72px] md:text-[88px]">
+    <h1 className="care-display mx-auto max-w-[13ch] text-[56px] sm:text-[80px] md:text-[104px]">
       Encontre o dentista certo
       <span className="mt-1 block">
         para{" "}

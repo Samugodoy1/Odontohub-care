@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { DentistPhoto } from "@/components/care/dentist-photo";
 import { InterestForm } from "@/components/care/interest-form";
 import { NetworkBadge } from "@/components/care/network-badge";
+import { ReviewPanel } from "@/components/care/review-panel";
 import { getCareCatalog, getCareProfessionals } from "@/lib/catalog/adapter";
 import { displayNameOf, hubDentistId } from "@/lib/catalog/names";
 import { citySlug } from "@/lib/seo/cities";
@@ -146,6 +147,8 @@ export default async function ProfessionalPage({
                   : "Consulte a disponibilidade"}
               </p>
             </section>
+
+            <ReviewPanel professionalSlug={professional.slug} professionalName={displayName} />
           </article>
 
           <aside className="lg:-mt-4">

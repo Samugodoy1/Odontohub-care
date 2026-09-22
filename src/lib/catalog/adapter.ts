@@ -1,11 +1,11 @@
 import { catalogFromCards } from "@/lib/catalog/query";
 import { parseDentistName } from "@/lib/catalog/names";
-import { REGIONS } from "@/lib/catalog/regions";
+import { REGIONS, resolvePracticeCity } from "@/lib/catalog/regions";
 import { SPECIALTY_BY_ID } from "@/lib/catalog/specialties";
 import type { CatalogPort, ProfessionalCard, Region } from "@/lib/catalog/types";
 import { CARE_INTENTS } from "@/lib/intent/taxonomy";
 import { normalizeText } from "@/lib/intent/normalize";
-import type { SpecialtyId } from "@/lib/intent/types";
+import type { IntentId, SpecialtyId } from "@/lib/intent/types";
 
 export type HubDentistProjection = {
   id: string;
@@ -50,17 +50,40 @@ function slugify(value: string) {
   return normalizeText(value).replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 }
 
-function specialtyIds(value: string | null): SpecialtyId[] {
-  const normalized = normalizeText(value ?? "");
+const GENERAL_INTENTS = new Set<IntentId>(["prevencao", "urgencia"]);
+
+function hasAlias(haystack: string, alias: string) {
+  if (` ${haystack} `.includes(` ${alias} `)) return true;
+  if (alias === "bucomaxilo" || alias === "implante") {
+    return haystack.split(" ").some((token) => token.startsWith(alias));
+  }
+  return false;
+}
+
+export function specialtyIdsFromLabel(value: string | null): SpecialtyId[] {
+  const normalized = normalizeText(value ?? "").replace(/\bcirurgiao\s+dentista\b/g, " ");
   const matches = SPECIALTY_ALIASES
-    .filter(([, aliases]) => aliases.some((alias) => normalized.includes(alias)))
+    .filter(([, aliases]) => aliases.some((alias) => hasAlias(normalized, alias)))
     .map(([id]) => id);
   return matches.length > 0 ? [...new Set(matches)] : ["clinica-geral"];
 }
 
+export function intentsForSpecialties(ids: readonly SpecialtyId[]): IntentId[] {
+  return CARE_INTENTS.filter((intent) => {
+    const specific = intent.specialtyIds.filter((id) => id !== "clinica-geral");
+    if (specific.some((id) => ids.includes(id))) return true;
+    return ids.includes("clinica-geral") && (specific.length === 0 || GENERAL_INTENTS.has(intent.id));
+  }).map((intent) => intent.id);
+}
+
+export function isListedOnCare(card: ProfessionalCard) {
+  const city = normalizeText(card.region.city);
+  const id = normalizeText(card.region.id);
+  return city.length > 0 && city !== "brasil" && id !== "brasil";
+}
+
 function knownRegion(city: string | null, address: string | null): Region | undefined {
-  const haystack = normalizeText([city, address].filter(Boolean).join(" "));
-  return REGIONS.find((region) => haystack.includes(normalizeText(region.city)));
+  return resolvePracticeCity(city, address, REGIONS);
 }
 
 function mapRegion(projection: HubDentistProjection): Region {
@@ -84,11 +107,9 @@ function mapRegion(projection: HubDentistProjection): Region {
 }
 
 export function mapHubProfessional(projection: HubDentistProjection): ProfessionalCard {
-  const mappedSpecialtyIds = specialtyIds(projection.specialty);
+  const mappedSpecialtyIds = specialtyIdsFromLabel(projection.specialty);
   const specialties = mappedSpecialtyIds.map((id) => SPECIALTY_BY_ID[id]).filter(Boolean);
-  const intentIds = CARE_INTENTS
-    .filter((intent) => intent.specialtyIds.some((id) => mappedSpecialtyIds.includes(id)))
-    .map((intent) => intent.id);
+  const intentIds = intentsForSpecialties(mappedSpecialtyIds);
   const region = mapRegion(projection);
   const neighborhood = projection.clinicNeighborhood?.trim()
     || region.neighborhoods.find((item) =>

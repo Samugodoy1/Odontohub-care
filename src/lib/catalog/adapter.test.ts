@@ -69,6 +69,42 @@ describe("OdontoHub Care catalog adapter", () => {
     expect(professional.clinic.name).toBe("Consultório de Dr. Samuel Godoy");
   });
 
+  it("does not treat cirurgião-dentista as oral surgery", () => {
+    const professional = mapHubProfessional({
+      ...dentist,
+      specialty: "Cirurgião-dentista",
+    });
+
+    expect(professional.specialtyIds).toEqual(["clinica-geral"]);
+    expect(professional.intentIds).not.toContain("cirurgia");
+    expect(professional.intentIds).not.toContain("endodontia");
+    expect(professional.intentIds).toContain("prevencao");
+  });
+
+  it("keeps clínica geral off specialist treatment pages", () => {
+    const professional = mapHubProfessional({
+      ...dentist,
+      specialty: "Clínica Geral",
+    });
+
+    expect(professional.intentIds).toEqual(expect.arrayContaining(["prevencao", "urgencia"]));
+    expect(professional.intentIds).not.toContain("cirurgia");
+    expect(professional.intentIds).not.toContain("endodontia");
+    expect(professional.intentIds).not.toContain("dentistica");
+  });
+
+  it("keeps a Taubaté clinic out of São Paulo when the address names the state", () => {
+    const professional = mapHubProfessional({
+      ...dentist,
+      clinicCity: "São Paulo",
+      clinicState: "SP",
+      clinicAddress: "Rua das Flores, 10, Centro, Taubaté - São Paulo",
+    });
+
+    expect(professional.region.id).toBe("taubate");
+    expect(professional.region.city).toBe("Taubaté");
+  });
+
   it("upgrades tiny Google avatars to a portrait-sized photo", () => {
     const professional = mapHubProfessional({
       ...dentist,

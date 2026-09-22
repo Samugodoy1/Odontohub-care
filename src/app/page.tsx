@@ -7,7 +7,7 @@ import { DeviceDossier } from "@/components/care/device-dossier";
 import { HeroHeadline } from "@/components/care/hero-headline";
 import { NeedSearch } from "@/components/care/need-search";
 import { Reveal } from "@/components/care/reveal";
-import { getCareCatalog } from "@/lib/catalog/adapter";
+import { getCareCatalog, isListedOnCare } from "@/lib/catalog/adapter";
 import { citySlug } from "@/lib/seo/cities";
 import { itemListJsonLd } from "@/lib/seo/jsonld";
 import { GOOGLE_QUERIES } from "@/lib/seo/queries";
@@ -33,7 +33,7 @@ const QUALITY = [
 
 export default async function HomePage() {
   const catalog = await getCareCatalog();
-  const network = catalog.listProfessionals({ intentIds: [] });
+  const network = catalog.listProfessionals({ intentIds: [] }).filter(isListedOnCare);
   const taubate = network.filter((item) => item.region.id === "taubate");
   const featured = taubate.length > 0 ? taubate : network;
   const featuredCity = featured[0]?.region.city;
@@ -47,15 +47,15 @@ export default async function HomePage() {
           __html: JSON.stringify(itemListJsonLd(network, "Dentistas do OdontoHub Care", SITE.domain)),
         }}
       />
-      <section className="care-hero-wash relative overflow-hidden pb-12 pt-10 sm:pb-20 sm:pt-16 md:pb-32 md:pt-24">
+      <section className="care-hero-wash relative flex min-h-[calc(100dvh-3rem+32px)] items-center overflow-hidden">
         <div className="care-orb -left-24 top-8 size-[280px] bg-[#0071e3]/16 sm:size-[340px]" aria-hidden />
         <div
-          className="care-orb right-[-80px] top-20 size-[220px] bg-[#32ade6]/18 sm:size-[280px]"
+          className="care-orb right-[-80px] top-20 size-[220px] bg-[#32ade6]/14 sm:size-[280px]"
           style={{ animationDelay: "-6s" }}
           aria-hidden
         />
         <div
-          className="care-orb bottom-0 left-1/3 size-[180px] bg-[#34c759]/10 sm:size-[220px]"
+          className="care-orb bottom-0 left-1/3 size-[180px] bg-[#0071e3]/8 sm:size-[220px]"
           style={{ animationDelay: "-11s" }}
           aria-hidden
         />

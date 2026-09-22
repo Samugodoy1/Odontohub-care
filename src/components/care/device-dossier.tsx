@@ -14,7 +14,7 @@ export function DeviceDossier({ dentists }: { dentists: ProfessionalCard[] }) {
             <div className="h-[18px] w-[84px] rounded-full bg-[#1d1d1f]" />
           </div>
           <div className="px-4 pb-7 pt-1">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#0f766e]">Perto de você</p>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#0071e3]">Perto de você</p>
             <p className="mt-1 text-[20px] font-semibold tracking-tight text-[#1d1d1f]">
               Dentistas em {city}
             </p>
