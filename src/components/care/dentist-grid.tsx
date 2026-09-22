@@ -1,7 +1,9 @@
 import Link from "next/link";
 
 import { ProfessionalCardView } from "@/components/care/professional-card";
+import { splitByRecommendation } from "@/lib/catalog/recommend";
 import type { ProfessionalCard } from "@/lib/catalog/types";
+import type { IntentId } from "@/lib/intent/types";
 
 export function DentistGrid({ dentists }: { dentists: ProfessionalCard[] }) {
   return (
@@ -12,6 +14,35 @@ export function DentistGrid({ dentists }: { dentists: ProfessionalCard[] }) {
         </li>
       ))}
     </ul>
+  );
+}
+
+export function RankedDentistList({
+  dentists,
+  intentId,
+}: {
+  dentists: ProfessionalCard[];
+  intentId?: IntentId | null;
+}) {
+  const { recommended, also } = splitByRecommendation(dentists, intentId);
+  if (recommended.length === 0 || also.length === 0) {
+    return <DentistGrid dentists={dentists} />;
+  }
+
+  return (
+    <div className="space-y-12">
+      <section>
+        <p className="mb-6 text-[13px] text-[#86868b]">Especialistas para este tratamento</p>
+        <DentistGrid dentists={recommended} />
+      </section>
+      <section>
+        <p className="mb-2 text-[13px] text-[#86868b]">Clínica geral também atende</p>
+        <p className="mb-6 max-w-xl text-[14px] leading-relaxed text-[#86868b]">
+          O clínico geral pode realizar o procedimento. O especialista aparece primeiro.
+        </p>
+        <DentistGrid dentists={also} />
+      </section>
+    </div>
   );
 }
 

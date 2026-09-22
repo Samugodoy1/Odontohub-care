@@ -38,7 +38,7 @@ describe("search filters", () => {
     expect(result.elsewhere.map((item) => item.slug)).not.toContain("juan-pablo-50");
   });
 
-  it("does not list a general dentist on the siso or canal pages", () => {
+  it("recommends the specialist first and still lists the general dentist", () => {
     const general = mapHubProfessional(base);
     const surgeon = mapHubProfessional({
       ...base,
@@ -49,10 +49,10 @@ describe("search filters", () => {
     const catalog = catalogFromCards([general, surgeon]);
 
     const siso = searchCare("dentista para siso", "Taubaté", catalog);
-    expect(siso.matches.map((item) => item.slug)).toEqual(["eduardo-leal-12"]);
+    expect(siso.matches.map((item) => item.slug)).toEqual(["eduardo-leal-12", "samuel-godoy-11"]);
 
     const canal = searchCare("dentista para canal", "Taubaté", catalog);
-    expect(canal.matches).toEqual([]);
+    expect(canal.matches.map((item) => item.slug)).toEqual(["samuel-godoy-11"]);
   });
 
   it("does not move a Taubaté search onto São Paulo because of the state code", () => {

@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { EmptyState } from "@/components/care/empty-state";
 import { IntentBanner } from "@/components/care/intent-banner";
 import { NeedSearch } from "@/components/care/need-search";
-import { DentistGrid } from "@/components/care/dentist-grid";
+import { DentistGrid, RankedDentistList } from "@/components/care/dentist-grid";
 import { getCareCatalog } from "@/lib/catalog/adapter";
 import { searchCare } from "@/lib/search";
 
@@ -75,7 +75,10 @@ export default async function SearchPage({ searchParams }: { searchParams: Searc
               />
             ) : (
               <section aria-live="polite">
-                <DentistGrid dentists={result.matches} />
+                <RankedDentistList
+                  dentists={result.matches}
+                  intentId={result.cityDossier ? null : result.intent.primary?.intent.id}
+                />
               </section>
             )}
 

@@ -55,6 +55,7 @@ export default async function CityCasePage({
       lede={careCase.lede}
       dentists={result.matches}
       elsewhere={result.elsewhere}
+      intentId={careCase.intentId}
       initialQuery={careCase.googleQuery}
       initialPlace={region.city}
     />

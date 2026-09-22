@@ -93,7 +93,7 @@ export function NeedSearch({
       </form>
 
       {!compact ? (
-        <div className="care-chip-row mt-5 sm:mt-6">
+        <div className="mt-4 flex flex-wrap justify-center gap-2 sm:mt-5">
           {SUGGESTED_QUERIES.map((item) => (
             <button
               key={item}
