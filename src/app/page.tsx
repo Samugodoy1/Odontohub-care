@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import { CareFaq } from "@/components/care/care-faq";
 import { CaseRail } from "@/components/care/case-rail";
-import { DentistRail } from "@/components/care/dentist-grid";
+import { HomeProfessionalsSection } from "@/components/care/home-professionals-section";
 import { NearYouSection } from "@/components/care/near-you-section";
 import { HeroHeadline } from "@/components/care/hero-headline";
 import { NeedSearch } from "@/components/care/need-search";
@@ -93,19 +93,7 @@ export default async function HomePage() {
 
       <NearYouSection dentists={network} catalogRegions={regions} />
 
-      <section className="care-band py-14 sm:py-24 md:py-32">
-        <div className="care-align">
-          <Reveal>
-            <p className="care-eyebrow">Profissionais</p>
-            <h2 className="care-display mt-3 text-[32px] sm:mt-4 sm:text-[40px] md:text-[56px]">
-              Dentistas para conhecer.
-            </h2>
-          </Reveal>
-        </div>
-        <Reveal className="mt-10 sm:mt-12" delay={80}>
-          <DentistRail dentists={network.slice(0, 8)} />
-        </Reveal>
-      </section>
+      <HomeProfessionalsSection dentists={network} catalogRegions={regions} />
 
       <section id="qualidade" className="py-16 sm:py-24 md:py-32">
         <div className="care-align">

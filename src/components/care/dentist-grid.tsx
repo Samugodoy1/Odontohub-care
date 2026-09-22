@@ -47,6 +47,10 @@ export function RankedDentistList({
 }
 
 export function DentistRail({ dentists }: { dentists: ProfessionalCard[] }) {
+  if (dentists.length === 0) {
+    return null;
+  }
+
   return (
     <div className="care-rail-mask">
       <div className="care-rail">
