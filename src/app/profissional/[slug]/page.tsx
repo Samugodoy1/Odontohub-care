@@ -12,6 +12,8 @@ import { citySlug } from "@/lib/seo/cities";
 import { dentistJsonLd } from "@/lib/seo/jsonld";
 import { SITE } from "@/lib/site";
 
+export const dynamic = "force-dynamic";
+
 export async function generateStaticParams() {
   const professionals = await getListedCareProfessionals();
   return professionals.map((professional) => ({ slug: professional.slug }));

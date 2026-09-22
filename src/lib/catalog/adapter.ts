@@ -169,7 +169,7 @@ export async function getCareProfessionals(): Promise<ProfessionalCard[]> {
 
   try {
     const response = await fetch(`${apiUrl}/api/care/professionals`, {
-      next: { revalidate: 60 },
+      cache: "no-store",
     });
     if (!response.ok) {
       console.error(`Care catalog request failed with ${response.status}.`);

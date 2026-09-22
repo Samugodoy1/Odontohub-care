@@ -9,6 +9,8 @@ import { searchCare } from "@/lib/search";
 
 type SearchParams = Promise<{ q?: string; onde?: string }>;
 
+export const revalidate = 0;
+
 export async function generateMetadata({
   searchParams,
 }: {

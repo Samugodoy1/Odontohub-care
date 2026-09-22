@@ -7,6 +7,8 @@ import { regionByCitySlug, CITY_SLUGS } from "@/lib/seo/cities";
 import { NOINDEX_FOLLOW } from "@/lib/seo/robots";
 import { SITE } from "@/lib/site";
 
+export const revalidate = 0;
+
 export function generateStaticParams() {
   return CITY_SLUGS.map((cidade) => ({ cidade }));
 }
