@@ -7,7 +7,7 @@ import { DeviceDossier } from "@/components/care/device-dossier";
 import { HeroHeadline } from "@/components/care/hero-headline";
 import { NeedSearch } from "@/components/care/need-search";
 import { Reveal } from "@/components/care/reveal";
-import { getCareCatalog, isListedOnCare } from "@/lib/catalog/adapter";
+import { getListedCareCatalog, getListedCareRegions } from "@/lib/catalog/adapter";
 import { citySlug } from "@/lib/seo/cities";
 import { itemListJsonLd } from "@/lib/seo/jsonld";
 import { GOOGLE_QUERIES } from "@/lib/seo/queries";
@@ -32,12 +32,12 @@ const QUALITY = [
 ] as const;
 
 export default async function HomePage() {
-  const catalog = await getCareCatalog();
-  const network = catalog.listProfessionals({ intentIds: [] }).filter(isListedOnCare);
+  const catalog = await getListedCareCatalog();
+  const network = catalog.listProfessionals({ intentIds: [] });
   const taubate = network.filter((item) => item.region.id === "taubate");
   const featured = taubate.length > 0 ? taubate : network;
   const featuredCity = featured[0]?.region.city;
-  const regions = catalog.listRegions();
+  const regions = await getListedCareRegions();
 
   return (
     <main>

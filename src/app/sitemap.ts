@@ -1,18 +1,14 @@
 import type { MetadataRoute } from "next";
 
-import { getCareProfessionals } from "@/lib/catalog/adapter";
+import { getListedCareProfessionals } from "@/lib/catalog/adapter";
 import { CARE_CASES } from "@/lib/seo/cases";
-import { CITY_SLUGS } from "@/lib/seo/cities";
 import { citySlug } from "@/lib/seo/cities";
 import { SITE } from "@/lib/site";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
-  const professionals = await getCareProfessionals();
-  const citySlugs = [...new Set([
-    ...CITY_SLUGS,
-    ...professionals.map((professional) => citySlug(professional.region.city)),
-  ])];
+  const professionals = await getListedCareProfessionals();
+  const citySlugs = [...new Set(professionals.map((professional) => citySlug(professional.region.city)))];
   const staticRoutes = ["", "/buscar", "/para-dentistas"].map((path) => ({
     url: `${SITE.domain}${path}`,
     lastModified: now,

@@ -35,8 +35,9 @@ src/
 ```
 
 O catálogo fica atrás de `CatalogPort` e lê a projeção pública, somente leitura, da API do
-OdontoHub. Contas de dentistas com acesso aprovado aparecem automaticamente; o administrador pode
-remover ou recolocar cada profissional no Care sem bloquear seu acesso ao sistema.
+OdontoHub. Só entram perfis com cidade e estado da clínica preenchidos no Hub. Relatos de pacientes
+persistem via `POST /api/care/reviews` na API central. O administrador pode remover ou recolocar
+cada profissional no Care sem bloquear seu acesso ao sistema.
 
 ## Rodar
 

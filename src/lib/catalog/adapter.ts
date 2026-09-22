@@ -192,6 +192,28 @@ export async function getCareCatalog(): Promise<CatalogPort> {
   return catalogFromCards(await getCareProfessionals());
 }
 
+export async function getListedCareProfessionals(): Promise<ProfessionalCard[]> {
+  return (await getCareProfessionals()).filter(isListedOnCare);
+}
+
+export async function getListedCareCatalog(): Promise<CatalogPort> {
+  return catalogFromCards(await getListedCareProfessionals());
+}
+
+export function listedRegionsFrom(cards: readonly ProfessionalCard[]): Region[] {
+  return [
+    ...new Map(
+      cards
+        .filter(isListedOnCare)
+        .map((card) => [card.region.id, card.region] as const),
+    ).values(),
+  ].sort((a, b) => a.city.localeCompare(b.city, "pt-BR"));
+}
+
+export async function getListedCareRegions(): Promise<Region[]> {
+  return listedRegionsFrom(await getCareProfessionals());
+}
+
 export const HUB_SYNC = {
   source: "odontohub-api",
   status: "connected",

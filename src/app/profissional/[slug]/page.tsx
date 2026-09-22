@@ -6,14 +6,14 @@ import { DentistPhoto } from "@/components/care/dentist-photo";
 import { InterestForm } from "@/components/care/interest-form";
 import { NetworkBadge } from "@/components/care/network-badge";
 import { ReviewPanel } from "@/components/care/review-panel";
-import { getCareCatalog, getCareProfessionals } from "@/lib/catalog/adapter";
+import { getListedCareCatalog, getListedCareProfessionals } from "@/lib/catalog/adapter";
 import { displayNameOf, hubDentistId } from "@/lib/catalog/names";
 import { citySlug } from "@/lib/seo/cities";
 import { dentistJsonLd } from "@/lib/seo/jsonld";
 import { SITE } from "@/lib/site";
 
 export async function generateStaticParams() {
-  const professionals = await getCareProfessionals();
+  const professionals = await getListedCareProfessionals();
   return professionals.map((professional) => ({ slug: professional.slug }));
 }
 
@@ -23,10 +23,10 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const catalog = await getCareCatalog();
+  const catalog = await getListedCareCatalog();
   const professional = catalog.getProfessional(slug);
   if (!professional) {
-    return { title: "Dentista" };
+    return { title: "Dentista", robots: { index: false, follow: false } };
   }
   const title = displayNameOf(professional);
   const description = `${title}, ${professional.specialties.map((item) => item.name).join(", ")} em ${professional.region.city}. ${professional.bio}`;
@@ -54,7 +54,7 @@ export default async function ProfessionalPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const catalog = await getCareCatalog();
+  const catalog = await getListedCareCatalog();
   const professional = catalog.getProfessional(slug);
   if (!professional) notFound();
 
