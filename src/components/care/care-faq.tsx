@@ -21,7 +21,7 @@ const FAQS = [
   },
   {
     q: "Sou dentista. Posso aparecer?",
-    a: "Sim, se a sua clínica usa o OdontoHub. Faça login no sistema, complete CRO e cidade do consultório e mantenha a publicação no Care.",
+    a: "Sim, assinando o OdontoHub em odontohub.app.br e usando o sistema na clínica. Complete CRO, foto e endereço (cidade e estado) no perfil; o Care publica automaticamente quem está elegível.",
   },
 ] as const;
 
