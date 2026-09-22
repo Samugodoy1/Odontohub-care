@@ -13,6 +13,8 @@ import { itemListJsonLd } from "@/lib/seo/jsonld";
 import { GOOGLE_QUERIES } from "@/lib/seo/queries";
 import { SITE } from "@/lib/site";
 
+export const revalidate = 0;
+
 const QUALITY = [
   {
     n: "01",

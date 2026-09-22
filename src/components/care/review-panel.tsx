@@ -30,7 +30,6 @@ export function ReviewPanel({ professionalSlug, professionalName }: ReviewPanelP
   const [pending, setPending] = useState(false);
   const [error, setError] = useState("");
   const [sent, setSent] = useState(false);
-
   useEffect(() => {
     let active = true;
     async function load() {
@@ -53,9 +52,10 @@ export function ReviewPanel({ professionalSlug, professionalName }: ReviewPanelP
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    const formEl = event.currentTarget;
     setError("");
     setPending(true);
-    const form = new FormData(event.currentTarget);
+    const form = new FormData(formEl);
     try {
       const response = await fetch("/api/avaliacoes", {
         method: "POST",
@@ -77,7 +77,7 @@ export function ReviewPanel({ professionalSlug, professionalName }: ReviewPanelP
       });
       setHighlights([]);
       setSent(true);
-      event.currentTarget.reset();
+      formEl.reset();
     } catch (cause) {
       setError(cause instanceof Error && cause.message !== "send-failed"
         ? cause.message
