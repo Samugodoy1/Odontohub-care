@@ -25,9 +25,14 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false, error: parsed.error }, { status: 400 });
   }
 
-  const result = await reviewRepository.add(parsed.value);
-  return NextResponse.json(
-    { ok: true, review: result.review },
-    { status: result.created ? 201 : 200 },
-  );
+  try {
+    const result = await reviewRepository.add(parsed.value);
+    return NextResponse.json(
+      { ok: true, review: result.review },
+      { status: result.created ? 201 : 200 },
+    );
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Não foi possível publicar o relato.";
+    return NextResponse.json({ ok: false, error: message }, { status: 502 });
+  }
 }

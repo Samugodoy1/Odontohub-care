@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { DossierPage } from "@/components/care/dossier-page";
-import { getCareCatalog } from "@/lib/catalog/adapter";
+import { getListedCareCatalog } from "@/lib/catalog/adapter";
 import { CARE_CASES, getCase } from "@/lib/seo/cases";
+import { NOINDEX_FOLLOW } from "@/lib/seo/robots";
 import { searchCare } from "@/lib/search";
 import { SITE } from "@/lib/site";
 
@@ -19,12 +20,15 @@ export async function generateMetadata({
   const { caso } = await params;
   const careCase = getCase(caso);
   if (!careCase) return { title: "Dentista" };
+  const catalog = await getListedCareCatalog();
+  const result = searchCare(careCase.googleQuery, "", catalog);
   return {
     title: `${careCase.title} | OdontoHub Care`,
     description: careCase.lede,
     keywords: [careCase.googleQuery, careCase.title, "dentista perto de mim"],
     alternates: { canonical: `${SITE.domain}/para/${caso}` },
     openGraph: { title: `${careCase.title} · OdontoHub Care`, description: careCase.lede },
+    robots: result.matches.length === 0 ? NOINDEX_FOLLOW : undefined,
   };
 }
 
@@ -33,7 +37,7 @@ export default async function CasePage({ params }: { params: Promise<{ caso: str
   const careCase = getCase(caso);
   if (!careCase) notFound();
 
-  const catalog = await getCareCatalog();
+  const catalog = await getListedCareCatalog();
   const result = searchCare(careCase.googleQuery, "", catalog);
 
   return (

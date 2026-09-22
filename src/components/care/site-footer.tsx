@@ -1,11 +1,12 @@
 import Link from "next/link";
 
+import { getListedCareRegions } from "@/lib/catalog/adapter";
 import { SITE } from "@/lib/site";
 import { CARE_CASES } from "@/lib/seo/cases";
-import { REGIONS } from "@/lib/catalog/regions";
 import { citySlug } from "@/lib/seo/cities";
 
-export function SiteFooter() {
+export async function SiteFooter() {
+  const regions = await getListedCareRegions();
   return (
     <footer className="mt-auto border-t border-[#d2d2d7] bg-white">
       <div className="care-align grid gap-10 py-12 sm:gap-12 sm:py-16 md:grid-cols-4">
@@ -30,7 +31,7 @@ export function SiteFooter() {
         <div>
           <p className="text-[12px] text-[#86868b]">Cidades</p>
           <ul className="mt-4 space-y-2 text-[13px]">
-            {REGIONS.slice(0, 6).map((region) => (
+            {regions.slice(0, 6).map((region) => (
               <li key={region.id}>
                 <Link
                   className="text-[#1d1d1f] hover:underline"
