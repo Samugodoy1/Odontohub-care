@@ -57,12 +57,12 @@ export function InterestForm({
 
   if (sent) {
     return (
-      <div className="rounded-[28px] bg-[#eaf8ef] px-6 py-8 md:px-8">
-        <p className="text-[13px] font-medium text-[#248a3d]">Enviado</p>
+      <div className="rounded-[28px] bg-[#eaf3fb] px-6 py-8 md:px-8">
+        <p className="text-[13px] font-medium text-[#0071e3]">Enviado</p>
         <h2 className="mt-2 text-[24px] font-semibold tracking-tight text-[#1d1d1f]">
           Pedido enviado à clínica.
         </h2>
-        <p className="mt-3 max-w-md text-[15px] leading-relaxed text-[#3d5a45]">
+        <p className="mt-3 max-w-md text-[15px] leading-relaxed text-[#3a4a5c]">
           Enviamos seu pedido para a clínica de {professionalName}. Ela entrará em contato para
           confirmar a disponibilidade.
         </p>

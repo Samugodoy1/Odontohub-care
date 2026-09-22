@@ -51,13 +51,18 @@ export function ProfessionalCardView({
           </p>
         </div>
       </Link>
-      <div className="flex items-center justify-between border-t border-[#eeeef0] px-4 py-3">
+      <div className="flex flex-wrap items-center justify-between gap-2 border-t border-[#eeeef0] px-4 py-3">
         <Link href={cityHref} className="text-[12px] text-[#86868b] hover:text-[#1d1d1f]">
           Em {professional.region.city}
         </Link>
-        <Link href={href} className="text-[13px] font-medium text-[#0f766e]">
-          Ver perfil →
-        </Link>
+        <span className="flex items-center gap-3">
+          <Link href={`${href}#avaliacoes`} className="text-[13px] font-medium text-[#0071e3]">
+            Avaliar
+          </Link>
+          <Link href={href} className="text-[13px] font-medium text-[#0071e3]">
+            Ver perfil →
+          </Link>
+        </span>
       </div>
     </article>
   );

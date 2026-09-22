@@ -21,7 +21,7 @@ export const CARE_CASES: readonly CareCase[] = [
     headline: "Limpeza.",
     title: "Dentista para limpeza",
     lede: "Limpeza profissional, revisão e consulta de rotina. Dentistas selecionados para cuidar disso com calma.",
-    tile: "from-[#e6f5f1] to-[#b7ddd4]",
+    tile: "from-[#e8eef6] to-[#c5d4e8]",
     photo: "/care/tratamentos/limpeza-cadeira.jpg",
   },
   {
@@ -43,7 +43,7 @@ export const CARE_CASES: readonly CareCase[] = [
     headline: "Siso.",
     title: "Dentista para siso",
     lede: "Incluso, inflamado, doendo. Cirurgiões para tirar o siso e te orientar no pós-operatório.",
-    tile: "from-[#eef6e8] to-[#c6e0b6]",
+    tile: "from-[#e7eef8] to-[#c9d7ea]",
     photo: "/care/tratamentos/tratamento-siso.jpg",
   },
   {
@@ -120,7 +120,7 @@ export const CARE_CASES: readonly CareCase[] = [
     headline: "Gengiva.",
     title: "Dentista para gengiva",
     lede: "Sangra na escova, recua, dói. Quem cuida da base do dente — para o resto fazer sentido.",
-    tile: "from-[#eaf6ee] to-[#c4e6cf]",
+    tile: "from-[#e8eef4] to-[#c7d5e4]",
     photo: "/care/tratamentos/tratamento-gengiva.jpg",
   },
 ] as const;

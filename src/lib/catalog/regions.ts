@@ -92,39 +92,85 @@ export type LocationGuess = {
   remainder: string;
 };
 
+function padded(value: string) {
+  return ` ${normalizeText(value)} `;
+}
+
+function mentionsCity(text: string, city: string) {
+  return padded(text).includes(` ${normalizeText(city)} `);
+}
+
+export function isStateNamedCity(region: Region) {
+  return normalizeText(region.city) === normalizeText(region.state);
+}
+
+export function findCitiesInText(text: string, regions: readonly Region[] = REGIONS): Region[] {
+  if (!normalizeText(text)) return [];
+  return regions.filter((region) => mentionsCity(text, region.city));
+}
+
+export function pickCity(matches: readonly Region[]): Region | null {
+  if (matches.length === 0) return null;
+  const specific = matches.filter((region) => !isStateNamedCity(region));
+  const pool = specific.length > 0 ? specific : [...matches];
+  return [...pool].sort(
+    (a, b) => normalizeText(b.city).length - normalizeText(a.city).length,
+  )[0] ?? null;
+}
+
+/**
+ * Clinic city wins when it names a municipality.
+ * "São Paulo" in an address is often the state; a more specific city in the
+ * same text keeps the dentist off the capital's pages.
+ */
+export function resolvePracticeCity(
+  city: string | null,
+  address: string | null,
+  regions: readonly Region[] = REGIONS,
+): Region | undefined {
+  const exact = city
+    ? regions.find((region) => normalizeText(region.city) === normalizeText(city))
+    : undefined;
+  const inAddress = address ? findCitiesInText(address, regions) : [];
+  const specificAddress = pickCity(inAddress.filter((region) => !isStateNamedCity(region)));
+
+  if (exact && isStateNamedCity(exact) && specificAddress) return specificAddress;
+  if (exact) return exact;
+  return pickCity(inAddress) ?? undefined;
+}
+
+function neighborhoodHits(text: string, regions: readonly Region[]) {
+  const haystack = padded(text);
+  const hits: { region: Region; neighborhood: string }[] = [];
+  for (const region of regions) {
+    for (const neighborhood of region.neighborhoods) {
+      if (haystack.includes(` ${normalizeText(neighborhood)} `)) {
+        hits.push({ region, neighborhood });
+      }
+    }
+  }
+  return hits;
+}
+
 export function parseLocation(
   query: string,
   explicitPlace?: string,
   regions: readonly Region[] = REGIONS,
 ): LocationGuess {
-  const haystack = [explicitPlace, query].filter(Boolean).join(" ");
-  const normalized = normalizeText(haystack);
-
-  let region: Region | null = null;
+  const placeCities = explicitPlace ? findCitiesInText(explicitPlace, regions) : [];
+  const queryCities = findCitiesInText(query, regions);
+  let region = placeCities.length > 0 ? pickCity(placeCities) : pickCity(queryCities);
   let neighborhood: string | null = null;
 
-  for (const item of regions) {
-    const cityNorm = normalizeText(item.city);
-    const stateNorm = normalizeText(item.stateCode);
-    if (normalized.includes(cityNorm) || normalized.split(" ").includes(stateNorm.toLowerCase())) {
-      region = item;
-      break;
+  const hits = neighborhoodHits([explicitPlace, query].filter(Boolean).join(" "), regions);
+  if (region) {
+    neighborhood = hits.find((hit) => hit.region.id === region?.id)?.neighborhood ?? null;
+  } else {
+    const regionIds = new Set(hits.map((hit) => hit.region.id));
+    if (regionIds.size === 1 && hits[0]) {
+      region = hits[0].region;
+      neighborhood = hits[0].neighborhood;
     }
-    if (item.city === "São Paulo" && (normalized.includes("sao paulo") || normalized.includes("sampa"))) {
-      region = item;
-      break;
-    }
-  }
-
-  for (const item of region ? [region] : regions) {
-    for (const n of item.neighborhoods) {
-      if (normalized.includes(normalizeText(n))) {
-        neighborhood = n;
-        region = item;
-        break;
-      }
-    }
-    if (neighborhood) break;
   }
 
   let remainder = query;

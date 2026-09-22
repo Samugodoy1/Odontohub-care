@@ -52,6 +52,7 @@ function queryCards(cards: ProfessionalCard[], query: CatalogQuery): Professiona
   return cards
     .map((card) => ({ card, score: rank(card, query) }))
     .filter((item) => {
+      if (query.regionId && item.card.region.id !== query.regionId) return false;
       if (query.intentIds.length === 0) return true;
       return query.intentIds.some((id) => item.card.intentIds.includes(id));
     })

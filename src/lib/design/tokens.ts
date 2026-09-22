@@ -9,7 +9,7 @@ export const CARE_TOKENS = {
     line: "#d2d2d7",
     blue: "#0071e3",
     teal: "#32ADE6",
-    mint: "#34C759",
+    mint: "#0071e3",
     black: "#000000",
   },
   type: {
