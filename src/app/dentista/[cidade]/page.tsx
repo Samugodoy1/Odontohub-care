@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { DossierPage } from "@/components/care/dossier-page";
-import { getCareCatalog } from "@/lib/catalog/adapter";
+import { getCareCatalog, isListedOnCare } from "@/lib/catalog/adapter";
 import { regionByCitySlug, CITY_SLUGS } from "@/lib/seo/cities";
 import { SITE } from "@/lib/site";
 
@@ -40,7 +40,7 @@ export default async function CityPage({ params }: { params: Promise<{ cidade: s
 
   const dentists = catalog
     .listProfessionals({ intentIds: [] })
-    .filter((item) => item.region.id === region.id);
+    .filter((item) => item.region.id === region.id && isListedOnCare(item));
 
   return (
     <DossierPage

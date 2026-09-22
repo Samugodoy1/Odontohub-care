@@ -1,3 +1,4 @@
+import { isListedOnCare } from "@/lib/catalog/adapter";
 import { catalog } from "@/lib/catalog/query";
 import { parseLocation, REGIONS } from "@/lib/catalog/regions";
 import type { CatalogPort, ProfessionalCard, Region } from "@/lib/catalog/types";
@@ -45,13 +46,17 @@ export function searchCare(
     neighborhood: location.neighborhood ?? undefined,
   });
 
-  const local = location.region
+  const local = (location.region
     ? pool.filter((item) => item.region.id === location.region?.id)
-    : pool;
+    : pool
+  ).filter(isListedOnCare);
   const elsewhere = location.region
     ? source
         .listProfessionals({ intentIds: primaryIds })
-        .filter((item) => item.region.id !== location.region?.id)
+        .filter(
+          (item) =>
+            isListedOnCare(item) && item.region.id !== location.region?.id,
+        )
     : [];
 
   return {
