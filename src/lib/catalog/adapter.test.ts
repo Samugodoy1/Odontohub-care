@@ -76,21 +76,16 @@ describe("OdontoHub Care catalog adapter", () => {
     });
 
     expect(professional.specialtyIds).toEqual(["clinica-geral"]);
-    expect(professional.intentIds).not.toContain("cirurgia");
-    expect(professional.intentIds).not.toContain("endodontia");
-    expect(professional.intentIds).toContain("prevencao");
+    expect(professional.intentIds).toEqual(expect.arrayContaining(["cirurgia", "endodontia", "prevencao"]));
   });
 
-  it("keeps clínica geral off specialist treatment pages", () => {
+  it("lists clínica geral on specialist pages, ranked after the specialist", () => {
     const professional = mapHubProfessional({
       ...dentist,
       specialty: "Clínica Geral",
     });
 
-    expect(professional.intentIds).toEqual(expect.arrayContaining(["prevencao", "urgencia"]));
-    expect(professional.intentIds).not.toContain("cirurgia");
-    expect(professional.intentIds).not.toContain("endodontia");
-    expect(professional.intentIds).not.toContain("dentistica");
+    expect(professional.intentIds).toEqual(expect.arrayContaining(["prevencao", "urgencia", "cirurgia", "endodontia"]));
   });
 
   it("keeps a Taubaté clinic out of São Paulo when the address names the state", () => {

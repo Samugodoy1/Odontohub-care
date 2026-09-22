@@ -42,6 +42,7 @@ export default async function CasePage({ params }: { params: Promise<{ caso: str
       title={careCase.headline}
       lede={careCase.lede}
       dentists={result.matches}
+      intentId={careCase.intentId}
       initialQuery={careCase.googleQuery}
     />
   );

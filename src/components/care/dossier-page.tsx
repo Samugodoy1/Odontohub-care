@@ -1,9 +1,10 @@
 import Link from "next/link";
 
 import { EmptyState } from "@/components/care/empty-state";
-import { DentistGrid } from "@/components/care/dentist-grid";
+import { DentistGrid, RankedDentistList } from "@/components/care/dentist-grid";
 import { NeedSearch } from "@/components/care/need-search";
 import type { ProfessionalCard } from "@/lib/catalog/types";
+import type { IntentId } from "@/lib/intent/types";
 import { itemListJsonLd } from "@/lib/seo/jsonld";
 import { SITE } from "@/lib/site";
 
@@ -12,6 +13,7 @@ type DossierPageProps = {
   title: string;
   lede: string;
   dentists: ProfessionalCard[];
+  intentId?: IntentId | null;
   emptyTitle?: string;
   emptyBody?: string;
   initialQuery?: string;
@@ -24,6 +26,7 @@ export function DossierPage({
   title,
   lede,
   dentists,
+  intentId,
   emptyTitle = "Ainda não há dentistas para isso.",
   emptyBody = "Tente outra cidade ou outro tratamento. A lista cresce com cuidado.",
   initialQuery = "",
@@ -61,7 +64,7 @@ export function DossierPage({
               <p className="mb-6 text-[13px] text-[#86868b]">
                 {dentists.length} {dentists.length === 1 ? "dentista selecionado" : "dentistas selecionados"} pelo Care
               </p>
-              <DentistGrid dentists={dentists} />
+              <RankedDentistList dentists={dentists} intentId={intentId} />
             </>
           )}
           {elsewhere.length > 0 ? (

@@ -1,3 +1,4 @@
+import { isSpecialistForIntent } from "@/lib/catalog/recommend";
 import { CLINICS, PROFESSIONALS } from "@/lib/catalog/seed";
 import { REGION_BY_ID, REGIONS } from "@/lib/catalog/regions";
 import { SPECIALTIES, SPECIALTY_BY_ID } from "@/lib/catalog/specialties";
@@ -36,6 +37,7 @@ function rank(card: ProfessionalCard, query: CatalogQuery): number {
   let score = 0;
   if (query.intentIds.some((id) => card.intentIds.includes(id))) score += 10;
   if (query.intentIds[0] && card.intentIds[0] === query.intentIds[0]) score += 6;
+  if (query.intentIds.some((id) => isSpecialistForIntent(card, id))) score += 16;
   if (query.regionId && card.region.id === query.regionId) score += 8;
   if (
     query.neighborhood &&

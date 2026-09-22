@@ -47,31 +47,29 @@ export default async function HomePage() {
           __html: JSON.stringify(itemListJsonLd(network, "Dentistas do OdontoHub Care", SITE.domain)),
         }}
       />
-      <section className="care-hero-wash relative flex min-h-[calc(100dvh-3rem+32px)] items-center overflow-hidden">
-        <div className="care-orb -left-24 top-8 size-[280px] bg-[#0071e3]/16 sm:size-[340px]" aria-hidden />
-        <div
-          className="care-orb right-[-80px] top-20 size-[220px] bg-[#32ade6]/14 sm:size-[280px]"
-          style={{ animationDelay: "-6s" }}
-          aria-hidden
-        />
-        <div
-          className="care-orb bottom-0 left-1/3 size-[180px] bg-[#0071e3]/8 sm:size-[220px]"
-          style={{ animationDelay: "-11s" }}
-          aria-hidden
-        />
-        <div className="care-align relative text-center">
-          <p className="care-enter care-eyebrow">OdontoHub Care</p>
-          <div className="care-enter mt-4 sm:mt-5" style={{ animationDelay: "90ms" }}>
-            <HeroHeadline />
+      <section className="care-hero">
+        <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
+          <div className="care-orb -left-24 top-8 size-[220px] bg-[#0071e3]/14 sm:size-[320px]" />
+          <div
+            className="care-orb right-[-60px] top-24 size-[180px] bg-[#32ade6]/12 sm:size-[240px]"
+            style={{ animationDelay: "-6s" }}
+          />
+        </div>
+        <div className="care-align relative flex min-h-[calc(100dvh-3rem)] flex-col justify-between py-10 sm:py-14 md:py-16">
+          <div className="care-hero-copy mx-auto w-full max-w-[40rem] text-center">
+            <p className="care-enter care-eyebrow">OdontoHub Care</p>
+            <div className="care-enter mt-4 sm:mt-5" style={{ animationDelay: "90ms" }}>
+              <HeroHeadline />
+            </div>
+            <p
+              className="care-enter care-subhead mx-auto mt-4 max-w-[28rem] text-[17px] sm:mt-6 sm:text-[19px] md:max-w-[32rem] md:text-[21px]"
+              style={{ animationDelay: "160ms" }}
+            >
+              Diga o tratamento e a cidade. Mostramos dentistas da rede OdontoHub para o que você
+              precisa.
+            </p>
           </div>
-          <p
-            className="care-enter care-subhead mx-auto mt-5 max-w-[34rem] text-[17px] sm:mt-7 sm:text-[19px] md:text-[24px]"
-            style={{ animationDelay: "160ms" }}
-          >
-            Diga o tratamento e a cidade. Mostramos dentistas da rede OdontoHub para cuidar do que
-            você precisa — limpeza, extração, aparelho, implante e urgência.
-          </p>
-          <div className="care-enter mx-auto mt-8 max-w-[46rem] sm:mt-12" style={{ animationDelay: "240ms" }}>
+          <div className="care-enter mx-auto mt-10 w-full max-w-[40rem] sm:mt-12" style={{ animationDelay: "240ms" }}>
             <NeedSearch />
           </div>
         </div>
