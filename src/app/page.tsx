@@ -3,7 +3,7 @@ import Link from "next/link";
 import { CareFaq } from "@/components/care/care-faq";
 import { CaseRail } from "@/components/care/case-rail";
 import { DentistRail } from "@/components/care/dentist-grid";
-import { DeviceDossier } from "@/components/care/device-dossier";
+import { NearYouSection } from "@/components/care/near-you-section";
 import { HeroHeadline } from "@/components/care/hero-headline";
 import { NeedSearch } from "@/components/care/need-search";
 import { Reveal } from "@/components/care/reveal";
@@ -36,9 +36,6 @@ const QUALITY = [
 export default async function HomePage() {
   const catalog = await getListedCareCatalog();
   const network = catalog.listProfessionals({ intentIds: [] });
-  const taubate = network.filter((item) => item.region.id === "taubate");
-  const featured = taubate.length > 0 ? taubate : network;
-  const featuredCity = featured[0]?.region.city;
   const regions = await getListedCareRegions();
 
   return (
@@ -94,31 +91,7 @@ export default async function HomePage() {
         </Reveal>
       </section>
 
-      <section className="py-14 sm:py-24 md:py-32">
-        <div className="care-align grid items-center gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
-          <Reveal>
-            <p className="care-eyebrow">Na sua cidade</p>
-            <h2 className="care-display mt-3 text-[32px] sm:mt-4 sm:text-[40px] md:text-[64px]">
-              Perto de você.
-            </h2>
-            <p className="care-subhead mt-4 max-w-[28rem] text-[17px] sm:mt-5 sm:text-[19px] md:text-[21px]">
-              {featuredCity
-                ? `Procurou dentista em ${featuredCity}? Estes são os profissionais da cidade. O tratamento e o lugar, juntos.`
-                : "Informe sua cidade para encontrar profissionais conectados ao OdontoHub Care."}
-            </p>
-            <Link
-              href={featuredCity ? `/dentista/${citySlug(featuredCity)}` : "/buscar"}
-              className="group mt-6 inline-flex items-center text-[17px] text-[#0066cc] sm:mt-8"
-            >
-              {featuredCity ? `Ver dentistas em ${featuredCity}` : "Encontrar dentista"}{" "}
-              <span className="care-arrow ml-1">›</span>
-            </Link>
-          </Reveal>
-          <Reveal delay={120}>
-            <DeviceDossier dentists={featured} />
-          </Reveal>
-        </div>
-      </section>
+      <NearYouSection dentists={network} catalogRegions={regions} />
 
       <section className="care-band py-14 sm:py-24 md:py-32">
         <div className="care-align">

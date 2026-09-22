@@ -4,8 +4,9 @@ import { useRouter } from "next/navigation";
 import { useId, useState, type FormEvent } from "react";
 import { Search } from "lucide-react";
 
+import { parseLocation, REGIONS } from "@/lib/catalog/regions";
+import { persistUserRegionFromCity } from "@/lib/geo/user-region-storage";
 import { SUGGESTED_QUERIES } from "@/lib/site";
-import { REGIONS } from "@/lib/catalog/regions";
 
 type NeedSearchProps = {
   initialQuery?: string;
@@ -43,6 +44,8 @@ export function NeedSearch({
       return;
     }
     setError("");
+    const { region } = parseLocation(trimmed);
+    persistUserRegionFromCity(region);
     router.push(`/buscar?q=${encodeURIComponent(trimmed)}`);
   }
 
